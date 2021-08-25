@@ -1,0 +1,16 @@
+.introduction_wrapper {
+  grid-template-columns: 1fr 1fr;
+  .intro_column {
+    background-color: #E9EAF2;
+    grid-template-rows: 2fr 1fr;
+  }
+  .intro_column__revers {
+    grid-template-rows: 1fr 2fr;
+  }
+}
+@media (max-width: 1200px) {
+  .introduction_wrapper  {
+    grid-template-columns: none;
+    grid-template-rows: 1fr 1fr;
+  }
+}

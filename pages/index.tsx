@@ -1,18 +1,22 @@
 import React from "react";
 import {Panel} from "../components/Panel";
-import {Main} from "./main";
-
-type MainContextProps = {
-    name: string
-}
-
-export const MainContext = React.createContext<MainContextProps>({} as MainContextProps);
+import {Introduction} from "../components/Introduction";
+import Head from "next/head";
 
 export default function Home() {
+    const obj = {
+        id: 0,
+        title: "АЮРОВ ДМИТРИЙ",
+        h2: "ВЕБ-РАЗРАБОТЧИК"
+    }
   return (
-          <div className="grid">
-              <Panel/>
-              <Main/>
-          </div>
+            <div className={"d-grid grid"}>
+                <Head>
+                    <meta name="viewport" content="width=device-width, initial-scale=1" />
+                    <title>Aurov Dmitry - Portfolio</title>
+                </Head>
+                <Panel {...obj}/>
+                <Introduction/>
+            </div>
   )
 }

@@ -1,4 +1,5 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Document, { Html, Main, Head, NextScript } from 'next/document'
+import React from "react";
 
 class AppDocument extends Document {
     static async getInitialProps(ctx) {
@@ -10,8 +11,6 @@ class AppDocument extends Document {
         return (
             <Html>
                 <Head>
-                    <meta name="viewport" content="width=device-width, initial-scale=1" />
-                    <title>Aurov Dmitry - Portfolio</title>
                 </Head>
                 <body>
                     <Main />

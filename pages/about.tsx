@@ -1,11 +1,12 @@
 import React from 'react';
 import Head from "next/head";
 import {Panel} from "../components/Panel";
+import {Introduction} from "../components/Introduction";
 
-export default function Projects() {
+export default function About() {
     const obj = {
-        id: 2,
-        title: "ПРОЕКТЫ"
+        id: 1,
+        title: "О СЕБЕ"
     }
     return (
         <div className="grid">
@@ -14,7 +15,7 @@ export default function Projects() {
                 <title>About</title>
             </Head>
             <Panel {...obj}/>
-            <div>Projects</div>
+            <div>About</div>
         </div>
     )
 };
