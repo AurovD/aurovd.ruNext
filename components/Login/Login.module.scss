@@ -1,0 +1,18 @@
+.login_wrapper {
+  position: relative;
+  background-color: #19292D;
+  background-image: url("/assets/login.png");
+  background-repeat: no-repeat;
+  background-size: 80%;
+  background-position: right center;
+}
+.auth_links {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 30px;
+  a {
+    font-size: 40px;
+  }
+}
+

@@ -3,14 +3,20 @@ import React from 'react';
 import Link from 'next/link';
 
 import styles from './Panel.module.scss';
+import {NextPage} from "next";
 
 // type MainContextProps = {
 //     name: string
 // }
 //
 // export const MainContext = React.createContext<MainContextProps>({} as MainContextProps);
+interface PanelProps {
+    id: number;
+    title: string;
+    h2?: string;
+}
 
-export const Panel = (obj) => {
+export const Panel: NextPage<PanelProps> = (obj: PanelProps) => {
     return (
         <div className={clsx("column d-flex flex-column justify-content-between border-box", styles.panel)}>
             <nav className={clsx("navigation d-flex justify-content-start", styles.navigation)}>
