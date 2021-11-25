@@ -1,20 +1,21 @@
 import React from 'react';
 import Head from "next/head";
 import {Panel} from "../components/Panel";
+import {Projects} from "../components/Projects";
 
-export default function Projects() {
+export default function ProjectsPage() {
     const obj = {
         id: 2,
         title: "ПРОЕКТЫ"
     }
     return (
-        <div className="grid">
+        <div className={"d-grid grid"}>
             <Head>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <title>About</title>
+                <title>Projects</title>
             </Head>
             <Panel {...obj}/>
-            <div>Projects</div>
+            <Projects/>
         </div>
     )
 };
