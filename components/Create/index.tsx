@@ -16,7 +16,6 @@ interface Values {
 
 
 const setPost = async (body: FormData) => {
-    console.log(body, "jkhkh")
     return await fetch("http://localhost:3001/post", {
         method: "post",
         body
@@ -40,13 +39,11 @@ export const CreateProject = () => {
                     values: Values,
                     { setSubmitting }: FormikHelpers<Values>
                 ) => {
+                    console.log(values)
                     const fd = new FormData();
                     Array.from(values.previews).forEach(file => {
                         fd.append('preview', file);
                     });
-                    // for(let i =0; i < values.previews.length; i++){
-                    //     fd.append('previews', values.previews);
-                    // }
                     for (let k in values) {
                         fd.append(k, typeof values[k] === "string" ? values[k] : JSON.stringify(values[k]));
                     }
@@ -68,7 +65,7 @@ export const CreateProject = () => {
                         <Field id="link" name="link" placeholder="Link" />
 
                         <label htmlFor="password">Password</label>
-                        <Field id="password" name="password" placeholder="Password" type="password"/>
+                        <Field id="password" name="password" placeholder="Password" type="password" />
 
                         <input
                             type="file"
