@@ -1,8 +1,8 @@
 import React from 'react';
 import {Panel} from "../components/Panel";
-import {CreateProject} from "../components/CreateProject";
+import {CreateProject} from "../components/Create";
 
-export default function Adding() {
+export default function Create() {
     return (
         <div className={"d-grid grid"}>
             <Panel id={3} title='СОЗДАТЬ НОВЫЙ ПРОЕКТ'/>
