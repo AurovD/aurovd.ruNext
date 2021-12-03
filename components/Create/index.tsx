@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Create.module.scss';
 import { Formik, Field, Form, FormikHelpers } from 'formik';
+import {log} from "util";
 
 interface Values {
     title: string;
@@ -12,6 +13,15 @@ interface Values {
 }
 
 // https://codesandbox.io/s/lkkjpr5r7?file=/index.js
+
+
+const setPost = async (body: FormData) => {
+    console.log(body, "jkhkh")
+    return await fetch("http://localhost:3001/post", {
+        method: "post",
+        body
+    });
+}
 
 
 export const CreateProject = () => {
@@ -31,11 +41,17 @@ export const CreateProject = () => {
                     { setSubmitting }: FormikHelpers<Values>
                 ) => {
                     const fd = new FormData();
-                    for(let i =0; i < values.previews.length; i++){
-                        fd.append('previews', values.previews[i]);
+                    Array.from(values.previews).forEach(file => {
+                        fd.append('preview', file);
+                    });
+                    // for(let i =0; i < values.previews.length; i++){
+                    //     fd.append('previews', values.previews);
+                    // }
+                    for (let k in values) {
+                        fd.append(k, typeof values[k] === "string" ? values[k] : JSON.stringify(values[k]));
                     }
-
                     setSubmitting(false);
+                    setPost(fd).then((r: any) => console.log(r));
                 }}>
                 {(formProps) => (
                     <Form className={'d-flex flex-column'}>
