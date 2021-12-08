@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './Create.module.scss';
-import { Formik, Field, Form, FormikHelpers } from 'formik';
-import {log} from "util";
+import {Formik, Field, Form, FormikHelpers, ErrorMessage} from 'formik';
+import * as Yup from 'yup';
+
 
 interface Values {
     title: string;
@@ -33,13 +34,24 @@ export const CreateProject = () => {
                     link: '',
                     github: '',
                     password: '',
+                    new_password: '',
                     previews: null
                 }}
+                validationSchema={Yup.object({
+                    title: Yup.string()
+                        .max(30, 'Must be 15 characters or less')
+                        .required('Required'),
+                    description: Yup.string()
+                        .required('Required'),
+                    password: Yup.string()
+                        .required('Required'),
+                    previews: Yup.mixed()
+                        .required('Required')
+                })}
                 onSubmit={(
                     values: Values,
                     { setSubmitting }: FormikHelpers<Values>
                 ) => {
-                    console.log(values)
                     const fd = new FormData();
                     Array.from(values.previews).forEach(file => {
                         fd.append('preview', file);
@@ -48,15 +60,20 @@ export const CreateProject = () => {
                         fd.append(k, typeof values[k] === "string" ? values[k] : JSON.stringify(values[k]));
                     }
                     setSubmitting(false);
-                    setPost(fd).then((r: any) => console.log(r));
+                    setPost(fd).then(async (r: any) => {
+                        r = await r.json();
+                        console.log(r)
+                    });
                 }}>
                 {(formProps) => (
                     <Form className={'d-flex flex-column'}>
                         <label htmlFor="title">Title</label>
                         <Field id="title" name="title" placeholder="Название проекта" />
+                        <ErrorMessage name="title" />
 
                         <label htmlFor="desc">Description</label>
-                        <Field id="desc" name="description" placeholder="Описание" />
+                        <Field id="desc" name="description" placeholder="Описание"/>
+                        <ErrorMessage name="description" />
 
                         <label htmlFor="github">GitHub link</label>
                         <Field id="github" name="github" placeholder="" />
@@ -66,6 +83,10 @@ export const CreateProject = () => {
 
                         <label htmlFor="password">Password</label>
                         <Field id="password" name="password" placeholder="Password" type="password" />
+                        <ErrorMessage name="password" />
+
+                        <label htmlFor="new_password">New Password</label>
+                        <Field id="new_password" name="new_password" placeholder="New password" type="password" />
 
                         <input
                             type="file"
@@ -75,6 +96,7 @@ export const CreateProject = () => {
                             }}
                             multiple
                         />
+                        <ErrorMessage name="previews" />
 
                         <button type="submit">Submit</button>
                     </Form>
