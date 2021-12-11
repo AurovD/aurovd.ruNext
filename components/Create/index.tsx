@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Create.module.scss';
 import {Formik, Field, Form, FormikHelpers, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
+import clsx from "clsx";
 
 
 interface Values {
@@ -23,10 +24,13 @@ const setPost = async (body: FormData) => {
     });
 }
 
+// React-toastify
+// https://codesandbox.io/s/formik-v2-tutorial-added-textarea-ujz18
+
 
 export const CreateProject = () => {
     return (
-        <div className={'d-flex justify-content-center align-items-center'}>
+        <div className={'d-flex justify-content-start align-items-center ml-40'}>
             <Formik
                 initialValues={{
                     title: '',
@@ -40,7 +44,7 @@ export const CreateProject = () => {
                 validationSchema={Yup.object({
                     title: Yup.string()
                         .max(30, 'Must be 15 characters or less')
-                        .required('Required'),
+                        .required('Required Title'),
                     description: Yup.string()
                         .required('Required'),
                     password: Yup.string()
@@ -66,10 +70,12 @@ export const CreateProject = () => {
                     });
                 }}>
                 {(formProps) => (
-                    <Form className={'d-flex flex-column'}>
-                        <label htmlFor="title">Title</label>
-                        <Field id="title" name="title" placeholder="Название проекта" />
-                        <ErrorMessage name="title" />
+                    <Form className={clsx('d-flex flex-column justify-content-between', styles.form)}>
+                        <div className={clsx('d-flex flex-column relative', styles.form_input)}>
+                            {/*<label htmlFor="title">Title</label>*/}
+                            <Field id="title" name="title" placeholder="Название проекта" />
+                            {/*<ErrorMessage name="title" />*/}
+                        </div>
 
                         <label htmlFor="desc">Description</label>
                         <Field id="desc" name="description" placeholder="Описание"/>

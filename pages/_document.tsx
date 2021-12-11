@@ -14,7 +14,7 @@ class AppDocument extends Document {
                 </Head>
                 <body>
                     <Main />
-                    <NextScript />
+                    <NextScript/>
                 </body>
             </Html>
     )
