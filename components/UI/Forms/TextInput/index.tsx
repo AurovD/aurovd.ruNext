@@ -13,9 +13,9 @@ interface Interface {
 export const MyTextInput: FC<Interface> = ({ label, ...props }) => {
     const [field, meta] = useField(props);
     return (
-        <div className={clsx('d-flex flex-column relative', styles.form_input)}>
-            <label htmlFor={props.name}>{label}</label>
-            <input className="text-input" {...field} {...props} />
+        <div className={clsx('relative', styles.form_input)}>
+            <label htmlFor={props.name} className={clsx("absolute label")}>{label}</label>
+            <input {...field} {...props} />
             {meta.touched && meta.error ? (
                 <div className={clsx("absolute error")}>{meta.error}</div>
             ) : null}

@@ -1,5 +1,7 @@
 import {useField} from "formik";
 import {FC} from "react";
+import styles from './TextArea.module.scss';
+import clsx from "clsx";
 
 interface Interface {
     label: string;
@@ -10,12 +12,12 @@ interface Interface {
 export const MyTextArea: FC<Interface> = ({label, ...props}) => {
     const [field, meta] = useField(props);
     return (
-        <>
-            <label htmlFor={props.name}>{label}</label>
-            <textarea className="text-area" {...field} {...props} />
+        <div className={clsx('relative', styles.form_textarea)}>
+            <label htmlFor={props.name} className={clsx("absolute label")}>{label}</label>
+            <textarea{...field} {...props} />
             {meta.touched && meta.error ? (
-                <div className="error">{meta.error}</div>
+                <div className={clsx("absolute error")}>{meta.error}</div>
             ) : null}
-        </>
+        </div>
     );
 };
