@@ -3,6 +3,13 @@ import {Panel} from "../components/Panel";
 import {Introduction} from "../components/Introduction";
 import Head from "next/head";
 
+
+type MainContextProps = {
+    page: number;
+};
+
+export const MainContext = React.createContext<MainContextProps>({} as MainContextProps);
+
 export default function Home() {
     const obj = {
         id: 0,

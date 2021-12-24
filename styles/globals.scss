@@ -24,6 +24,12 @@ a {
 .border-box {
   box-sizing: border-box;
 }
+.error {
+  top: 0;
+  right: 0;
+  color: #b80f0a;
+  font-size: 12px;
+}
 @media (max-width: 1000px) {
   .grid {
     display: block;

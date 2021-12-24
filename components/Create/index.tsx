@@ -1,8 +1,10 @@
 import React from 'react';
 import styles from './Create.module.scss';
-import {Formik, Field, Form, FormikHelpers, ErrorMessage} from 'formik';
+import {Formik, Form, FormikHelpers, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 import clsx from "clsx";
+import {MyTextInput} from "../UI/Forms/TextInput";
+import {MyTextArea} from "../UI/Forms/TextArea";
 
 
 interface Values {
@@ -44,7 +46,7 @@ export const CreateProject = () => {
                 validationSchema={Yup.object({
                     title: Yup.string()
                         .max(30, 'Must be 15 characters or less')
-                        .required('Required Title'),
+                        .required('Требуется название проекта'),
                     description: Yup.string()
                         .required('Required'),
                     password: Yup.string()
@@ -71,28 +73,33 @@ export const CreateProject = () => {
                 }}>
                 {(formProps) => (
                     <Form className={clsx('d-flex flex-column justify-content-between', styles.form)}>
+                        <MyTextInput label="Название проекта*" name="title" type="text" placeholder="Порфолио"/>
                         <div className={clsx('d-flex flex-column relative', styles.form_input)}>
                             {/*<label htmlFor="title">Title</label>*/}
-                            <Field id="title" name="title" placeholder="Название проекта" />
+                            {/*<Field id="title" name="title" placeholder="Название проекта" />*/}
                             {/*<ErrorMessage name="title" />*/}
+                            <MyTextArea label="Description" name="description" placeholder="Description"/>
                         </div>
 
-                        <label htmlFor="desc">Description</label>
-                        <Field id="desc" name="description" placeholder="Описание"/>
-                        <ErrorMessage name="description" />
 
-                        <label htmlFor="github">GitHub link</label>
-                        <Field id="github" name="github" placeholder="" />
+                        <div className={clsx('d-flex flex-column relative', styles.form_input)}>
+                            <MyTextInput label="github" name="github" type="text" placeholder="Ссылка на github"/>
+                        </div>
 
-                        <label htmlFor="link">Link</label>
-                        <Field id="link" name="link" placeholder="Link" />
+                        <div className={clsx('d-flex flex-column relative', styles.form_input)}>
+                            <MyTextInput label="link" name="link" type="text" placeholder="Ссылка"/>
+                        </div>
 
-                        <label htmlFor="password">Password</label>
-                        <Field id="password" name="password" placeholder="Password" type="password" />
-                        <ErrorMessage name="password" />
+                        <div className={clsx('d-flex flex-column relative', styles.form_input)}>
+                            <MyTextInput label="Password" name="password" type="password" placeholder="Password"/>
+                        </div>
 
-                        <label htmlFor="new_password">New Password</label>
-                        <Field id="new_password" name="new_password" placeholder="New password" type="password" />
+                        {/*<label htmlFor="new_password">New Password</label>*/}
+                        {/*<Field id="new_password" name="new_password" placeholder="New password" type="password" />*/}
+
+                        <div className={clsx('d-flex flex-column relative', styles.form_input)}>
+                            <MyTextInput label="New Password" name="new_password" type="password" placeholder="New Password"/>
+                        </div>
 
                         <input
                             type="file"
