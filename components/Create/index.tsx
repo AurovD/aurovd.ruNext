@@ -16,8 +16,6 @@ interface Values {
     previews: FileList | null;
 }
 
-// https://codesandbox.io/s/lkkjpr5r7?file=/index.js
-
 
 const setPost = async (body: FormData) => {
     return await fetch("http://localhost:3001/post", {
@@ -26,20 +24,17 @@ const setPost = async (body: FormData) => {
     });
 }
 
-// React-toastify
-// https://codesandbox.io/s/formik-v2-tutorial-added-textarea-ujz18
-
 
 export const CreateProject = () => {
-    const [files, setFiles] = useState<string[]>([])
+    const [files, setFiles] = useState<string[]>([]);
 
-    useEffect(() => {
-        console.log(files);
-    }, [files]);
 
-    const x = (n) => {
-      setFiles(["kjhkhlhkh"]);
+    const filesHandle = (files: FileList) => {
+        Array.from(files).forEach(file => {
+            setFiles(prev => [...prev, file.name]);
+        });
     }
+
     return (
         <div className={'d-flex justify-content-start ml-40 mb-50'}>
             <Formik
@@ -71,16 +66,15 @@ export const CreateProject = () => {
                     const fd = new FormData();
                     Array.from(values.previews).forEach(file => {
                         fd.append('preview', file);
-                        setFiles(prev => [...prev, file.name]);
                     });
                     for (let k in values) {
                         fd.append(k, typeof values[k] === "string" ? values[k] : JSON.stringify(values[k]));
                     }
                     setSubmitting(false);
-                    // setPost(fd).then(async (r: any) => {
-                    //     r = await r.json();
-                    //     console.log(r)
-                    // });
+                    setPost(fd).then(async (r: any) => {
+                        r = await r.json();
+                        console.log(r)
+                    });
                 }}>
                 {(formProps) => (
                     <Form className={clsx('d-flex flex-column', styles.form)}>
@@ -99,6 +93,7 @@ export const CreateProject = () => {
                             name="previews"
                             onChange={(event) =>{
                                 formProps.setFieldValue("previews", event.target.files);
+                                filesHandle(event.target.files);
                             }}
                             className={clsx(styles.files)}
                             multiple
