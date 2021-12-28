@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import styles from './Create.module.scss';
 import {Formik, Form, FormikHelpers, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
@@ -18,7 +18,7 @@ interface Values {
 
 
 const setPost = async (body: FormData) => {
-    return await fetch("http://localhost:3001/post", {
+    return await fetch("http://localhost:3001/project", {
         method: "post",
         body
     });
@@ -26,13 +26,13 @@ const setPost = async (body: FormData) => {
 
 
 export const CreateProject = () => {
-    const [files, setFiles] = useState<string[]>([]);
+    const [files, setFiles] = useState<string>("Выбрать файлы");
 
 
     const filesHandle = (files: FileList) => {
-        Array.from(files).forEach(file => {
-            setFiles(prev => [...prev, file.name]);
-        });
+        let str = "Выбранные файлы: ";
+        str += Array.from(files).map(img => img.name).join(", ");
+        setFiles(str);
     }
 
     return (
@@ -62,7 +62,7 @@ export const CreateProject = () => {
                     values: Values,
                     { setSubmitting }: FormikHelpers<Values>
                 ) => {
-                    setFiles([]);
+                    setFiles("Выбрать файлы");
                     const fd = new FormData();
                     Array.from(values.previews).forEach(file => {
                         fd.append('preview', file);
@@ -85,7 +85,8 @@ export const CreateProject = () => {
                         <MyTextInput label="Пароль*" name="password" type="password" placeholder="**********"/>
                         <MyTextInput label="Изменить пароль" name="new_password" type="password" placeholder="**********"/>
                         <label htmlFor="previews" className={clsx(styles.label)}>
-                            {!files.length ? "Выбрать файлы" : `Выбранные файлы: ${files.join(", ")}.`}
+                            {/*{!files.length ? "Выбрать файлы" : `Выбранные файлы: ${files.join(", ")}.`}*/}
+                            {files}
                         </label>
                         <input
                             id="previews"

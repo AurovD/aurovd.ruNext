@@ -63,12 +63,18 @@ class PostController {
 
                     return res.status(200).send({msg: "Success"});
                 } catch (e) {
-                    console.log(e);
                     return res.send({msg: "Ошибка создания"});
                 }
             }
         })
-
+    }
+    async getAll(req: express.Request, res: express.Response) {
+        try {
+            let projects = await Projects.findAll();
+            return res.send(projects);
+        } catch (e) {
+            return res.send({msg: "Серверная ошибка"});
+        }
     }
 }
 

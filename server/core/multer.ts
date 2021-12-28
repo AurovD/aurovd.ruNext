@@ -7,7 +7,7 @@ export const upload = multer({
             cb(null, 'public/projects')
         },
         filename: function (req, file, cb){
-            cb(null, file.fieldname + '-' + nanoid(6) + '.' + file.mimetype.split("/").pop());
+            cb(null, file.fieldname + '-' + nanoid(6) + Date.now() + '.' + file.mimetype.split("/").pop());
         }
     })
 });

@@ -14,7 +14,8 @@ app.use(cors());
 app.use(express.json());
 
 app.post('/registration', UserController.registration);
-app.post('/post', PostController.create)
+app.post('/project', PostController.create);
+app.get('/projects', PostController.getAll);
 
 app.listen(3001, () => {
     console.log('server running');
