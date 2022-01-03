@@ -5,24 +5,27 @@ import * as Yup from 'yup';
 import clsx from "clsx";
 import {MyTextInput} from "../UI/Forms/TextInput";
 import {MyTextArea} from "../UI/Forms/TextArea";
+import {IProject} from "../../types/types";
+import {ProjectsApi} from "../../api/ProjectsApi";
+import {Axios} from "../../axios/axios";
 
 
-interface Values {
-    title: string;
-    description: string;
-    link?: string;
-    github?: string;
-    password: string;
-    previews: FileList | null;
-}
+// interface Values {
+//     title: string;
+//     description: string;
+//     link?: string;
+//     github?: string;
+//     password: string;
+//     previews: FileList | null;
+// }
 
 
-const setPost = async (body: FormData) => {
-    return await fetch("http://localhost:3001/project", {
-        method: "post",
-        body
-    });
-}
+// const setPost = async (body: FormData) => {
+//     return await fetch("http://localhost:3001/project", {
+//         method: "post",
+//         body
+//     });
+// }
 
 
 export const CreateProject = () => {
@@ -59,8 +62,8 @@ export const CreateProject = () => {
                         .required('Требуется превью проекта')
                 })}
                 onSubmit={(
-                    values: Values,
-                    { setSubmitting }: FormikHelpers<Values>
+                    values: IProject,
+                    { setSubmitting }: FormikHelpers<IProject>
                 ) => {
                     setFiles("Выбрать файлы");
                     const fd = new FormData();
@@ -71,9 +74,9 @@ export const CreateProject = () => {
                         fd.append(k, typeof values[k] === "string" ? values[k] : JSON.stringify(values[k]));
                     }
                     setSubmitting(false);
-                    setPost(fd).then(async (r: any) => {
-                        r = await r.json();
-                        console.log(r)
+                    ProjectsApi(Axios).createProject(fd).then(async (r: any) => {
+                            // r = await r.json();
+                            console.log(r)
                     });
                 }}>
                 {(formProps) => (

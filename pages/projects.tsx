@@ -2,9 +2,10 @@ import React from 'react';
 import Head from "next/head";
 import {Panel} from "../components/Panel";
 import {Projects} from "../components/Projects";
-import {GetServerSideProps, InferGetServerSidePropsType} from "next";
+import {GetServerSideProps} from "next";
+import {Api} from "../api";
 
-export default function ProjectsPage({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function ProjectsPage ({ data }) {
     const obj = {
         id: 2,
         title: "ПРОЕКТЫ"
@@ -24,16 +25,20 @@ export default function ProjectsPage({ data }: InferGetServerSidePropsType<typeo
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     try {
-        let data = await fetch("http://localhost:3001/projects", {
-            method: "get"
-        });
-        data = await data.json();
+        // let data = await fetch("http://localhost:3001/projects", {
+        //     method: "get"
+        // });
+        // data = await data.json();
+
+        const data = await Api(context).getProjects();
+        console.log(data)
+
         return {
             props: {data}
         }
     } catch (e) {
         return {
-            props: []
+            props: {data: []}
         }
     }
 
