@@ -28,6 +28,13 @@ import {Axios} from "../../axios/axios";
 // }
 
 
+// let text = "Give, jh879 98799, &^&^GJkh";
+// let pattern = /\w+/g;
+// let result = text.match(pattern);
+//
+// console.log(result);
+
+
 export const CreateProject = () => {
     const [files, setFiles] = useState<string>("Выбрать файлы");
 
@@ -44,6 +51,7 @@ export const CreateProject = () => {
                 initialValues={{
                     title: 'test',
                     description: 'test',
+                    tags: '',
                     link: '',
                     github: '',
                     password: '123',
@@ -52,7 +60,7 @@ export const CreateProject = () => {
                 }}
                 validationSchema={Yup.object({
                     title: Yup.string()
-                        .max(30, 'Must be 15 characters or less')
+                        .max(30, 'Небольше 30 символов')
                         .required('Требуется название проекта'),
                     description: Yup.string()
                         .required('Требуется описание проекта'),
@@ -83,6 +91,7 @@ export const CreateProject = () => {
                     <Form className={clsx('d-flex flex-column', styles.form)}>
                         <MyTextInput label="Название проекта*" name="title" type="text" placeholder="Портфолио"/>
                         <MyTextArea label="Description*" name="description" placeholder="Description"/>
+                        <MyTextInput label="Тэги" name="tags" type="text" placeholder="node.js javascript"/>
                         <MyTextInput label="Ссылка на Github" name="github" type="text" placeholder="https://github.com/AurovD/aurovd.ruNext"/>
                         <MyTextInput label="Ссылка на проект" name="link" type="text" placeholder="https://aurovd.ru/"/>
                         <MyTextInput label="Пароль*" name="password" type="password" placeholder="**********"/>

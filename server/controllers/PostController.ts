@@ -3,17 +3,19 @@ import {upload} from "../core/multer";
 // @ts-ignore
 import { User, Projects } from "../../models";
 import bcrypt from "bcryptjs";
+import {IProject as BodyRequest} from "../../types/types";
 
 
 
-interface BodyRequest extends Request {
-    title: string,
-    description: string,
-    link?: string,
-    password: string,
-    github?: string,
-    new_password?: string
-}
+// interface BodyRequest extends Request {
+//     title: string,
+//     description: string,
+//     link?: string,
+//     password: string,
+//     github?: string,
+//     tags?: string,
+//     new_password?: string
+// }
 
 declare module 'express' {
     interface Request {
@@ -53,13 +55,13 @@ class PostController {
                         images_arr.push(img.filename)
                     });
 
-                    await Projects.create({
-                        title: req.body.title,
-                        description: req.body.description,
-                        github: req.body.github,
-                        link: req.body.link,
-                        images: images_arr
-                    })
+                    // await Projects.create({
+                    //     title: req.body.title,
+                    //     description: req.body.description,
+                    //     github: req.body.github,
+                    //     link: req.body.link,
+                    //     images: images_arr
+                    // })
 
                     return res.status(200).send({msg: "Success"});
                 } catch (e) {

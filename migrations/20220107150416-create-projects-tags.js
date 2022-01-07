@@ -16,7 +16,6 @@ module.exports = {
           model: "Projects",
           key: 'id'
         },
-        onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
       },
       TagId: {
@@ -27,7 +26,6 @@ module.exports = {
           model: "Tags",
           key: 'id'
         },
-        onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
       },
       createdAt: {
