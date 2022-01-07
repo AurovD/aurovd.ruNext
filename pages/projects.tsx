@@ -25,13 +25,8 @@ export default function ProjectsPage ({ data }) {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     try {
-        // let data = await fetch("http://localhost:3001/projects", {
-        //     method: "get"
-        // });
-        // data = await data.json();
 
         const data = await Api(context).getProjects();
-        console.log(data)
 
         return {
             props: {data}
