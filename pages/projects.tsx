@@ -26,7 +26,7 @@ export default function ProjectsPage ({ data }) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
     try {
 
-        const data = await Api(context).getProjects();
+        const data = await Api(context).getProjects(0);
 
         return {
             props: {data}

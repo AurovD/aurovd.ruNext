@@ -6,6 +6,7 @@ import { User, Projects, Tags, Projects_Tags } from "../../models";
 import bcrypt from "bcryptjs";
 import {IProject as BodyRequest} from "../../types/types";
 import TagsService from '../core/tags_service';
+import {Sequelize} from "sequelize";
 
 
 
@@ -84,8 +85,17 @@ class PostController {
     }
     async getAll(req: express.Request, res: express.Response) {
         try {
-            let projects = await Projects.findAll();
-            return res.send(projects);
+            let offset = +req.query.offset;
+            let projects = await Projects.findAll({
+                offset: offset,
+                limit: 5
+            })
+            let count = await Projects.count().then(c => c);
+            if(count && projects) {
+                return res.set({"X-Total-Count": count}).send(projects);
+            } else {
+                return res.status(501).send({msg: "Серверная ошибка"});
+            }
         } catch (e) {
             return res.send({msg: "Серверная ошибка"});
         }
