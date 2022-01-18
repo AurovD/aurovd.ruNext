@@ -9,13 +9,15 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       login: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
       },
       password: {
         type: Sequelize.STRING
       },
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
       },
       status: {
         type: Sequelize.BOOLEAN
@@ -30,7 +32,7 @@ module.exports = {
       }
     });
   },
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface) => {
     await queryInterface.dropTable('Users');
   }
 };

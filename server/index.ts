@@ -13,7 +13,7 @@ import './core/db';
 app.use(cors());
 app.use(express.json());
 
-app.post('/registration', UserController.registration);
+app.get('/registration', UserController.registration);
 app.post('/project', PostController.create);
 app.get('/projects', PostController.getAll);
 

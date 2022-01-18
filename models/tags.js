@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       Tags.belongsToMany(models.Projects, {
         through: 'Projects_Tags',
         as: 'Projects',
-        foreignKey: 'TagsId'
+        foreignKey: 'TagId'
       });
     }
   }

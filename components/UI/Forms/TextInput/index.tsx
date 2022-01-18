@@ -18,7 +18,7 @@ export const MyTextInput: FC<Interface> = ({ label, ...props }) => {
             <input {...field}{...props}
                 onChange={event => {
                     if (label === 'Тэги') {
-                        let str = event.target.value.split(" ").map(tag => !~tag.indexOf("#") && tag.length > 1 ? `#${tag}` : `${tag}`).join(' ');
+                        let str = event.target.value.split(" ").map(tag => !~tag.indexOf("#") && tag.length >= 1 ? `#${tag}` : `${tag}`).join(' ');
                         helpers.setValue(str);
                     }
                     else {

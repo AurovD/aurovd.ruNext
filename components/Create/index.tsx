@@ -51,7 +51,7 @@ export const CreateProject = () => {
                 initialValues={{
                     title: 'test',
                     description: 'test',
-                    tags: '',
+                    tags: '#jhgjhgj #hjhjhjjhggh #hjhjhhu7686',
                     link: '',
                     github: '',
                     password: '123',
@@ -64,6 +64,9 @@ export const CreateProject = () => {
                         .required('Требуется название проекта'),
                     description: Yup.string()
                         .required('Требуется описание проекта'),
+                    tags: Yup.string()
+                        .trim()
+                        .matches(/\B#[a-z0-9_]+/g, "Требуется знак # перед тэгом"),
                     password: Yup.string()
                         .required('Требуется идентификация по паролю'),
                     previews: Yup.mixed()

@@ -1,9 +1,12 @@
 import express from 'express';
 import {upload} from "../core/multer";
+
 // @ts-ignore
-import { User, Projects } from "../../models";
+import { User, Projects, Tags, Projects_Tags } from "../../models";
 import bcrypt from "bcryptjs";
 import {IProject as BodyRequest} from "../../types/types";
+import TagsService from '../core/tags_service';
+
 
 
 
@@ -49,22 +52,31 @@ class PostController {
                         const hashed_pass = await bcrypt.hash(req.body.new_password, 12);
                         await User.update({password: hashed_pass}, {where: {password: req.body.password}})
                     }
+
+                    console.log(req.body);
+
+                    let tags:string[] = req.body?.tags.match(/\B#[a-z0-9_]+/g);
+
                     let images_arr = [];
 
                     req.files.map((img: { filename: string }) => {
                         images_arr.push(img.filename)
                     });
 
-                    // await Projects.create({
-                    //     title: req.body.title,
-                    //     description: req.body.description,
-                    //     github: req.body.github,
-                    //     link: req.body.link,
-                    //     images: images_arr
-                    // })
+                    await Projects.create({
+                        title: req.body.title,
+                        description: req.body.description,
+                        github: req.body.github,
+                        link: req.body.link,
+                        images: images_arr
+                    })
+                        .then(async (project) => {
+                            await TagsService.add(tags, project.id);
+                        })
 
                     return res.status(200).send({msg: "Success"});
                 } catch (e) {
+                    console.log(e)
                     return res.send({msg: "Ошибка создания"});
                 }
             }
