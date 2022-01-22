@@ -8,3 +8,14 @@ export interface IProject {
     new_password?: string;
     previews: FileList;
 }
+
+export interface IProjects {
+    createdAt: string;
+    description: string;
+    github: string;
+    id: number;
+    images: [string];
+    link: string;
+    title: string;
+    updatedAt: string;
+}

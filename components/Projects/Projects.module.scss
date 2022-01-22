@@ -1,9 +1,6 @@
 .project_grid {
   display: grid;
-  gap: .25rem;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-}
-.card {
-  aspect-ratio: 1 / 1.5;
-  /* border: 3px solid hotpink; */
+  gap: .45rem;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  height: min-content;
 }

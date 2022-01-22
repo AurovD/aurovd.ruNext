@@ -88,7 +88,7 @@ class PostController {
             let offset = +req.query.offset;
             let projects = await Projects.findAll({
                 offset: offset,
-                limit: 5
+                limit: 10
             })
             let count = await Projects.count().then(c => c);
             if(count && projects) {

@@ -9,6 +9,9 @@ body {
   font-family: 'Montserrat', 'Roboto', 'Open Sans', sans-serif;
   background-color: #E9EAF2;
 }
+h2, p {
+  margin: 0;
+}
 
 a {
   color: inherit;
@@ -34,6 +37,10 @@ a {
   top: 5px;
   left: 10px;
   font-size: 12px;
+}
+.container {
+  padding: 2.5rem 0;
+  padding-inline: 2rem;
 }
 @media (max-width: 1000px) {
   .grid {

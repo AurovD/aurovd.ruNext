@@ -10,7 +10,6 @@ export default function ProjectsPage ({ data }) {
         id: 2,
         title: "ПРОЕКТЫ"
     }
-    console.log(data)
     return (
         <div className={"d-grid grid"}>
             <Head>
@@ -18,7 +17,7 @@ export default function ProjectsPage ({ data }) {
                 <title>Projects</title>
             </Head>
             <Panel {...obj}/>
-            <Projects/>
+            <Projects data={data}/>
         </div>
     )
 };

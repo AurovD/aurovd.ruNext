@@ -1,0 +1,23 @@
+.card {
+  //display: grid;
+  aspect-ratio: 1.5 / 1;
+  background-color: #ddd;
+  cursor: pointer;
+  box-shadow: 0 0.25rem 1rem rgb(0 0 0 / 0.3);
+  img {
+    width: 100%;
+    aspect-ratio: 1 / .6;
+    object-fit: cover;
+    box-shadow: 0 0.25rem 1rem rgb(0 0 0 / 0.3);
+  }
+  div {
+    align-self: end;
+    //margin: 0.5rem 0.5rem 2rem;
+    padding: 0.5rem;
+  }
+  .card__title {
+    font-size: 1.25rem;
+    line-height: 1.1;
+    font-weight: 900;
+  }
+}

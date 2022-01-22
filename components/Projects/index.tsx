@@ -1,18 +1,18 @@
 import React from 'react';
-import {NextPage} from "next";
 import clsx from "clsx";
 import styles from './Projects.module.scss';
+import {IProjects} from "../../types/types";
+import {ProjectCard} from "../ProjectCard";
 
-export const Projects: NextPage = () => {
+
+interface Projects {
+    data: Array<IProjects>;
+}
+
+export const Projects: React.FC<Projects> = ({data}) => {
     return (
-        <div className={clsx(styles.project_grid)}>
-            <div className={clsx(styles.card)}>jhjkhkjk</div>
-            <div className={clsx(styles.card)}>jhjkhkjk</div>
-            <div className={clsx(styles.card)}>jhjkhkjk</div>
-            <div className={clsx(styles.card)}>jhjkhkjk</div>
-            <div className={clsx(styles.card)}>jhjkhkjk</div>
-            <div className={clsx(styles.card)}>jhjkhkjk</div>
-            <div className={clsx(styles.card)}>jhjkhkjk</div>
+        <div className={clsx("container", styles.project_grid)}>
+            {data.length && data.map(project => <ProjectCard key={project.id} project={project}/>)}
         </div>
 )
 };
