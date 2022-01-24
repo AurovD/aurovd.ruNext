@@ -12,10 +12,11 @@ export interface IProject {
 export interface IProjects {
     createdAt: string;
     description: string;
-    github: string;
+    github?: string;
     id: number;
-    images: [string];
-    link: string;
+    images?: [string];
+    link?: string;
     title: string;
     updatedAt: string;
+    Tags?: Array<{id: number, title: string}>
 }

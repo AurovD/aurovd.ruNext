@@ -1,6 +1,6 @@
 .project_grid {
   display: grid;
-  gap: .45rem;
+  gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   height: min-content;
 }

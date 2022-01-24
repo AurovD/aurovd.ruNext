@@ -88,7 +88,14 @@ class PostController {
             let offset = +req.query.offset;
             let projects = await Projects.findAll({
                 offset: offset,
-                limit: 10
+                limit: 10,
+                include: [{
+                    model: Tags,
+                    as: "Tags",
+                    through: Projects_Tags,
+                    attributes: ["id", "title"]
+                }],
+                order: ["id"]
             })
             let count = await Projects.count().then(c => c);
             if(count && projects) {

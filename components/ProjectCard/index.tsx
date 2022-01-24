@@ -12,8 +12,8 @@ export const ProjectCard: React.FC<Project> = ({project}) => {
         <div className={clsx("border-box", styles.card)}>
             <img src={"/projects_images/preview-Tvf7VH1642528075548.jpeg"} alt={project.title}/>
             <div>
-                <h2 className={clsx(styles.card__title)}>{project.title}</h2>
-                <p>{project.title}</p>
+                <h2 className={clsx(styles.card__title)}>Test</h2>
+                <p>{project.Tags && project.Tags.map(tag => <span key={tag.id}>{tag.title}</span>)}</p>
             </div>
         </div>
     )
