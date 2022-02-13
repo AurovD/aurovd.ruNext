@@ -20,3 +20,7 @@ export interface IProjects {
     updatedAt: string;
     Tags?: Array<{id: number, title: string}>
 }
+export interface IMessage{
+    data: {msg: string};
+    status: number;
+}

@@ -11,6 +11,7 @@ import {Sequelize} from "sequelize";
 
 
 
+
 // interface BodyRequest extends Request {
 //     title: string,
 //     description: string,
@@ -34,7 +35,7 @@ class PostController {
         let images = upload.array("preview", 3);
         images(req, res, async (err) => {
             if(err){
-                return res.send({msg: "Ошибка"})
+                return res.send({msg: "Ошибка файла"})
             } else {
                 try {
                     let password = await User.findOne({
@@ -53,8 +54,6 @@ class PostController {
                         const hashed_pass = await bcrypt.hash(req.body.new_password, 12);
                         await User.update({password: hashed_pass}, {where: {password: req.body.password}})
                     }
-
-                    console.log(req.body);
 
                     let tags:string[] = req.body?.tags.match(/\B#[a-z0-9_]+/g);
 
@@ -75,7 +74,7 @@ class PostController {
                             await TagsService.add(tags, project.id);
                         })
 
-                    return res.status(200).send({msg: "Success"});
+                    return res.status(200).send({msg: "Добавлено"});
                 } catch (e) {
                     console.log(e)
                     return res.send({msg: "Ошибка создания"});

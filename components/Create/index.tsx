@@ -8,6 +8,7 @@ import {MyTextArea} from "../UI/Forms/TextArea";
 import {IProject} from "../../types/types";
 import {ProjectsApi} from "../../api/ProjectsApi";
 import {Axios} from "../../axios/axios";
+import {Toast} from "../UI/Toast";
 
 
 // interface Values {
@@ -37,6 +38,10 @@ import {Axios} from "../../axios/axios";
 
 export const CreateProject = () => {
     const [files, setFiles] = useState<string>("Выбрать файлы");
+    const [msg, setMsg] = useState({
+        msg: 'Добавлено',
+        status: 200
+    });
 
 
     const filesHandle = (files: FileList) => {
@@ -49,9 +54,9 @@ export const CreateProject = () => {
         <div className={'d-flex justify-content-start ml-40 mb-50'}>
             <Formik
                 initialValues={{
-                    title: 'test',
+                    title: 'Test js',
                     description: 'test',
-                    tags: '#jhgjhgj #hjhjhjjhggh #hjhjhhu7686',
+                    tags: '#js #facebook #good',
                     link: '',
                     github: '',
                     password: '123',
@@ -85,9 +90,14 @@ export const CreateProject = () => {
                         fd.append(k, typeof values[k] === "string" ? values[k] : JSON.stringify(values[k]));
                     }
                     setSubmitting(false);
-                    ProjectsApi(Axios).createProject(fd).then(async (r: any) => {
-                            // r = await r.json();
-                            console.log(r)
+                    ProjectsApi(Axios).createProject(fd).then(async (res: { msg: string, status?: number }) => {
+                            setMsg({msg: res.msg, status: res.status});
+                            setTimeout(() => {
+                                setMsg({
+                                    msg: '',
+                                    status: null
+                                });
+                            }, 5000);
                     });
                 }}>
                 {(formProps) => (
@@ -117,6 +127,7 @@ export const CreateProject = () => {
                         <ErrorMessage name="previews" />
 
                         <button type="submit">Добавить проект</button>
+                        {msg.status && <Toast msg={msg.msg} status={msg.status}/>}
                     </Form>
                 )}
             </Formik>
