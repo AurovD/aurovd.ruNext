@@ -9,7 +9,6 @@ interface IMsg {
 
 export const Toast: React.FC<IMsg> = ({msg, status}) => {
     console.log(msg, status);
-    //TODO ширина инпутов
     return (
         <div className={clsx(styles.toast)}>
             {msg}

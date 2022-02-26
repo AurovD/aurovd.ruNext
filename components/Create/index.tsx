@@ -51,7 +51,7 @@ export const CreateProject = () => {
     }
 
     return (
-        <div className={'d-flex justify-content-start ml-40 mb-50'}>
+        <div className={'d-flex justify-content-start'}>
             <Formik
                 initialValues={{
                     title: 'Test js',

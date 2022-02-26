@@ -1,9 +1,30 @@
 .toast {
   position: fixed;
-  top: 0;
   left: 50%;
   transform: translate(-50%);
   background-color: #19292D;
   padding: 10px 20px;
   color: #E9EAF2;
+  animation-name: toast;
+  animation-duration: 5s;
+  top: -50px;
 }
+
+@keyframes toast {
+  0% {
+    top: -50px;
+  }
+  20% {
+    top: 0;
+  }
+  80% {
+    top: 0;
+  }
+  100% {
+    top: -50px;
+  }
+}
+
+//TODO https://habr.com/ru/post/576874/
+//TODO toast
+//TODO lazy components
