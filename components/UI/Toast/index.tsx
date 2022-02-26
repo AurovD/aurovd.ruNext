@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import clsx from "clsx";
 import styles from './Toast.module.scss';
 
@@ -7,11 +7,11 @@ interface IMsg {
     status?: number
 }
 
-export const Toast: React.FC<IMsg> = ({msg, status}) => {
+export const Toast: React.FC<IMsg> = memo(({msg, status}) => {
     console.log(msg, status);
     return (
-        <div className={clsx(styles.toast)}>
+        <div className={clsx(styles.toast, status === 200 ? "" : styles.error)}>
             {msg}
         </div>
     )
-};
+});

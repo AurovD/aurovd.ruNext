@@ -47,7 +47,7 @@ class PostController {
 
                     const isPassEquals = await bcrypt.compare(req.body.password, password.password);
                     if (!isPassEquals) {
-                        return res.send({msg: 'Неверный доступ'});
+                        return res.status(400).send({msg: 'Неверный доступ'});
                     }
 
                     if(req.body.new_password) {
@@ -74,10 +74,10 @@ class PostController {
                             await TagsService.add(tags, project.id);
                         })
 
-                    return res.status(200).send({msg: "Добавлено"});
+                    return res.status(200).json({msg: "Добавлено"});
                 } catch (e) {
                     console.log(e)
-                    return res.send({msg: "Ошибка создания"});
+                    return res.status(501).send({msg: "Ошибка создания"});
                 }
             }
         })
@@ -103,7 +103,7 @@ class PostController {
                 return res.status(501).send({msg: "Серверная ошибка"});
             }
         } catch (e) {
-            return res.send({msg: "Серверная ошибка"});
+            return res.status(501).send({msg: "Серверная ошибка"});
         }
     }
 }

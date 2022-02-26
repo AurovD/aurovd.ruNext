@@ -24,3 +24,9 @@ export interface IMessage{
     data: {msg: string};
     status: number;
 }
+
+
+//TODO https://habr.com/ru/post/576874/
+//TODO toast
+//TODO lazy components
+//TODO delete images for mistake

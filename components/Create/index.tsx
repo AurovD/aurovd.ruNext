@@ -40,7 +40,7 @@ export const CreateProject = () => {
     const [files, setFiles] = useState<string>("Выбрать файлы");
     const [msg, setMsg] = useState({
         msg: 'Добавлено',
-        status: 200
+        status: null
     });
 
 
@@ -91,7 +91,7 @@ export const CreateProject = () => {
                     }
                     setSubmitting(false);
                     ProjectsApi(Axios).createProject(fd).then(async (res: { msg: string, status?: number }) => {
-                            setMsg({msg: res.msg, status: res.status});
+                        setMsg({msg: res.msg, status: res.status});
                             setTimeout(() => {
                                 setMsg({
                                     msg: '',
