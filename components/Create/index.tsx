@@ -83,12 +83,12 @@ export const CreateProject = () => {
                 ) => {
                     setFiles("Выбрать файлы");
                     const fd = new FormData();
-                    Array.from(values.previews).forEach(file => {
-                        fd.append('preview', file);
-                    });
                     for (let k in values) {
                         fd.append(k, typeof values[k] === "string" ? values[k] : JSON.stringify(values[k]));
                     }
+                    Array.from(values.previews).forEach(file => {
+                        fd.append('preview', file);
+                    });
                     setSubmitting(false);
                     ProjectsApi(Axios).createProject(fd).then(async (res: { msg: string, status?: number }) => {
                         setMsg({msg: res.msg, status: res.status});

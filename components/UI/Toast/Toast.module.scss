@@ -2,16 +2,29 @@
   position: fixed;
   left: 50%;
   transform: translate(-50%);
-  background-color: #19292D;
+  background-color: #637073;
+  //background-color: #19292D;
   padding: 10px 20px;
   color: #E9EAF2;
   animation-name: toast;
   animation-duration: 5s;
   top: -50px;
+  &:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 7px;
+    background-color: #fff;
+    width: 2px;
+    height: 30px;
+  }
 }
 
 .error {
-  background-color: #FC4F4F;
+  &:before {
+    background-color: #FC4F4F;
+  }
 }
 
 @keyframes toast {
@@ -19,10 +32,10 @@
     top: -50px;
   }
   20% {
-    top: 0;
+    top: 10px;
   }
   80% {
-    top: 0;
+    top: 10px;
   }
   100% {
     top: -50px;

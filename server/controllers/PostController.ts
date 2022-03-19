@@ -6,7 +6,7 @@ import { User, Projects, Tags, Projects_Tags } from "../../models";
 import bcrypt from "bcryptjs";
 import {IProject as BodyRequest} from "../../types/types";
 import TagsService from '../core/tags_service';
-import {Sequelize} from "sequelize";
+import PostService from "../core/post_service";
 
 
 
@@ -38,15 +38,17 @@ class PostController {
                 return res.send({msg: "Ошибка файла"})
             } else {
                 try {
+                    console.log(req.body);
                     let password = await User.findOne({
                         where: {
                             status: true
                         },
                         attributes: ['password']
                     });
-
+                    let images_arr = Array.from(req.files, (img: { filename: string }) => img.filename)
                     const isPassEquals = await bcrypt.compare(req.body.password, password.password);
                     if (!isPassEquals) {
+                        await PostService.deleteImages(images_arr);
                         return res.status(400).send({msg: 'Неверный доступ'});
                     }
 
@@ -56,12 +58,6 @@ class PostController {
                     }
 
                     let tags:string[] = req.body?.tags.match(/\B#[a-z0-9_]+/g);
-
-                    let images_arr = [];
-
-                    req.files.map((img: { filename: string }) => {
-                        images_arr.push(img.filename)
-                    });
 
                     await Projects.create({
                         title: req.body.title,
@@ -76,7 +72,6 @@ class PostController {
 
                     return res.status(200).json({msg: "Добавлено"});
                 } catch (e) {
-                    console.log(e)
                     return res.status(501).send({msg: "Ошибка создания"});
                 }
             }

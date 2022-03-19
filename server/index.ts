@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import bodyParser from "body-parser";
 import UserController from "./controllers/UserController";
 import PostController from "./controllers/PostController";
 
@@ -12,6 +13,9 @@ import './core/db';
 
 app.use(cors());
 app.use(express.json());
+
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 app.get('/registration', UserController.registration);
 app.post('/project', PostController.create);

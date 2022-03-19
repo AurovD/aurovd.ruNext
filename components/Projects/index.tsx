@@ -10,7 +10,6 @@ interface Projects {
 }
 
 export const Projects: React.FC<Projects> = ({data}) => {
-    console.log(data)
     return (
         <div className={clsx("container", styles.project_grid)}>
             {data.length && data.map(project => <ProjectCard key={project.id} project={project}/>)}
