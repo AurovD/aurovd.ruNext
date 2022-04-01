@@ -81,7 +81,7 @@ export const CreateProject = () => {
                     values: IProject,
                     { setSubmitting }: FormikHelpers<IProject>
                 ) => {
-                    setFiles("Выбрать файлы");
+                    // setFiles("Выбрать файлы: ");
                     const fd = new FormData();
                     for (let k in values) {
                         fd.append(k, typeof values[k] === "string" ? values[k] : JSON.stringify(values[k]));

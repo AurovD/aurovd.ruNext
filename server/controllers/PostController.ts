@@ -82,7 +82,7 @@ class PostController {
             let offset = +req.query.offset;
             let projects = await Projects.findAll({
                 offset: offset,
-                limit: 10,
+                limit: 5,
                 include: [{
                     model: Tags,
                     as: "Tags",
@@ -93,7 +93,10 @@ class PostController {
             })
             let count = await Projects.count().then(c => c);
             if(count && projects) {
-                return res.set({"X-Total-Count": count}).send(projects);
+                return res.set({"X-Total-Count": count}).send({
+                    count,
+                    projects
+                });
             } else {
                 return res.status(501).send({msg: "Серверная ошибка"});
             }

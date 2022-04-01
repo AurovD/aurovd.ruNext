@@ -10,9 +10,11 @@ interface Projects {
 }
 
 export const Projects: React.FC<Projects> = ({data}) => {
+    const observer = React.useRef();
     return (
         <div className={clsx("container", styles.project_grid)}>
-            {data.length && data.map(project => <ProjectCard key={project.id} project={project}/>)}
+            {data.length ? data.map(project => <ProjectCard key={project.id} project={project}/>) : <p>jgkhh</p>}
+            <div className={styles.observer}>Observer</div>
         </div>
 )
 };

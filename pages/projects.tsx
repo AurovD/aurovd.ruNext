@@ -10,6 +10,8 @@ export default function ProjectsPage ({ data }) {
         id: 2,
         title: "ПРОЕКТЫ"
     }
+
+    const [projects, setProjects] = React.useState(data);
     return (
         <div className={"d-grid grid"}>
             <Head>
@@ -17,18 +19,20 @@ export default function ProjectsPage ({ data }) {
                 <title>Projects</title>
             </Head>
             <Panel {...obj}/>
-            <Projects data={data}/>
+            <Projects data={projects}/>
         </div>
     )
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
     try {
-
-        const data = await Api(context).getProjects(0);
-
+        res.setHeader(
+            'Cache-Control',
+            'public, s-maxage=10, stale-while-revalidate=59'
+        )
+        const data = await Api(req).getProjects(0);
         return {
-            props: {data}
+            props: {data: data.projects}
         }
     } catch (e) {
         return {
