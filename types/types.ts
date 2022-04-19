@@ -22,6 +22,9 @@ export interface IMessage{
     data: {msg: string};
     status: number;
 }
+export interface ProjectReq {
+  count: number, projects: IProjects[]
+}
 
 
 //TODO https://habr.com/ru/post/576874/

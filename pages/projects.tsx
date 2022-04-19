@@ -11,7 +11,6 @@ export default function ProjectsPage ({ data }) {
         title: "ПРОЕКТЫ"
     }
 
-    const [projects, setProjects] = React.useState(data);
     return (
         <div className={"d-grid grid"}>
             <Head>
@@ -19,7 +18,7 @@ export default function ProjectsPage ({ data }) {
                 <title>Projects</title>
             </Head>
             <Panel {...obj}/>
-            <Projects data={projects}/>
+            <Projects data={data}/>
         </div>
     )
 };
@@ -32,7 +31,8 @@ export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
         )
         const data = await Api(req).getProjects(0);
         return {
-            props: {data: data.projects}
+            props: {data}
+            // props: {data: data.projects}
         }
     } catch (e) {
         return {

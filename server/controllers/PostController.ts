@@ -82,7 +82,7 @@ class PostController {
             let offset = +req.query.offset;
             let projects = await Projects.findAll({
                 offset: offset,
-                limit: 5,
+                limit: 6,
                 include: [{
                     model: Tags,
                     as: "Tags",

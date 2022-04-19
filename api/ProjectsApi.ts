@@ -1,10 +1,9 @@
-import {IProject} from "../types/types";
+import {IProjects} from "../types/types";
 import { AxiosInstance } from 'axios';
-import {array} from "yup";
 
 export const ProjectsApi = (instance: AxiosInstance) => {
     return {
-        getProjects: async (offset): Promise<{ count: number, projects: IProject[] }> => {
+        getProjects: async (offset): Promise<{ count: number, projects: IProjects[] }> => {
         // getProjects: async (offset): Promise<IProject[]> => {
             const { data } = await instance.get('/projects?offset=' + offset);
             return data; 
