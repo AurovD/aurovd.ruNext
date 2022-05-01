@@ -10,8 +10,10 @@ class PostService {
                         try {
                             let path_file = path.join('public', 'projects_images', img);
                             fs.unlink(path_file, err => {
-                                if (err) throw err;
-                                console.log(`${img} was deleted`);
+                                if (err) {
+                                    rej(err);
+                                }
+                                res(`${img} was deleted`)
                             });
                         } catch (err) {
                             console.error(err);

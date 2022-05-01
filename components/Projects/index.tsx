@@ -44,7 +44,7 @@ export const Projects: React.FC<Projects> = ({data}) => {
 
     return (
         <div className={clsx("container", styles.project_grid)}>
-            {projects.length ? projects.map(project => <ProjectCard key={project.id} project={project}/>) : <p>jgkhh</p>}
+            {projects.map(project => <ProjectCard key={project.id} project={project}/>)}
             <div ref={observer} className={styles.observer}>Observer</div>
         </div>
 )

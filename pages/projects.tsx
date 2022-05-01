@@ -18,7 +18,7 @@ export default function ProjectsPage ({ data }) {
                 <title>Projects</title>
             </Head>
             <Panel {...obj}/>
-            <Projects data={data}/>
+            {data.count > 0 && <Projects data={data}/>}
         </div>
     )
 };

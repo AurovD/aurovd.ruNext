@@ -1,14 +1,14 @@
 .panel {
-  background-color: #19292D;
+  background-color: var(--clr-main);
   position: sticky;
   top: 0;
-  padding: 40px;
+  padding: 3rem;
 }
 .navigation {
   a {
-    color: #fff;
+    color: var(--clr-wtext);
     font-weight: 600;
-    font-size: 1.5em;
+    font-size: 1.5rem;
     margin-right: 40px;
     &:hover {
       color: #E9EAF2;

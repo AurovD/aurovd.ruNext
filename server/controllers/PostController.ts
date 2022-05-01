@@ -72,6 +72,7 @@ class PostController {
 
                     return res.status(200).json({msg: "Добавлено"});
                 } catch (e) {
+                    console.log(e)
                     return res.status(501).send({msg: "Ошибка создания"});
                 }
             }

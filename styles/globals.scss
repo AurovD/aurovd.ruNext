@@ -2,13 +2,31 @@
 @import './display';
 @import './spacing';
 
+:root {
+  /* colors */
+  --clr-main: #19292D;
+  --clr-wtext: #fff;
+  --clr-bg: #E9EAF2;
+
+
+  /* font-sizes */
+  --sizeindex: calc(1vw + 1vh);
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
+  text-rendering: optimizeSpeed;
   font-family: 'Montserrat', 'Roboto', 'Open Sans', sans-serif;
-  background-color: #E9EAF2;
+  background-color: var(--clr-bg);
+  font-size: 1rem;
 }
+
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
 h2, p {
   margin: 0;
 }
@@ -31,12 +49,12 @@ a {
   top: 5px;
   right: 10px;
   color: #b80f0a;
-  font-size: 12px;
+  font-size: .7rem;
 }
 .label {
   top: 5px;
   left: 10px;
-  font-size: 12px;
+  font-size: .7rem;
 }
 .container {
   padding: 2.5rem 0;
