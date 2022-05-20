@@ -35,7 +35,7 @@ export const Projects: React.FC<Projects> = ({data}) => {
 
     useObserver(observer, () => {
         // setOffset(changeOffset);
-        if(offset <= limit){
+        if(offset <= limit && data?.count > 0){
             setOffset(prev => {
                 return prev + 6;
             });

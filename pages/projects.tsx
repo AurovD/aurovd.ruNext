@@ -1,15 +1,44 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Head from "next/head";
 import {Panel} from "../components/Panel";
 import {Projects} from "../components/Projects";
-import {GetServerSideProps} from "next";
-import {Api} from "../api";
+import dynamic from "next/dynamic";
+import {ProjectReq} from "../types/types";
+import {ProjectsApi} from "../api/ProjectsApi";
+import {Axios} from "../axios/axios";
 
-export default function ProjectsPage ({ data }) {
+
+
+// const Projects = dynamic<React.ComponentProps<typeof ProjectsComp>>(
+//     () => import('../components/Projects').then(mod => mod.Projects),
+// )
+
+export default function ProjectsPage () {
     const obj = {
         id: 2,
         title: "ПРОЕКТЫ"
     }
+
+    const [isLoading, setIsLoading] = React.useState<boolean>(true);
+    const [projects, setData] = React.useState<ProjectReq>({
+        count: 0,
+        projects: []
+    });
+
+
+    useEffect(()=> {
+        try {
+            ProjectsApi(Axios).getProjects(0).then(async (res: ProjectReq) => {
+                if(res?.count > 0){
+                    setData(res);
+                    setIsLoading(false);
+                }
+            });
+        } catch (e) {
+            console.log(e)
+        }
+    }, []);
+
 
     return (
         <div className={"d-grid grid"}>
@@ -18,26 +47,35 @@ export default function ProjectsPage ({ data }) {
                 <title>Projects</title>
             </Head>
             <Panel {...obj}/>
-            {data.count > 0 && <Projects data={data}/>}
+            {
+                isLoading ? <div style={{color: "red"}}>loading</div> : <Projects data={projects}/>
+            }
         </div>
     )
 };
 
-export const getServerSideProps: GetServerSideProps = async ({req, res}) => {
-    try {
-        res.setHeader(
-            'Cache-Control',
-            'public, s-maxage=10, stale-while-revalidate=59'
-        )
-        const data = await Api(req).getProjects(0);
-        return {
-            props: {data}
-            // props: {data: data.projects}
-        }
-    } catch (e) {
-        return {
-            props: {data: []}
-        }
-    }
-
-}
+// export async function getServerSideProps(req, res) {
+//     try {
+//         // res.setHeader(
+//         //     'Cache-Control',
+//         //     'public, s-maxage=10, stale-while-revalidate=59'
+//         // )
+//         const data = await Api(req).getProjects(0);
+//
+//         // let respond = await fetch("http://localhost:3001/projects?offset=0");
+//         // let data = await respond.json();
+//         if(!data){
+//             return {
+//                 props: {data: []}
+//             }
+//         }
+//         return {
+//             props: {data}
+//             // props: {data: data.projects}
+//         }
+//     } catch (e) {
+//         return {
+//             props: {data: []}
+//         }
+//     }
+// }

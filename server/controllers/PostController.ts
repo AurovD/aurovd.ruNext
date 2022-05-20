@@ -94,7 +94,7 @@ class PostController {
             })
             let count = await Projects.count().then(c => c);
             if(count && projects) {
-                return res.set({"X-Total-Count": count}).send({
+                return res.status(200).send({
                     count,
                     projects
                 });
