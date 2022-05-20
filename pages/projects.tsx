@@ -2,10 +2,11 @@ import React, {useEffect} from 'react';
 import Head from "next/head";
 import {Panel} from "../components/Panel";
 import {Projects} from "../components/Projects";
-import dynamic from "next/dynamic";
+//import dynamic from "next/dynamic";
 import {ProjectReq} from "../types/types";
 import {ProjectsApi} from "../api/ProjectsApi";
 import {Axios} from "../axios/axios";
+import {LoadingGrid} from "../components/UI/Loading/LoadingGrid";
 
 
 
@@ -48,7 +49,7 @@ export default function ProjectsPage () {
             </Head>
             <Panel {...obj}/>
             {
-                isLoading ? <div style={{color: "red"}}>loading</div> : <Projects data={projects}/>
+                !isLoading ? <LoadingGrid/> : <Projects data={projects}/>
             }
         </div>
     )
