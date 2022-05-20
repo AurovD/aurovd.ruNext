@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React, {FC} from 'react';
+import React from 'react';
 import Link from 'next/link';
 
 import styles from './Panel.module.scss';
@@ -15,7 +15,7 @@ interface PanelProps {
     h2?: string;
 }
 
-export const Panel: FC<PanelProps> = ({id, title, h2}) => {
+const Panel = React.memo<PanelProps>(({id, title, h2}) => {
     console.log("panel")
     return (
         <div className={clsx("column d-flex flex-column justify-content-between border-box", styles.panel)}>
@@ -37,4 +37,6 @@ export const Panel: FC<PanelProps> = ({id, title, h2}) => {
             <div>kjgjk</div>
         </div>
     )
-};
+});
+
+export default Panel;

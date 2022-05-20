@@ -1,5 +1,5 @@
 import React from "react";
-import {Panel} from "../components/Panel";
+import Panel from "../components/Panel";
 import {Introduction} from "../components/Introduction";
 import Head from "next/head";
 

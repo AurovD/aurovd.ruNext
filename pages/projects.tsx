@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import Head from "next/head";
-import {Panel} from "../components/Panel";
+import Panel from "../components/Panel";
 import {Projects} from "../components/Projects";
 //import dynamic from "next/dynamic";
 import {ProjectReq} from "../types/types";
@@ -49,7 +49,7 @@ export default function ProjectsPage () {
             </Head>
             <Panel {...obj}/>
             {
-                !isLoading ? <LoadingGrid/> : <Projects data={projects}/>
+                isLoading ? <LoadingGrid/> : <Projects data={projects}/>
             }
         </div>
     )
