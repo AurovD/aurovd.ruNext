@@ -15,6 +15,10 @@ export const ProjectsApi = (instance: AxiosInstance) => {
             } catch (e) {
                 return e.response ? {msg: e.response.data.msg, status: e.response.status} : {msg: "Ошибка", status: 500};
             }
-        }
+        },
+        getProject: async (id: string | string[]): Promise<any> => {
+            const { data } = await instance.get(`/project?id=${id}`);
+            return data;
+        },
     };
 };

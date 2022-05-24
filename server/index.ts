@@ -18,6 +18,7 @@ app.use(express.json());
 
 app.get('/registration', UserController.registration);
 app.post('/project', PostController.create);
+app.get('/project', PostController.show);
 app.get('/projects', PostController.getAll);
 
 app.listen(3001, () => {

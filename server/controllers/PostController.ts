@@ -105,6 +105,24 @@ class PostController {
             return res.status(501).send({msg: "Серверная ошибка"});
         }
     }
+
+    async show (req: express.Request, res: express.Response) {
+        try {
+            let projectId = +req.query.id;
+            if(isNaN(Number(projectId))){
+                return res.status(404).json({message: 'ID проекта не найдено'});
+            }
+            const project = await Projects.findByPk(projectId);
+
+            if(!project){
+                return res.status(404).json({message: 'Проект не найден'});
+            }
+            res.json(project)
+
+        } catch (e) {
+            return res.status(501).send({msg: "Серверная ошибка"});
+        }
+    }
 }
 
 export default new PostController();
