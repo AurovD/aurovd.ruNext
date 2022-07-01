@@ -21,7 +21,7 @@
 .title {
   h1 {
     color: #E9EAF2;
-    font-size: 3.5em;
+    font-size: calc(var(--sizeindex) * 3);
   }
   h2, span {
     color: #505C5E;

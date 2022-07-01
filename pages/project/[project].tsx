@@ -2,22 +2,14 @@ import Panel from "../../components/Panel";
 import Head from "next/head";
 import {ProjectsApi} from "../../api/ProjectsApi";
 import {Axios} from "../../axios/axios";
-import {ProjectPreview} from "../../components/UI/ProjectPreview";
-
-
-// type MainContextProps = {
-//     page: number;
-// };
-//
-// export const MainContext = React.createContext<MainContextProps>({} as MainContextProps);
+import ProjectPreview from "../../components/UI/ProjectPreview";
+import {ProjectDescription} from "../../components/UI/ProjectDescription";
 
 export default function ProjectPage({project}) {
     const obj = {
         title: project.title,
-        h2: "ВЕБ-РАЗРАБОТЧИК",
         tags: project.Tags
     }
-    console.log(project)
 
     return (
         <div className={"d-grid grid"}>
@@ -27,7 +19,8 @@ export default function ProjectPage({project}) {
             </Head>
             <Panel {...obj}/>
             <div>
-                {project.images.map((image, index) => <ProjectPreview image={image} key={index}/>)}
+                {project.images && project.images.map((image, index) => <ProjectPreview image={image} key={index}/>)}
+                <ProjectDescription description={project}/>
             </div>
         </div>
     )

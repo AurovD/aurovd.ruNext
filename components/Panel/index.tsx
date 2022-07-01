@@ -30,8 +30,9 @@ const Panel = React.memo<PanelProps>(({id, title, h2, tags}) => {
                 {
                     tags && tags.length ?
                         tags.map(tag => <span key={tag.id}>{tag.title}</span>) :
-                        <h2 className={clsx("mt-0 mb-0")}>{h2}</h2>
+                        null
                 }
+                {h2 && <h2 className={clsx("mt-0 mb-0")}>{h2}</h2>}
             </div>
             <div>kjgjk</div>
         </div>

@@ -1,0 +1,9 @@
+.description {
+  position: sticky;
+  top: 0;
+  padding: 100px max(3vw, 40px);
+  background-color: var(--clr-bg);
+}
+.description__title {
+  font-size: calc(var(--sizeindex) * 2);
+}
