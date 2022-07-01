@@ -21,6 +21,7 @@ body {
   font-family: 'Montserrat', 'Roboto', 'Open Sans', sans-serif;
   background-color: var(--clr-bg);
   font-size: 1rem;
+  scroll-behavior: smooth;
 }
 
 html:focus-within {

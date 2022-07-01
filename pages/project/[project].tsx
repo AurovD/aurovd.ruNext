@@ -13,9 +13,9 @@ import {ProjectPreview} from "../../components/UI/ProjectPreview";
 
 export default function ProjectPage({project}) {
     const obj = {
-        id: 0,
-        title: "GHJTRN",
-        h2: "ВЕБ-РАЗРАБОТЧИК"
+        title: project.title,
+        h2: "ВЕБ-РАЗРАБОТЧИК",
+        tags: project.Tags
     }
     console.log(project)
 

@@ -10,18 +10,6 @@ import PostService from "../core/post_service";
 
 
 
-
-
-// interface BodyRequest extends Request {
-//     title: string,
-//     description: string,
-//     link?: string,
-//     password: string,
-//     github?: string,
-//     tags?: string,
-//     new_password?: string
-// }
-
 declare module 'express' {
     interface Request {
         body:  BodyRequest
@@ -32,7 +20,7 @@ declare module 'express' {
 class PostController {
     // npx sequelize-cli model:generate --name Projects --attributes title:string,password:string,description:string,link:string,github:string,img:string
     async create(req: express.Request, res: express.Response) {
-        let images = upload.array("preview", 3);
+        let images = upload.array("preview", 7);
         images(req, res, async (err) => {
             if(err){
                 return res.send({msg: "Ошибка файла"})
@@ -112,7 +100,14 @@ class PostController {
             if(isNaN(Number(projectId))){
                 return res.status(404).json({message: 'ID проекта не найдено'});
             }
-            const project = await Projects.findByPk(projectId);
+            const project = await Projects.findByPk(projectId, {
+                include: [{
+                    model: Tags,
+                    as: "Tags",
+                    through: Projects_Tags,
+                    attributes: ["id", "title"]
+                }]
+            });
 
             if(!project){
                 return res.status(404).json({message: 'Проект не найден'});

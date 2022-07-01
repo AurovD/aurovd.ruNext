@@ -4,19 +4,14 @@ import Link from 'next/link';
 
 import styles from './Panel.module.scss';
 
-// type MainContextProps = {
-//     name: string
-// }
-//
-// export const MainContext = React.createContext<MainContextProps>({} as MainContextProps);
 interface PanelProps {
-    id: number;
+    id?: number;
     title: string;
     h2?: string;
+    tags?: Array<{id: number, title: string}>
 }
 
-const Panel = React.memo<PanelProps>(({id, title, h2}) => {
-    console.log("panel")
+const Panel = React.memo<PanelProps>(({id, title, h2, tags}) => {
     return (
         <div className={clsx("column d-flex flex-column justify-content-between border-box", styles.panel)}>
             <nav className={clsx("navigation d-flex justify-content-between", styles.navigation)}>
@@ -32,7 +27,11 @@ const Panel = React.memo<PanelProps>(({id, title, h2}) => {
             </nav>
             <div className={clsx(styles.title)}>
                 <h1 className={clsx("mt-0 mb-0")}>{title}</h1>
-                {h2 && <h2 className={clsx("mt-0 mb-0")}>{h2}</h2>}
+                {
+                    tags && tags.length ?
+                        tags.map(tag => <span key={tag.id}>{tag.title}</span>) :
+                        <h2 className={clsx("mt-0 mb-0")}>{h2}</h2>
+                }
             </div>
             <div>kjgjk</div>
         </div>
