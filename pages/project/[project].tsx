@@ -2,7 +2,7 @@ import Panel from "../../components/Panel";
 import Head from "next/head";
 import {ProjectsApi} from "../../api/ProjectsApi";
 import {Axios} from "../../axios/axios";
-import Project from "../../components/Project";
+import {ProjectPreview} from "../../components/UI/ProjectPreview";
 
 
 // type MainContextProps = {
@@ -17,15 +17,18 @@ export default function ProjectPage({project}) {
         title: "GHJTRN",
         h2: "ВЕБ-РАЗРАБОТЧИК"
     }
+    console.log(project)
 
     return (
         <div className={"d-grid grid"}>
             <Head>
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <title>Aurov Dmitry - Portfolio</title>
             </Head>
             <Panel {...obj}/>
-            <Project/>
+            <div>
+                {project.images.map((image, index) => <ProjectPreview image={image} key={index}/>)}
+            </div>
         </div>
     )
 }
