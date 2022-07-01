@@ -2,6 +2,7 @@ import Panel from "../../components/Panel";
 import Head from "next/head";
 import {ProjectsApi} from "../../api/ProjectsApi";
 import {Axios} from "../../axios/axios";
+import Project from "../../components/Project";
 
 
 // type MainContextProps = {
@@ -10,7 +11,7 @@ import {Axios} from "../../axios/axios";
 //
 // export const MainContext = React.createContext<MainContextProps>({} as MainContextProps);
 
-export default function Project({project}) {
+export default function ProjectPage({project}) {
     const obj = {
         id: 0,
         title: "GHJTRN",
@@ -24,7 +25,7 @@ export default function Project({project}) {
                 <title>Aurov Dmitry - Portfolio</title>
             </Head>
             <Panel {...obj}/>
-            {/*{project}*/}
+            <Project/>
         </div>
     )
 }

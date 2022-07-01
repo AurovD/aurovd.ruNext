@@ -9,13 +9,26 @@
     object-fit: cover;
     box-shadow: 0 0.25rem 1rem rgb(0 0 0 / 0.3);
     transition: 200ms transform ease-in-out;
-    object-position: center;
+    object-position: top;
     cursor: pointer;
     &:hover {
       transform: scale(1.05);
     }
   }
-  div {
+  .error_image {
+    position: relative;
+    &:before {
+      content: "Ой, ссылка потерялась...";
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      font-size: calc((1vw + 1vh)  * .8);
+    }
+    img {
+      object-position: center;
+    }
+  }
+  .card__description {
     align-self: end;
     //margin: 0.5rem 0.5rem 2rem;
     padding: 0.5rem;
@@ -25,5 +38,8 @@
       line-height: 1.1;
       font-weight: 900;
     }
+  }
+  p {
+    font-size: .8rem;
   }
 }

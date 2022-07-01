@@ -1,7 +1,6 @@
 import React from 'react';
 import Head from "next/head";
-import {Panel} from "../components/Panel";
-import {Introduction} from "../components/Introduction";
+import Panel from "../components/Panel";
 
 export default function About() {
     const obj = {

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import clsx from "clsx";
 import styles from './Projects.module.scss';
 import {ProjectReq} from "../../types/types";
-import {ProjectCard} from "../ProjectCard";
+import ProjectCard from "../ProjectCard";
 import {useObserver} from "../../hooks/useObserver";
 import {Axios} from "../../axios/axios";
 import {ProjectsApi} from "../../api/ProjectsApi";
@@ -28,13 +28,8 @@ export const Projects: React.FC<Projects> = ({data}) => {
         }
     }, [offset]);
 
-    // const changeOffset = (state) => {
-    //     console.log(projects.length)
-    //     return state + 6;
-    // }
 
     useObserver(observer, () => {
-        // setOffset(changeOffset);
         if(offset <= limit && data?.count > 0){
             setOffset(prev => {
                 return prev + 6;
