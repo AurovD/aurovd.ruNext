@@ -1,5 +1,6 @@
 export interface Project {
     title: string;
+    task: string;
     description: string;
     link?: string;
     github?: string;
@@ -31,6 +32,7 @@ export interface ProjectReq {
 //toast
 //TODO titles?
 //TODO font sizes
+//TODO задача проекта
 // https://habr.com/ru/company/timeweb/blog/588498/#%D0%BA%D0%B5%D1%88%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5
 
 // sudo lsof -PiTCP -sTCP:LISTEN

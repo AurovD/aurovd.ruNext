@@ -1,0 +1,15 @@
+.link{
+  position: sticky;
+  top: 0;
+  padding: 30px max(3vw, 40px);
+  border-radius: 5px 5px 0 0;
+  background-color: var(--clr-main);
+  border-top: 1px solid #fff;
+  border-left: 2px solid #fff;
+  a {
+    color: var(--clr-bg);
+    font-size: calc(var(--sizeindex) * .8);
+    font-weight: 600;
+    line-height: 1.8rem;
+  }
+}

@@ -1,0 +1,29 @@
+.task{
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  padding: 30px max(3vw, 40px);
+  border-radius: 5px;
+  color: var(--clr-main);
+  gap: 2rem;
+  align-items: center;
+  .task__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--clr-main);
+    color: var(--clr-bg);
+    font-weight: 900;
+    font-size: calc(var(--sizeindex) * 1.5);
+    aspect-ratio: 1/1;
+    padding: 1rem;
+    //-webkit-text-stroke: 1px var(--clr-bg);
+    //-webkit-text-fill-color: var(--clr-main);;
+  }
+  .task__text{
+    font-size: calc(var(--sizeindex) * 2);
+    text-align: right;
+    font-weight: 800;
+  }
+}

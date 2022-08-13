@@ -1,9 +1,11 @@
 .description {
   position: sticky;
   top: 0;
-  padding: 100px max(3vw, 40px);
-  background-color: var(--clr-bg);
-}
-.description__title {
-  font-size: calc(var(--sizeindex) * 2);
+  padding: 30px max(3vw, 40px);
+  border-radius: 5px;
+  color: var(--clr-main);
+  background-color: #fff;
+  font-size: calc(var(--sizeindex) * .8);
+  font-weight: 600;
+  line-height: calc(var(--sizeindex) * 1);
 }

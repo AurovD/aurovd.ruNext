@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.TEXT,
     link: DataTypes.STRING,
     github: DataTypes.STRING,
+    task: DataTypes.STRING,
     images: {
       type: DataTypes.JSON,
       defaultValue: []

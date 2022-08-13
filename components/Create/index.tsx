@@ -55,6 +55,7 @@ export const CreateProject = () => {
             <Formik
                 initialValues={{
                     title: 'Test js',
+                    task: 'Сделать что-нибудь',
                     description: 'test',
                     tags: '#js #facebook #good',
                     link: '',
@@ -67,6 +68,8 @@ export const CreateProject = () => {
                     title: Yup.string()
                         .max(30, 'Небольше 30 символов')
                         .required('Требуется название проекта'),
+                    task: Yup.string()
+                        .required('Требуется задача проекта'),
                     description: Yup.string()
                         .required('Требуется описание проекта'),
                     tags: Yup.string()
@@ -103,6 +106,7 @@ export const CreateProject = () => {
                 {(formProps) => (
                     <Form className={clsx('d-flex flex-column', styles.form)}>
                         <MyTextInput label="Название проекта*" name="title" type="text" placeholder="Портфолио"/>
+                        <MyTextInput label="Задача проекта" name="task" type="text" placeholder="Сделать что-нибудь"/>
                         <MyTextArea label="Description*" name="description" placeholder="Description"/>
                         <MyTextInput label="Тэги" name="tags" type="text" placeholder="node.js javascript"/>
                         <MyTextInput label="Ссылка на Github" name="github" type="text" placeholder="https://github.com/AurovD/aurovd.ruNext"/>

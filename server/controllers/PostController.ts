@@ -50,6 +50,7 @@ class PostController {
                     await Projects.create({
                         title: req.body.title,
                         description: req.body.description,
+                        task: req.body.task,
                         github: req.body.github,
                         link: req.body.link,
                         images: images_arr
