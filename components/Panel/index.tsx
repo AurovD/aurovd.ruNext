@@ -37,11 +37,11 @@ const Panel = React.memo<PanelProps>(({id, title, h2, tags}) => {
             <div className={clsx("d-flex flex-column", styles.contacts)}>
                 <p>+7(926)541-13-08</p>
                 <div className={clsx("d-flex")}>
-                    <a href="https://t.me/aurovdm">telegram</a>
-                    <a href="https://vk.com/aurovdm">vkontakte</a>
-                    <a href="https://www.facebook.com/profile.php?id=100052364083518&ref=bookmarks">facebook</a>
-                    <a href="https://www.instagram.com/buckle_jean/">instagram</a>
-                    <a href="https://github.com/AurovD">github</a>
+                    <a target="_blank" href="https://t.me/aurovdm">telegram</a>
+                    <a target="_blank" href="https://vk.com/aurovdm">vkontakte</a>
+                    <a target="_blank" href="https://www.facebook.com/profile.php?id=100052364083518&ref=bookmarks">facebook</a>
+                    <a target="_blank" href="https://www.instagram.com/buckle_jean/">instagram</a>
+                    <a target="_blank" href="https://github.com/AurovD">github</a>
                 </div>
             </div>
         </div>
