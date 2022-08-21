@@ -31,12 +31,21 @@
     font-weight: bold;
   }
 }
+.contacts {
+  color: #E9EAF2;
+  font-size: calc(var(--sizeindex) * .7);
+  font-weight: 600;
+  gap: 1rem;
+  div {
+    gap: 1rem;
+  }
+}
 @media (max-width: 680px) {
   .navigation {
     flex-direction: column;
   }
 }
-@media (max-width: 1000px) {
+@media (max-width: 1140px) {
   .panel {
     position: relative;
   }

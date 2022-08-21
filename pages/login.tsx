@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from "next/head";
-import {Panel} from "../components/Panel";
+import Panel from "../components/Panel";
 import {Login} from "../components/Login";
 
 export default function LoginPage() {

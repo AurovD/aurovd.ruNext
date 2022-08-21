@@ -6,6 +6,7 @@ import ProjectPreview from "../../components/UI/ProjectPreview";
 import {ProjectDescription} from "../../components/UI/ProjectDescription";
 import {Task} from "../../components/UI/Task";
 import {DescriptionLinks} from "../../components/UI/DescriptionLinks";
+import {GetServerSideProps} from "next";
 
 export default function ProjectPage({project}) {
     const obj = {
@@ -30,7 +31,7 @@ export default function ProjectPage({project}) {
     )
 }
 
-// @ts-ignore
+
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     try {
         const projectId = ctx.query.project;

@@ -1,55 +1,23 @@
 .introductionWrapper {
+  position: relative;
   height: 100vh;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(2, 1fr);
+  background-color: #19292D;
+  grid-template-columns: .5fr 1fr .5fr;
+    grid-template-rows: repeat(5, 1fr);
 }
 .introduction__avatar {
+  position: absolute;
+  grid-column: 2/2;
+  grid-row: 2/4;
+  border: 5px solid var(--clr-bg);
+  box-sizing: border-box;
   img {
     width: 100%;
   }
 }
-.presentation__box {
-  h3 {
-      position: relative;
-      color: var(--clr-main);
-      display: block;
-      font-size: 2em;
-      margin-block-start: 0.5em;
-      margin-block-end: 0.5em;
-      font-weight: bold;
-  }
-  p {
-    color: #505C5E;
-    font-size: 1em;
-    font-weight: 500;
-    margin-bottom: 0.5em;
-  }
-  a {
-    text-decoration: underline #19292D;
-    color: #19292D;
-    font-size: 1em;
-    font-weight: 800;
-  }
-}
-.projects_statistic {
-  gap: 20px;
-  span {
-    color: #19292D;
-    font-size: 3em;
-    font-weight: 800;
-    margin-right: 10px;
-  }
-  p {
-    color: #19292D;
-    font-size: 1em;
-    font-weight: 500;
-    flex-wrap: wrap;
-  }
-}
-@media (max-width: 1400px) {
-  .introductionWrapper  {
-    height: unset;
-    grid-template-columns: none;
-    grid-template-rows: 1fr 1fr;
+@media (max-width: 1140px) {
+  .introductionWrapper {
+    background-color: red;
+    display: none;
   }
 }

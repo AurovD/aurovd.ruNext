@@ -12,22 +12,24 @@ const ProjectCard = React.memo<Project>(({project}) => {
     const [error, setError] = useState(false);
 
     return (
-        <Link href={"/project/" + project.id}>
             <div className={clsx("border-box", styles.card)}>
-                <div className={clsx(error ? styles.error_image : "")}>
-                    <img src={
-                        loading || error ? "https://media3.giphy.com/media/rzIOcIZEKeKiY/giphy.gif" : "/projects_images/" + project.images[0] }
-                         alt={project.title}
-                         onLoad={() => setLoading(false)}
-                         onError={() => setError(true)}
-                    />
-                </div>
+                <Link href={"/project/" + project.id}>
+                    <div className={clsx(error ? styles.error_image : "")}>
+                        <img src={
+                            loading || error ? "/assets/giphy.webp" : "/projects_images/" + project.images[0] }
+                             alt={project.title}
+                             onLoad={() => setLoading(false)}
+                             onError={() => setError(true)}
+                        />
+                    </div>
+                </Link>
                 <div className={clsx("border-box", styles.card__description)}>
-                    <h2 className={clsx(styles.card__title)}>{project.title}</h2>
+                    <Link href={"/project/" + project.id}>
+                        <h2 className={clsx(styles.card__title)}>{project.title}</h2>
+                    </Link>
                     <p>{project.Tags && project.Tags.map(tag => <span key={tag.id}>{tag.title}</span>)}</p>
                 </div>
             </div>
-        </Link>
     )
 });
 

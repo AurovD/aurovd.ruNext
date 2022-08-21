@@ -9,7 +9,7 @@ const ProjectPreview = React.memo<{image: string}>(({image}) => {
     return (
         <div className={clsx("m-10", styles.preview, error ? styles.error_preview : "")}>
             <img src={
-                error ? "https://media3.giphy.com/media/rzIOcIZEKeKiY/giphy.gif" : "/projects_images/" + image }
+                error ? "/assets/giphy.webp" : "/projects_images/" + image }
                  alt={image}
                  onError={() => setError(true)}
             />
