@@ -34,18 +34,31 @@ const Panel = React.memo<PanelProps>(({id, title, h2, tags}) => {
                 }
                 {h2 && <h2 className={clsx("mt-0 mb-0")}>{h2}</h2>}
             </div>
-            <div className={clsx("d-flex flex-column", styles.contacts)}>
-                <p>+7(926)541-13-08</p>
-                <div className={clsx("d-flex")}>
-                    <a target="_blank" href="https://t.me/aurovdm">telegram</a>
-                    <a target="_blank" href="https://vk.com/aurovdm">vkontakte</a>
-                    <a target="_blank" href="https://www.facebook.com/profile.php?id=100052364083518&ref=bookmarks">facebook</a>
-                    <a target="_blank" href="https://www.instagram.com/buckle_jean/">instagram</a>
-                    <a target="_blank" href="https://github.com/AurovD">github</a>
-                </div>
+            <div className={clsx("d-flex", styles.contacts)}>
+                <Link  href={"https://t.me/aurovdm"}>
+                    {/*<svg className={clsx(styles.contacts__item)}></svg>*/}
+                    <svg height="100" width="100">
+                        <circle cx="50" cy="50" r="40" />
+                    </svg>
+                    {/*<a target="_blank" href="https://t.me/aurovdm"></a>*/}
+                </Link>
+                {/*<a target="_blank" href="https://github.com/AurovD">github</a>*/}
+                {/*<a target="_blank" href="https://github.com/AurovD">cv</a>*/}
             </div>
         </div>
     )
 });
 
 export default Panel;
+
+
+            function person() {
+                let name = "Peter";
+
+                return function displayName() {
+                    console.log(name);
+                };
+            }
+
+            let peter = person();
+            peter(); //выведет 'Peter'

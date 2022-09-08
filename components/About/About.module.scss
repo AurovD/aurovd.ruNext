@@ -1,0 +1,35 @@
+.about {
+  position: relative;
+  background-color: var(--clr-bg);
+  overflow-y: hidden;
+}
+.introduction {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  position: relative;
+  .introduction__main {
+    width: 100%;
+    position: relative;
+    .introduction__photo {
+      width: 100%;
+    }
+    .introduction__text {
+      position: absolute;
+      bottom: 50px;
+      background-color: #19292D;
+      color: #c7c7c7;
+      padding: 3rem;
+      font-size: calc(var(--sizeindex) * .5);
+    }
+  }
+}
+@media (max-width: 1140px) {
+  .introduction {
+    .introduction__main {
+      .introduction__text {
+        position: relative;
+        grid: 1 / 3;
+      }
+    }
+  }
+}

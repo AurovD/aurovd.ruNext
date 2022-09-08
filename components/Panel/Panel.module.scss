@@ -32,13 +32,26 @@
   }
 }
 .contacts {
-  color: #E9EAF2;
-  font-size: calc(var(--sizeindex) * .7);
   font-weight: 600;
   gap: 1rem;
-  div {
-    gap: 1rem;
+  svg {
+    color: #b80f0a;
   }
+  circle {
+    fill: var(--clr-main);
+    stroke: var(--clr-bg);
+    stroke-width: 2;
+    stroke-dasharray: 250;
+    stroke-dashoffset: 60;
+    animation: rotate 1s linear;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+  }
+  //@keyframes rotate {
+  //  to {
+  //    stroke-dashoffset: 60;
+  //  }
+  //}
 }
 @media (max-width: 680px) {
   .navigation {
