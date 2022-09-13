@@ -24,6 +24,9 @@ const Panel = React.memo<PanelProps>(({id, title, h2, tags}) => {
                 <Link href="/projects">
                     <a className={id === 2 ? clsx(styles.active) : ""}>ПРОЕКТЫ</a>
                 </Link>
+                <Link href="https://t.me/test6789977">
+                    <a>БЛОГ</a>
+                </Link>
             </nav>
             <div className={clsx(styles.title)}>
                 <h1 className={clsx("mt-0 mb-0")}>{title}</h1>
@@ -36,14 +39,23 @@ const Panel = React.memo<PanelProps>(({id, title, h2, tags}) => {
             </div>
             <div className={clsx("d-flex", styles.contacts)}>
                 <Link  href={"https://t.me/aurovdm"}>
-                    {/*<svg className={clsx(styles.contacts__item)}></svg>*/}
-                    <svg height="100" width="100">
-                        <circle cx="50" cy="50" r="40" />
+                    <svg>
+                        <circle cx="50" cy="50" r="30" className={clsx(styles.tg)}/>
+                        <text x="44" y="52">tg</text>
                     </svg>
-                    {/*<a target="_blank" href="https://t.me/aurovdm"></a>*/}
                 </Link>
-                {/*<a target="_blank" href="https://github.com/AurovD">github</a>*/}
-                {/*<a target="_blank" href="https://github.com/AurovD">cv</a>*/}
+                <Link  href={"https://github.com/AurovD"}>
+                    <svg>
+                        <circle cx="50" cy="50" r="30" className={clsx(styles.git)}/>
+                        <text x="44" y="52">git</text>
+                    </svg>
+                </Link>
+                <Link  href={"/CV.pdf"}>
+                    <svg>
+                        <circle cx="50" cy="50" r="30" className={clsx(styles.cv)}/>
+                        <text x="44" y="52">cv</text>
+                    </svg>
+                </Link>
             </div>
         </div>
     )
@@ -51,14 +63,3 @@ const Panel = React.memo<PanelProps>(({id, title, h2, tags}) => {
 
 export default Panel;
 
-
-            function person() {
-                let name = "Peter";
-
-                return function displayName() {
-                    console.log(name);
-                };
-            }
-
-            let peter = person();
-            peter(); //выведет 'Peter'

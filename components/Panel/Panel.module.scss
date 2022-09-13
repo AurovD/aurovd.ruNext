@@ -32,27 +32,59 @@
   }
 }
 .contacts {
-  font-weight: 600;
   gap: 1rem;
   svg {
-    color: #b80f0a;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    text {
+      font: 400 .9rem sans-serif;
+      fill: var(--clr-bg);
+    }
+    circle {
+      fill: var(--clr-main);
+      stroke: var(--clr-bg);
+      stroke-width: 1;
+      animation-iteration-count: 1;
+    }
+    .tg {
+      stroke-dasharray: 285;
+      stroke-dashoffset: 280;
+      animation: rotate_tg .5s linear;
+      animation-fill-mode: forwards;
+    }
+    .git {
+      stroke-dasharray: 285;
+      stroke-dashoffset: -180;
+      animation: rotate_git .5s linear;
+      animation-fill-mode: forwards;
+    }
+    .cv {
+      stroke-dasharray: 70;
+      stroke-dashoffset: 200;
+      animation: rotate_cv .5s linear;
+      animation-fill-mode: forwards;
+    }
   }
-  circle {
-    fill: var(--clr-main);
-    stroke: var(--clr-bg);
-    stroke-width: 2;
-    stroke-dasharray: 250;
-    stroke-dashoffset: 60;
-    animation: rotate 1s linear;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
-  }
-  //@keyframes rotate {
-  //  to {
-  //    stroke-dashoffset: 60;
-  //  }
-  //}
 }
+
+@keyframes rotate_tg {
+  to {
+    stroke-dashoffset: 140;
+  }
+}
+@keyframes rotate_git {
+  to {
+    stroke-dashoffset: -50;
+  }
+}
+@keyframes rotate_cv {
+  to {
+    stroke-dashoffset: 300;
+  }
+}
+
+
 @media (max-width: 680px) {
   .navigation {
     flex-direction: column;
