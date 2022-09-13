@@ -24,8 +24,8 @@ export default function ProjectPage({project}) {
                 {project.images && project.images.map((image, index) => <ProjectPreview image={image} key={index}/>)}
                 <Task title={project.task}  color={"#fff"}/>
                 <ProjectDescription description={project.description}/>
-                {project.github && <DescriptionLinks link={project.github} title={"Ссылка на гитхаб"}/>}
-                {project.link && <DescriptionLinks link={project.link} title={"Ссылка на сайт"}/>}
+                {project.github && <DescriptionLinks link={project.github} title={"GitHub"}/>}
+                {project.link && <DescriptionLinks link={project.link} title={"Сайт"}/>}
             </div>
         </div>
     )
