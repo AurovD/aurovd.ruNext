@@ -11,31 +11,6 @@ import {Axios} from "../../axios/axios";
 import {Toast} from "../UI/Toast";
 
 
-// interface Values {
-//     title: string;
-//     description: string;
-//     link?: string;
-//     github?: string;
-//     password: string;
-//     previews: FileList | null;
-// }
-
-
-// const setPost = async (body: FormData) => {
-//     return await fetch("http://localhost:3001/project", {
-//         method: "post",
-//         body
-//     });
-// }
-
-
-// let text = "Give, jh879 98799, &^&^GJkh";
-// let pattern = /\w+/g;
-// let result = text.match(pattern);
-//
-// console.log(result);
-
-
 export const CreateProject = () => {
     const [files, setFiles] = useState<string>("Выбрать файлы");
     const [msg, setMsg] = useState({
@@ -48,6 +23,28 @@ export const CreateProject = () => {
         let str = "Выбранные файлы: ";
         str += Array.from(files).map(img => img.name).join(", ");
         setFiles(str);
+    }
+
+    const sendBody = (body, setSubmitting) => {
+        setFiles("Выбрать файлы: ");
+        const fd = new FormData();
+        for (let k in body) {
+            fd.append(k, typeof body[k] === "string" ? body[k] : JSON.stringify(body[k]));
+        }
+        Array.from(body.previews).forEach((file: string | Blob) => {
+            fd.append('preview', file);
+        });
+        setSubmitting(false);
+        ProjectsApi(Axios).createProject(fd)
+            .then(async (res: { msg: string, status?: number }) => {
+                setMsg({msg: res.msg || "Ошибка", status: res.status});
+                setTimeout(() => {
+                    setMsg({
+                        msg: '',
+                        status: null
+                    });
+                }, 5000);
+            });
     }
 
     return (
@@ -84,24 +81,17 @@ export const CreateProject = () => {
                     values: IProject,
                     { setSubmitting }: FormikHelpers<IProject>
                 ) => {
-                    // setFiles("Выбрать файлы: ");
-                    const fd = new FormData();
-                    for (let k in values) {
-                        fd.append(k, typeof values[k] === "string" ? values[k] : JSON.stringify(values[k]));
-                    }
-                    Array.from(values.previews).forEach(file => {
-                        fd.append('preview', file);
-                    });
-                    setSubmitting(false);
-                    ProjectsApi(Axios).createProject(fd).then(async (res: { msg: string, status?: number }) => {
-                        setMsg({msg: res.msg, status: res.status});
+                    ProjectsApi(Axios).check(values.password)
+                        .then(() => sendBody(values, setSubmitting))
+                        .catch((res) => {
+                            setMsg({msg: res.response.data.msg || "Ошибка", status: res.response.status});
                             setTimeout(() => {
                                 setMsg({
                                     msg: '',
                                     status: null
                                 });
                             }, 5000);
-                    });
+                        })
                 }}>
                 {(formProps) => (
                     <Form className={clsx('d-flex flex-column', styles.form)}>

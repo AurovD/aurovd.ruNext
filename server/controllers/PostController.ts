@@ -26,19 +26,7 @@ class PostController {
                 return res.send({msg: "Ошибка файла"})
             } else {
                 try {
-                    console.log(req.body);
-                    let password = await User.findOne({
-                        where: {
-                            status: true
-                        },
-                        attributes: ['password']
-                    });
                     let images_arr = Array.from(req.files, (img: { filename: string }) => img.filename)
-                    const isPassEquals = await bcrypt.compare(req.body.password, password.password);
-                    if (!isPassEquals) {
-                        await PostService.deleteImages(images_arr);
-                        return res.status(400).send({msg: 'Неверный доступ'});
-                    }
 
                     if(req.body.new_password) {
                         const hashed_pass = await bcrypt.hash(req.body.new_password, 12);
@@ -61,7 +49,6 @@ class PostController {
 
                     return res.status(200).json({msg: "Добавлено"});
                 } catch (e) {
-                    console.log(e)
                     return res.status(501).send({msg: "Ошибка создания"});
                 }
             }
@@ -115,6 +102,24 @@ class PostController {
             }
             res.json(project)
 
+        } catch (e) {
+            return res.status(501).send({msg: "Серверная ошибка"});
+        }
+    }
+    async check (req: express.Request, res: express.Response) {
+        try {
+            console.log(req.body, "khlj");
+            let password = await User.findOne({
+                where: {
+                    status: true
+                },
+                attributes: ['password']
+            });
+            const isPassEquals = await bcrypt.compare(req.body.password, password.password);
+            if (!isPassEquals) {
+                return res.status(400).send({msg: 'Неверный доступ'});
+            }
+            return res.status(200).json({msg: true});
         } catch (e) {
             return res.status(501).send({msg: "Серверная ошибка"});
         }

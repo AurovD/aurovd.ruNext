@@ -2,28 +2,26 @@
   position: fixed;
   left: 50%;
   transform: translate(-50%);
-  background-color: #637073;
-  //background-color: #19292D;
-  padding: 10px 20px;
+  background-color: #fff;
   color: #E9EAF2;
   animation-name: toast;
   animation-duration: 5s;
   top: -50px;
-  &:before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 7px;
-    background-color: #fff;
-    width: 2px;
-    height: 30px;
+  display: flex;
+  gap: 1px;
+  div {
+    background-color: #19292D;
+    padding: 10px 20px;
+    -webkit-box-shadow: 4px 4px 12px 0px rgba(0, 0, 0, 0.43);
+    -moz-box-shadow: 4px 4px 12px 0px rgba(0, 0, 0, 0.43);
+    box-shadow: 4px 4px 12px 0px rgba(0, 0, 0, 0.43);
   }
 }
 
 .error {
-  &:before {
-    background-color: #FC4F4F;
+  div:first-child {
+    background-color: #fff;
+    color: #19292D;
   }
 }
 

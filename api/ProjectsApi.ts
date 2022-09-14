@@ -20,5 +20,9 @@ export const ProjectsApi = (instance: AxiosInstance) => {
             const { data } = await instance.get(`/project?id=${id}`);
             return data;
         },
+        check: async (password: string): Promise<{  }> => {
+            const { data }  = await instance.post(`/check`, JSON.stringify({password}));
+            return data;
+        },
     };
 };

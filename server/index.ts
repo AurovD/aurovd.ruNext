@@ -20,6 +20,7 @@ app.get('/registration', UserController.registration);
 app.post('/project', PostController.create);
 app.get('/project', PostController.show);
 app.get('/projects', PostController.getAll);
+app.post('/check', PostController.check);
 
 app.listen(3001, () => {
     console.log('server running');

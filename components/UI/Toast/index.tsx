@@ -10,7 +10,8 @@ interface IMsg {
 export const Toast: React.FC<IMsg> = memo(({msg, status}) => {
     return (
         <div className={clsx(styles.toast, status === 200 ? "" : styles.error)}>
-            {msg}
+            <div>{status}</div>
+            <div>{msg}</div>
         </div>
     )
 });

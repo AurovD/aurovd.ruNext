@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import React from 'react';
 import Link from 'next/link';
-
 import styles from './Panel.module.scss';
 
 interface PanelProps {
@@ -24,9 +23,7 @@ const Panel = React.memo<PanelProps>(({id, title, h2, tags}) => {
                 <Link href="/projects">
                     <a className={id === 2 ? clsx(styles.active) : ""}>ПРОЕКТЫ</a>
                 </Link>
-                <Link href="https://t.me/test6789977">
-                    <a>БЛОГ</a>
-                </Link>
+                <a href="https://t.me/juniornoteslink" target="_blank">БЛОГ</a>
             </nav>
             <div className={clsx(styles.title)}>
                 <h1 className={clsx("mt-0 mb-0")}>{title}</h1>
