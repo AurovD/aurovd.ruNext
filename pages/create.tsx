@@ -8,9 +8,9 @@ export default function Create() {
         <div className={"d-grid grid"}>
             <Head>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <title>Create</title>
+                <title>СОЗДАТЬ НОВЫЙ ПРОЕКТ</title>
             </Head>
-            <Panel id={3} title='СОЗДАТЬ НОВЫЙ ПРОЕКТ'/>
+            <Panel title='СОЗДАТЬ НОВЫЙ ПРОЕКТ'/>
             <CreateProject/>
         </div>
     )

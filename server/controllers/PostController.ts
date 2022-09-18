@@ -3,10 +3,10 @@ import {upload} from "../core/multer";
 
 // @ts-ignore
 import { User, Projects, Tags, Projects_Tags } from "../../models";
-import bcrypt from "bcryptjs";
 import {IProject as BodyRequest} from "../../types/types";
 import TagsService from '../core/tags_service';
-import PostService from "../core/post_service";
+import UserService from "../core/user_service";
+
 
 
 
@@ -27,11 +27,6 @@ class PostController {
             } else {
                 try {
                     let images_arr = Array.from(req.files, (img: { filename: string }) => img.filename)
-
-                    if(req.body.new_password) {
-                        const hashed_pass = await bcrypt.hash(req.body.new_password, 12);
-                        await User.update({password: hashed_pass}, {where: {password: req.body.password}})
-                    }
 
                     let tags:string[] = req.body?.tags.match(/\B#[a-z0-9_]+/g);
 
@@ -108,15 +103,8 @@ class PostController {
     }
     async check (req: express.Request, res: express.Response) {
         try {
-            console.log(req.body, "khlj");
-            let password = await User.findOne({
-                where: {
-                    status: true
-                },
-                attributes: ['password']
-            });
-            const isPassEquals = await bcrypt.compare(req.body.password, password.password);
-            if (!isPassEquals) {
+            let password = await UserService.compare(req.body.password);
+            if (!password) {
                 return res.status(400).send({msg: 'Неверный доступ'});
             }
             return res.status(200).json({msg: true});

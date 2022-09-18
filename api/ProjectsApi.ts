@@ -1,4 +1,4 @@
-import {IProjects} from "../types/types";
+import {IProjects, Password} from "../types/types";
 import { AxiosInstance } from 'axios';
 
 export const ProjectsApi = (instance: AxiosInstance) => {
@@ -20,8 +20,12 @@ export const ProjectsApi = (instance: AxiosInstance) => {
             const { data } = await instance.get(`/project?id=${id}`);
             return data;
         },
-        check: async (password: string): Promise<{  }> => {
+        check: async (password: string): Promise<{ msg: string }> => {
             const { data }  = await instance.post(`/check`, JSON.stringify({password}));
+            return data;
+        },
+        change: async (body: Password): Promise<{ msg: string }>=> {
+            const { data }  = await instance.post(`/change`, JSON.stringify(body));
             return data;
         },
     };
