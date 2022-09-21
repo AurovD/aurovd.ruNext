@@ -16,6 +16,20 @@ export default function Change() {
         msg: 'Пароль изменен',
         status: null
     });
+
+    const removeValues = () => {
+        setTimeout(() => {
+            setMsg({
+                msg: '',
+                status: null
+            })
+        }, 5000);
+    }
+
+    const startToast = (msg) => {
+        setMsg(msg);
+        removeValues();
+    }
     return (
         <div className="d-grid grid">
             <Head>
@@ -48,17 +62,18 @@ export default function Change() {
                         { setSubmitting }: FormikHelpers<Password>
                     ) => {
                         setSubmitting(false);
-                        ProjectsApi(Axios).change(values)
-                            .then(res => setMsg({msg: res.msg || "Ошибка", status: 200}))
-                            .catch((res) => {
-                                setMsg({msg: res.response.data.msg || "Ошибка", status: res.response.status});
-                                setTimeout(() => {
-                                    setMsg({
-                                        msg: '',
-                                        status: null
-                                    });
-                                }, 5000);
-                            })
+                        if(values.password === values.new_password){
+                            startToast({msg: "Одинаковый пароль", status: 400})
+                            removeValues();
+                        } else {
+                            ProjectsApi(Axios).change(values)
+                                .then(res => startToast({msg: res.msg || "Ошибка", status: 200}))
+                                .catch((res) => {
+                                    startToast({msg: res.response?.data?.msg || "Ошибка", status: res.response?.status})
+                                    removeValues();
+                                })
+
+                        }
                     }}>
                     {() => (
                         <Form className={clsx('d-flex flex-column', styles.form)}>

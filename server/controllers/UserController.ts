@@ -29,15 +29,13 @@ class UserController {
     }
     async change(req: express.Request, res: express.Response) {
         try {
-            let user = await UserService.findUser();
-            let password = await UserService.compare(user.password, req.body.password);
-            if (!password) {
+            let {password} = await UserService.findUser();
+            let isPassEquals = await UserService.compare(password, req.body.password);
+            if (!isPassEquals) {
                 return res.status(400).send({msg: 'Неверный доступ'});
             }
-            if(req.body.new_password) {
-                const hashed_pass = await bcrypt.hash(req.body.new_password, 12);
-                await User.update({password: hashed_pass}, {where: {password: password.password}})
-            }
+            const hashed_pass = await bcrypt.hash(req.body.new_password, 12);
+            await User.update({password: hashed_pass}, {where: {id: 1}});
             return res.status(200).json({msg: "Успешная смена пароля"});
         }
          catch (e) {
