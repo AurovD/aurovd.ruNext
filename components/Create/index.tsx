@@ -88,7 +88,7 @@ export const CreateProject = () => {
                     ProjectsApi(Axios).check(values.password)
                         .then(() => sendBody(values, setSubmitting))
                         .catch((res) => {
-                            setMsg({msg: res.response.data.msg || "Ошибка", status: res.response.status});
+                            setMsg({msg: res.response?.data?.msg || "Неверный доступ", status: res.response?.status || 400});
                             setTimeout(() => {
                                 setMsg({
                                     msg: '',

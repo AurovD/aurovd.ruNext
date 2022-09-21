@@ -1,20 +1,26 @@
+import dotenv from "dotenv";
+
 const bcrypt = require('bcryptjs');
 // @ts-ignore
 import { User } from "../../models";
 
+dotenv.config({
+    path: 'server/.env'
+})
+
 class UserService {
-    async bcrypt(pwd) {
-        return await bcrypt.hash(pwd, 12);
-    }
-    async compare(password) {
-        let pass = await User.findOne({
+    async findUser() {
+        return await User.findOne({
             where: {
-                status: true
+                id: 1
             },
-            attributes: ['password']
+            raw: true,
+            attributes: ['id', 'password', 'email', 'login', 'status']
         });
-        const isPassEquals = await bcrypt.compare(password, pass.password);
-        return isPassEquals ? pass : null;
+    }
+    async compare(user_password, password) {
+        const isPassEquals = await bcrypt.compare(password, user_password);
+        return isPassEquals ? isPassEquals : null;
     }
 }
 

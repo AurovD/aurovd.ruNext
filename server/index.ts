@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import { passport } from './core/passport';
 import UserController from "./controllers/UserController";
 import PostController from "./controllers/PostController";
 
@@ -17,7 +18,7 @@ app.use(express.json());
 // app.use(bodyParser.json())
 
 app.get('/registration', UserController.registration);
-app.post('/project', PostController.create);
+app.post('/project', passport.authenticate('jwt', { session: false }), PostController.create);
 app.get('/project', PostController.show);
 app.get('/projects', PostController.getAll);
 app.post('/check', PostController.check);

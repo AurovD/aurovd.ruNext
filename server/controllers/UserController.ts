@@ -18,8 +18,7 @@ class UserController {
             await  User.create({
                 login: "Buckle",
                 password: newPass,
-                email:"dmi@mail.ru",
-                status: true
+                email:"dmi@mail.ru"
             });
 
             return res.status(200).json({msg: "Успешная регистрация"});
@@ -30,7 +29,8 @@ class UserController {
     }
     async change(req: express.Request, res: express.Response) {
         try {
-            let password = await UserService.compare(req.body.password);
+            let user = await UserService.findUser();
+            let password = await UserService.compare(user.password, req.body.password);
             if (!password) {
                 return res.status(400).send({msg: 'Неверный доступ'});
             }

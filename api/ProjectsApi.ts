@@ -1,5 +1,6 @@
 import {IProjects, Password} from "../types/types";
 import { AxiosInstance } from 'axios';
+import Cookies from 'js-cookie';
 
 export const ProjectsApi = (instance: AxiosInstance) => {
     return {
@@ -20,8 +21,10 @@ export const ProjectsApi = (instance: AxiosInstance) => {
             const { data } = await instance.get(`/project?id=${id}`);
             return data;
         },
-        check: async (password: string): Promise<{ msg: string }> => {
-            const { data }  = await instance.post(`/check`, JSON.stringify({password}));
+        check: async (password: string): Promise<{ token: string }> => {
+            const {data}   = await instance.post(`/check`, JSON.stringify({password}));
+            Cookies.remove('token');
+            Cookies.set('token', data.token);
             return data;
         },
         change: async (body: Password): Promise<{ msg: string }>=> {
