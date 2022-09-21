@@ -73,6 +73,10 @@ export const CreateProject = () => {
                         .trim()
                         .matches(/\B#[a-z0-9_]+/g, "Требуется знак # перед тэгом"),
                     password: Yup.string()
+                        .trim()
+                        .max(7, 'Не больше 7 символов')
+                        .min(4, 'От 4 символов')
+                        .matches(/^[0-9]+$/g, "Требуется только числа")
                         .required('Требуется идентификация по паролю'),
                     previews: Yup.mixed()
                         .required('Требуется превью проекта')
@@ -102,7 +106,6 @@ export const CreateProject = () => {
                         <MyTextInput label="Ссылка на Github" name="github" type="text" placeholder="https://github.com/AurovD/aurovd.ruNext"/>
                         <MyTextInput label="Ссылка на проект" name="link" type="text" placeholder="https://aurovd.ru/"/>
                         <MyTextInput label="Пароль*" name="password" type="password" placeholder="**********"/>
-                        <MyTextInput label="Изменить пароль" name="new_password" type="password" placeholder="**********"/>
                         <label htmlFor="previews" className={clsx(styles.label)}>
                             {/*{!files.length ? "Выбрать файлы" : `Выбранные файлы: ${files.join(", ")}.`}*/}
                             {files}

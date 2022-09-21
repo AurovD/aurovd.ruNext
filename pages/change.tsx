@@ -31,8 +31,16 @@ export default function Change() {
                     }}
                     validationSchema={Yup.object({
                         password: Yup.string()
+                            .trim()
+                            .max(7, 'Не больше 7 символов')
+                            .min(4, 'От 4 символов')
+                            .matches(/^[0-9]+$/g, "Требуется только числа")
                             .required('Требуется идентификация по паролю'),
                         new_password: Yup.string()
+                            .trim()
+                            .max(7, 'Не больше 7 символов')
+                            .min(4, 'От 4 символов')
+                            .matches(/^[0-9]+$/g, "Требуется только числа")
                             .required('Требуется новый пароль'),
                     })}
                     onSubmit={(
