@@ -18,33 +18,10 @@ export const CreateProject = () => {
         status: null
     });
 
-
     const filesHandle = (files: FileList) => {
         let str = "Выбранные файлы: ";
         str += Array.from(files).map(img => img.name).join(", ");
         setFiles(str);
-    }
-
-    const sendBody = (body, setSubmitting) => {
-        setFiles("Выбрать файлы: ");
-        const fd = new FormData();
-        for (let k in body) {
-            fd.append(k, typeof body[k] === "string" ? body[k] : JSON.stringify(body[k]));
-        }
-        Array.from(body.previews).forEach((file: string | Blob) => {
-            fd.append('preview', file);
-        });
-        setSubmitting(false);
-        ProjectsApi(Axios).createProject(fd)
-            .then(async (res: { msg: string, status?: number }) => {
-                setMsg({msg: res.msg || "Ошибка", status: res.status});
-                setTimeout(() => {
-                    setMsg({
-                        msg: '',
-                        status: null
-                    });
-                }, 5000);
-            });
     }
 
     return (
@@ -57,8 +34,6 @@ export const CreateProject = () => {
                     tags: '#js #facebook #good',
                     link: '',
                     github: '',
-                    password: '123',
-                    new_password: '',
                     previews: null
                 }}
                 validationSchema={Yup.object({
@@ -72,12 +47,6 @@ export const CreateProject = () => {
                     tags: Yup.string()
                         .trim()
                         .matches(/\B#[a-z0-9_]+/g, "Требуется знак # перед тэгом"),
-                    password: Yup.string()
-                        .trim()
-                        .max(7, 'Не больше 7 символов')
-                        .min(4, 'От 4 символов')
-                        .matches(/^[0-9]+$/g, "Требуется только числа")
-                        .required('Требуется идентификация по паролю'),
                     previews: Yup.mixed()
                         .required('Требуется превью проекта')
                 })}
@@ -85,27 +54,35 @@ export const CreateProject = () => {
                     values: IProject,
                     { setSubmitting }: FormikHelpers<IProject>
                 ) => {
-                    ProjectsApi(Axios).check(values.password)
-                        .then(() => sendBody(values, setSubmitting))
-                        .catch((res) => {
-                            setMsg({msg: res.response?.data?.msg || "Неверный доступ", status: res.response?.status || 400});
+                    setFiles("Выбрать файлы: ");
+                    const fd = new FormData();
+                    for (let k in values) {
+                        fd.append(k, typeof values[k] === "string" ? values[k] : JSON.stringify(values[k]));
+                    }
+                    Array.from(values.previews).forEach((file: string | Blob) => {
+                        fd.append('preview', file);
+                    });
+                    setSubmitting(false);
+                    ProjectsApi(Axios).createProject(fd)
+                        .then(async (res: { msg: string, status?: number }) => {
+                            setMsg({msg: res.msg, status: res.status});
                             setTimeout(() => {
                                 setMsg({
                                     msg: '',
                                     status: null
                                 });
                             }, 5000);
+                            // Cookies.remove('token');
                         })
                 }}>
                 {(formProps) => (
-                    <Form className={clsx('d-flex flex-column', styles.form)}>
+                    <Form className={clsx('d-flex flex-column form')}>
                         <MyTextInput label="Название проекта*" name="title" type="text" placeholder="Портфолио"/>
                         <MyTextInput label="Задача проекта" name="task" type="text" placeholder="Сделать что-нибудь"/>
                         <MyTextArea label="Description*" name="description" placeholder="Description"/>
                         <MyTextInput label="Тэги" name="tags" type="text" placeholder="node.js javascript"/>
                         <MyTextInput label="Ссылка на Github" name="github" type="text" placeholder="https://github.com/AurovD/aurovd.ruNext"/>
                         <MyTextInput label="Ссылка на проект" name="link" type="text" placeholder="https://aurovd.ru/"/>
-                        <MyTextInput label="Пароль*" name="password" type="password" placeholder="**********"/>
                         <label htmlFor="previews" className={clsx(styles.label)}>
                             {/*{!files.length ? "Выбрать файлы" : `Выбранные файлы: ${files.join(", ")}.`}*/}
                             {files}

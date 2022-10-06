@@ -5,8 +5,6 @@ import {upload} from "../core/multer";
 import { User, Projects, Tags, Projects_Tags } from "../../models";
 import {IProject as BodyRequest} from "../../types/types";
 import TagsService from '../core/tags_service';
-import UserService from "../core/user_service";
-import TokenService from "../core/passport_service";
 
 
 
@@ -96,22 +94,8 @@ class PostController {
             if(!project){
                 return res.status(404).json({message: 'Проект не найден'});
             }
-            res.json(project)
+            res.status(200).json(project)
 
-        } catch (e) {
-            return res.status(501).send({msg: "Серверная ошибка"});
-        }
-    }
-    async check (req: express.Request, res: express.Response) {
-        try {
-            let {password, ...user} = await UserService.findUser();
-            let isPassEquals = await UserService.compare(password, req.body.password);
-            if (!isPassEquals || !user) {
-                return res.status(400).send({msg: 'Неверный доступ'});
-            }
-            let token = await TokenService.generateToken(user);
-            res.cookie('token', token, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
-            return res.status(200).json({token});
         } catch (e) {
             return res.status(501).send({msg: "Серверная ошибка"});
         }

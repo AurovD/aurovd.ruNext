@@ -2,16 +2,46 @@ import React from 'react';
 import Panel from "../components/Panel";
 import {CreateProject} from "../components/Create";
 import Head from "next/head";
+import {GetServerSideProps} from "next";
+import {ProjectsApi} from "../api/ProjectsApi";
+import {Axios} from "../axios/axios";
+import {getCookies} from "cookies-next";
 
 export default function Create() {
     return (
         <div className={"d-grid grid"}>
             <Head>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <title>СОЗДАТЬ НОВЫЙ ПРОЕКТ</title>
+                <title>СОЗДАТЬ ПРОЕКТ</title>
             </Head>
-            <Panel title='СОЗДАТЬ НОВЫЙ ПРОЕКТ'/>
+            <Panel title='СОЗДАТЬ ПРОЕКТ'/>
             <CreateProject/>
         </div>
     )
+};
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    try {
+        const user = await ProjectsApi(Axios).checkAuth(getCookies(ctx).token);
+        if(!user){
+            return {
+                redirect: {
+                    permanent: false,
+                    destination: '/'
+                }
+            }
+        }
+        return {
+            props: {
+            },
+        }
+    } catch (error) {
+        return {
+            props: {},
+            redirect: {
+                destination: '/',
+                permanent: false
+            }
+        }
+    }
 };

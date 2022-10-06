@@ -1,34 +1,48 @@
 import {IProjects, Password} from "../types/types";
 import { AxiosInstance } from 'axios';
-import Cookies from 'js-cookie';
+import {setCookie} from 'cookies-next';
+
 
 export const ProjectsApi = (instance: AxiosInstance) => {
     return {
         getProjects: async (offset): Promise<{ count: number, projects: IProjects[] }> => {
         // getProjects: async (offset): Promise<IProject[]> => {
             const { data } = await instance.get('/projects?offset=' + offset);
-            return data; 
+            return data;
         },
         createProject: async (body)  => {
             try {
-                const {data, status}  = await instance.post('/project', body);
+                const {data, status}  = await instance.post('/project',  body);
                 return {msg: data.msg, status: status};
             } catch (e) {
-                return e.response ? {msg: e.response.data.msg, status: e.response.status} : {msg: "Ошибка", status: 500};
+                return e.response.data.msg ? {msg: e.response.data.msg, status: e.response.status} : {msg: "Проект не добавлен", status: e.response.status};
             }
         },
         getProject: async (id: string | string[]): Promise<any> => {
             const { data } = await instance.get(`/project?id=${id}`);
             return data;
         },
-        check: async (password: string): Promise<{ token: string }> => {
-            const {data}   = await instance.post(`/check`, JSON.stringify({password}));
-            Cookies.remove('token');
-            Cookies.set('token', data.token);
-            return data;
+        login: async (body): Promise<{ msg?: string, token?: string, status?: number }> => {
+            try {
+                const {data}   = await instance.post(`/login`, JSON.stringify(body));
+                setCookie('token', data.token);
+                return data;
+            } catch (e) {
+                return e.response.data.msg ? {msg: e.response.data.msg, status: e.response.status} : {msg: "Проект не добавлен", status: e.response.status};
+            }
         },
         change: async (body: Password): Promise<{ msg: string }>=> {
             const { data }  = await instance.post(`/change`, JSON.stringify(body));
+            return data;
+        },
+        checkAuth: async (cookie): Promise<any>=> {
+            const { data }  = await instance.get(`/me`, {
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "Authorization": 'Bearer ' + cookie,
+                }
+            });
             return data;
         },
     };

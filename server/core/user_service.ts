@@ -9,10 +9,10 @@ dotenv.config({
 })
 
 class UserService {
-    async findUser() {
+    async findUser(login) {
         return await User.findOne({
             where: {
-                id: 1
+                login
             },
             raw: true,
             attributes: ['id', 'password', 'email', 'login', 'status']

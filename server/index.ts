@@ -21,8 +21,9 @@ app.get('/registration', UserController.registration);
 app.post('/project', passport.authenticate('jwt', { session: false }), PostController.create);
 app.get('/project', PostController.show);
 app.get('/projects', PostController.getAll);
-app.post('/check', PostController.check);
-app.post('/change', UserController.change);
+app.post('/login', UserController.login);
+app.post('/change', passport.authenticate('jwt', { session: false }), UserController.change);
+app.get('/me', passport.authenticate('jwt', { session: false }), UserController.me);
 
 app.listen(3001, () => {
     console.log('server running');

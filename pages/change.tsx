@@ -5,7 +5,6 @@ import * as Yup from "yup";
 import {Form, Formik, FormikHelpers} from "formik";
 import {Axios} from "../axios/axios";
 import clsx from "clsx";
-import styles from "../components/Create/Create.module.scss";
 import {MyTextInput} from "../components/UI/Forms/TextInput";
 import {Toast} from "../components/UI/Toast";
 import {Password} from "../types/types";
@@ -40,7 +39,7 @@ export default function Change() {
             <div className={'d-flex justify-content-start'}>
                 <Formik
                     initialValues={{
-                        password: '123',
+                        password: '',
                         new_password: '',
                     }}
                     validationSchema={Yup.object({
@@ -76,9 +75,9 @@ export default function Change() {
                         }
                     }}>
                     {() => (
-                        <Form className={clsx('d-flex flex-column', styles.form)}>
+                        <Form className={clsx('d-flex flex-column form')}>
                             <MyTextInput label="Пароль*" name="password" type="password" placeholder="**********"/>
-                            <MyTextInput label="Изменить пароль" name="new_password" type="password" placeholder="**********"/>
+                            <MyTextInput label="Изменить пароль*" name="new_password" type="password" placeholder="**********"/>
                             <button type="submit">Сменить пароль</button>
                             {msg.status && <Toast msg={msg.msg} status={msg.status}/>}
                         </Form>
