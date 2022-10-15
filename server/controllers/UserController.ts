@@ -57,7 +57,7 @@ class UserController {
         try {
             let {password} = await UserService.findUser(req.user.user.login);
             let isPassEquals = await UserService.compare(password, req.body.password);
-            if (!isPassEquals) {
+            if (!isPassEquals || !req.user) {
                 return res.status(400).send({msg: 'Неверный доступ'});
             }
             const hashed_pass = await bcrypt.hash(req.body.new_password, 12);

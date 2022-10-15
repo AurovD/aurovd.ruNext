@@ -31,7 +31,45 @@ export const About: React.FC = () => {
                 </div>
             </div>
             <div className={clsx("sticky", styles.education)}>
-                <h3>EDUCATION</h3>
+                <h3 className="mb-20">ОБРАЗОВАНИЕ</h3>
+                <div className={clsx("d-grid", styles.items)}>
+                    <div className={clsx( styles.item, styles.mgmsu)}>
+                        <div className={clsx(styles.item__header)}>
+                            <img src="/assets/mgmsu.svg" alt=""/>
+                        </div>
+                        <div className={clsx(styles.item__info)}>
+                            <div className={clsx(styles.info__content)}>
+                                <div className={clsx(styles.content__years)}>
+                                    <div>2008</div>
+                                    <div>2013</div>
+                                </div>
+                                <div className={clsx("d-flex flex-column", styles.content__headers)}>
+                                    <h5>Клинический психолог</h5>
+                                    <p>Медицинская психология и психотерапия</p>
+                                </div>
+                                <a className={clsx(styles.content__link)} href="https://www.msmsu.ru/obrazovanie/student/studentu/facultet/fakultet_klinicheskoy_psikhologii/about/">подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={clsx(styles.item)}>
+                        <div className={clsx(styles.item__header)}>
+                            <img src="/assets/ithublogo.gif" alt=""/>
+                        </div>
+                        <div className={clsx(styles.item__info)}>
+                            <div className={clsx(styles.info__content)}>
+                                <div className={clsx(styles.content__years)}>
+                                    <div>2018</div>
+                                    <div>2021</div>
+                                </div>
+                                <div className={clsx("d-flex flex-column", styles.content__headers)}>
+                                    <h5>Веб-разработчик</h5>
+                                    <p>JS, React, Node, HTML, CSS</p>
+                                </div>
+                                <a className={clsx(styles.content__link)} href="https://ithub.ru/">подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )

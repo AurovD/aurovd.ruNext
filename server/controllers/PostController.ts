@@ -11,14 +11,18 @@ import TagsService from '../core/tags_service';
 
 declare module 'express' {
     interface Request {
-        body:  BodyRequest
-        files: []
+        user?: {user: any};
+        body:  BodyRequest;
+        files: [];
     }
 }
 
 class PostController {
     // npx sequelize-cli model:generate --name Projects --attributes title:string,password:string,description:string,link:string,github:string,img:string
     async create(req: express.Request, res: express.Response) {
+        if (!req.user) {
+            return res.status(401).send({msg: 'Неверный доступ'});
+        }
         let images = upload.array("preview", 7);
         images(req, res, async (err) => {
             if(err){

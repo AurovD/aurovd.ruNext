@@ -9,6 +9,8 @@ import {MyTextInput} from "../components/UI/Forms/TextInput";
 import {Toast} from "../components/UI/Toast";
 import {Password} from "../types/types";
 import {ProjectsApi} from "../api/ProjectsApi";
+import {GetServerSideProps} from "next";
+import {getCookies} from "cookies-next";
 
 export default function Change() {
     const [msg, setMsg] = useState({
@@ -86,4 +88,30 @@ export default function Change() {
             </div>
         </div>
     )
+};
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    try {
+        const user = await ProjectsApi(Axios).checkAuth(getCookies(ctx).token);
+        if(!user){
+            return {
+                redirect: {
+                    permanent: false,
+                    destination: '/'
+                }
+            }
+        }
+        return {
+            props: {
+            },
+        }
+    } catch (error) {
+        return {
+            props: {},
+            redirect: {
+                destination: '/',
+                permanent: false
+            }
+        }
+    }
 };
