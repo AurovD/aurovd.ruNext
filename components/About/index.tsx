@@ -4,14 +4,6 @@ import clsx from "clsx";
 import Link from "next/link";
 
 export const About: React.FC = () => {
-    const [active, setActive] = React.useState(false);
-    console.log(active);
-
-
-    const activityHandler = (e) => {
-        console.log("click", e.target);
-        setActive(!active);
-    };
     return (
         <div className={clsx(styles.about)}>
             <div className={clsx(styles.introduction__bg)}>
@@ -83,22 +75,26 @@ export const About: React.FC = () => {
                 <h3>ОПЫТ</h3>
                 <div className={clsx("d-flex flex-column")}>
                     <div className={clsx("d-flex justify-content-between mt-20", styles.item__exp)}>
-                        <div onClick={activityHandler} className={clsx(styles.hover, styles.logo_exp)}>
+                        <div className={clsx(styles.hover, styles.logo_exp)}>
                             <img src="/assets/ithublogo.gif" alt=""/>
                         </div>
-                        <div className={clsx(`${active ? styles.active : ""}`, styles.hover, styles.info_exp)}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur delectus dolor doloremque, ea fugit laboriosam obcaecati omnis provident? Aliquid animi atque consequuntur culpa debitis deleniti doloribus est exercitationem fuga, hic illum, ipsam itaque maiores minima mollitia nam obcaecati perspiciatis porro quae repudiandae rerum sapiente sequi sint tenetur voluptatem, voluptatum.</div>
+                        <div className={clsx(styles.hover, styles.info_exp)}>
+                            <h5>ItHub College</h5>
+                        </div>
                     </div>
                     <div className={clsx("d-flex justify-content-between mt-20", styles.item__exp)}>
-                        <div className={clsx(styles.logo_exp)}>
+                        <div className={clsx(styles.hover, styles.logo_exp)}>
                             <img src="/assets/croc.svg" alt=""/>
                         </div>
-                        <div className={clsx(styles.info_exp)}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, animi culpa delectus distinctio dolor dolorem eum facilis id illo illum incidunt ipsa iure laborum magnam maiores molestiae nihil perferendis placeat quae quaerat, recusandae reiciendis, rem reprehenderit similique temporibus tenetur ullam? Aliquid beatae dicta, excepturi hic minus odio optio rerum sint!</div>
+                        <div className={clsx(styles.hover, styles.info_exp)}>
+                            <h5>ItHub College</h5>
+                        </div>
                     </div>
                     <div className={clsx("d-flex justify-content-between mt-20", styles.item__exp)}>
-                        <div className={clsx(styles.logo_exp)}>
+                        <div className={clsx(styles.hover, styles.logo_exp)}>
                             <img src="/assets/ps.svg" alt=""/>
                         </div>
-                        <div className={clsx(styles.info_exp)}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur dicta, dolor dolorum explicabo in iusto labore nihil reiciendis rem tenetur. Ab, ea ex hic neque qui sunt. Esse fugit itaque provident voluptatum? Alias aliquam, architecto harum illum minus porro quis quisquam similique? Aut dicta magni mollitia? Doloribus excepturi minus nihil!</div>
+                        <div className={clsx(styles.hover, styles.info_exp)}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur dicta, dolor dolorum explicabo in iusto labore nihil reiciendis rem tenetur. Ab, ea ex hic neque qui sunt. Esse fugit itaque provident voluptatum? Alias aliquam, architecto harum illum minus porro quis quisquam similique? Aut dicta magni mollitia? Doloribus excepturi minus nihil!</div>
                     </div>
                 </div>
             </div>

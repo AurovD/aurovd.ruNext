@@ -12,6 +12,11 @@
   /* font-sizes */
   --sizeindex: calc(1vw + 1vh);
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 html,
 body {
   padding: 0;
@@ -41,9 +46,6 @@ a {
 }
 .column {
   height: 100vh;
-}
-.border-box {
-  box-sizing: border-box;
 }
 .error {
   top: 5px;
