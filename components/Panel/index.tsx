@@ -23,7 +23,7 @@ const Panel = React.memo<PanelProps>(({id, title, h2, tags}) => {
                 <Link href="/projects">
                     <a className={id === 2 ? clsx(styles.active) : ""}>ПРОЕКТЫ</a>
                 </Link>
-                <a href="https://t.me/juniornoteslink" target="_blank">БЛОГ</a>
+                <a href="https://t.me/webdevaddicted" target="_blank">БЛОГ</a>
             </nav>
             <div className={clsx(styles.title)}>
                 <h1 className={clsx("mt-0 mb-0")}>{title}</h1>
