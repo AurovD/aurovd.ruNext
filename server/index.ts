@@ -24,6 +24,7 @@ app.get('/projects', PostController.getAll);
 app.post('/login', UserController.login);
 app.post('/change', passport.authenticate('jwt', { session: false }), UserController.change);
 app.get('/me', passport.authenticate('jwt', { session: false }), UserController.me);
+app.get('/tags', PostController.tags);
 
 app.listen(3001, () => {
     console.log('server running');

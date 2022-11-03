@@ -104,6 +104,17 @@ class PostController {
             return res.status(501).send({msg: "Серверная ошибка"});
         }
     }
+    async tags (req: express.Request, res: express.Response) {
+        try {
+            let projects = await Tags.findAndCountAll({
+                    through: Projects_Tags,
+                    attributes: ["id", "title"]
+            })
+            res.status(200).json(projects);
+        } catch (e) {
+            return res.status(501).send({msg: "Серверная ошибка"});
+        }
+    }
 }
 
 export default new PostController();

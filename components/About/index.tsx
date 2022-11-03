@@ -79,7 +79,11 @@ export const About: React.FC = () => {
                             <img src="/assets/ithublogo.gif" alt=""/>
                         </div>
                         <div className={clsx(styles.hover, styles.info_exp)}>
-                            <h5>ItHub College</h5>
+                            <div>
+                                <h5>ItHub College</h5>
+                                <p>Преподаватель</p>
+                            </div>
+                            <p>Преподавание основ тестирования веб-приложений</p>
                         </div>
                     </div>
                     <div className={clsx("d-flex justify-content-between mt-20", styles.item__exp)}>
@@ -87,14 +91,26 @@ export const About: React.FC = () => {
                             <img src="/assets/croc.svg" alt=""/>
                         </div>
                         <div className={clsx(styles.hover, styles.info_exp)}>
-                            <h5>ItHub College</h5>
+                            <div>
+                                <h5>ЗАО «КРОК инкорпорейтед»</h5>
+                                <p>Техник-тестировщик</p>
+                            </div>
+
+                            <p>Осуществлял техподдержку и тестирование комплексов обработки избирательных бюллетеней на всех этапах при подготовке к выборам 2019 года, от сборки до техподдержки по время голосования.</p>
                         </div>
                     </div>
                     <div className={clsx("d-flex justify-content-between mt-20", styles.item__exp)}>
                         <div className={clsx(styles.hover, styles.logo_exp)}>
                             <img src="/assets/ps.svg" alt=""/>
                         </div>
-                        <div className={clsx(styles.hover, styles.info_exp)}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur dicta, dolor dolorum explicabo in iusto labore nihil reiciendis rem tenetur. Ab, ea ex hic neque qui sunt. Esse fugit itaque provident voluptatum? Alias aliquam, architecto harum illum minus porro quis quisquam similique? Aut dicta magni mollitia? Doloribus excepturi minus nihil!</div>
+                        <div className={clsx(styles.hover, styles.info_exp)}>
+                            <div>
+                                <h5>ProfiSourcing</h5>
+                                <p>Ресечер (Ассистент менеджера по подбору персонала)</p>
+                            </div>
+
+                            <p>Помогал менеджеру по подбору персонала в поиске кандидатов, просматривал резюме и проводил первичное собеседование. Оптимизировал процесс поиска кандидатов и обработки резюме, что ускорило работу в 2 раза.</p>
+                        </div>
                     </div>
                 </div>
             </div>
