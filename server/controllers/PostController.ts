@@ -5,6 +5,7 @@ import {upload} from "../core/multer";
 import { User, Projects, Tags, Projects_Tags } from "../../models";
 import {IProject as BodyRequest} from "../../types/types";
 import TagsService from '../core/tags_service';
+import {Sequelize} from "sequelize";
 
 
 
@@ -106,12 +107,17 @@ class PostController {
     }
     async tags (req: express.Request, res: express.Response) {
         try {
-            let projects = await Tags.findAndCountAll({
-                    through: Projects_Tags,
-                    attributes: ["id", "title"]
+            let projects = await Projects_Tags.findAll({
+                attributes: [[Sequelize.fn("COUNT", Sequelize.col("TagId")), "count_ofTags"]],
+                include: [{
+                    model: Tags, attributes: ["title"]
+                }],
+                group: ['Tag.id"']
             })
+
             res.status(200).json(projects);
         } catch (e) {
+            console.log(e)
             return res.status(501).send({msg: "Серверная ошибка"});
         }
     }

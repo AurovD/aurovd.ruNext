@@ -75,9 +75,11 @@ export const About: React.FC = () => {
                 <h3>ОПЫТ</h3>
                 <div className={clsx("d-flex flex-column")}>
                     <div className={clsx("d-flex justify-content-between mt-20", styles.item__exp)}>
-                        <div className={clsx(styles.hover, styles.logo_exp)}>
-                            <img src="/assets/ithublogo.gif" alt=""/>
-                        </div>
+                        <Link href={"https://ithub.ru/"}>
+                            <div className={clsx(styles.hover, styles.logo_exp)}>
+                                <img src="/assets/ithublogo.gif" alt=""/>
+                            </div>
+                        </Link>
                         <div className={clsx(styles.hover, styles.info_exp)}>
                             <div>
                                 <h5>ItHub College</h5>
@@ -87,9 +89,11 @@ export const About: React.FC = () => {
                         </div>
                     </div>
                     <div className={clsx("d-flex justify-content-between mt-20", styles.item__exp)}>
-                        <div className={clsx(styles.hover, styles.logo_exp)}>
-                            <img src="/assets/croc.svg" alt=""/>
-                        </div>
+                        <Link href={"https://www.croc.ru/"}>
+                            <div className={clsx(styles.hover, styles.logo_exp)}>
+                                <img src="/assets/croc.svg" alt=""/>
+                            </div>
+                        </Link>
                         <div className={clsx(styles.hover, styles.info_exp)}>
                             <div>
                                 <h5>ЗАО «КРОК инкорпорейтед»</h5>
