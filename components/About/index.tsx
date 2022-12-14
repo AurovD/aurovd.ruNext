@@ -1,15 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './About.module.scss';
 import clsx from "clsx";
 import Link from "next/link";
+import {Tags} from "../../types/types";
+import {TagCard} from "../UI/TagCard";
 
-export const About: React.FC = () => {
+
+interface TagsData{
+    tags: Array<Tags>
+}
+
+export const About: React.FC<TagsData> = ({tags}) => {
+
+
     return (
         <div className={clsx(styles.about)}>
             <div className={clsx(styles.introduction__bg)}>
                 <div className={clsx(styles.introduction__bg_dark)}></div>
             </div>
-            <div className={clsx("sticky", styles.introduction)}>
+            <div className={clsx("sticky", styles.introduction, styles.about_block)}>
                 <div className={clsx(styles.introduction__content)}>
                     <div className={clsx("mb-30", styles.introduction__header)}>
                         <h3>ДМИТРИЙ</h3>
@@ -30,7 +39,7 @@ export const About: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <div className={clsx("sticky", styles.education)}>
+            <div className={clsx("sticky", styles.education, styles.about_block)}>
                 <h3 className="mb-20">ОБРАЗОВАНИЕ</h3>
                 <div className={clsx("d-grid", styles.items)}>
                     <div className={clsx( styles.item, styles.mgmsu)}>
@@ -71,15 +80,15 @@ export const About: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <div className={clsx("sticky", styles.experience)}>
+            <div className={clsx("sticky", styles.experience, styles.about_block)}>
                 <h3>ОПЫТ</h3>
                 <div className={clsx("d-flex flex-column")}>
                     <div className={clsx("d-flex justify-content-between mt-20", styles.item__exp)}>
-                        <Link href={"https://ithub.ru/"}>
+                        {/*<Link href={"https://ithub.ru/"}>*/}
                             <div className={clsx(styles.hover, styles.logo_exp)}>
                                 <img src="/assets/ithublogo.gif" alt=""/>
                             </div>
-                        </Link>
+                        {/*</Link>*/}
                         <div className={clsx(styles.hover, styles.info_exp)}>
                             <div>
                                 <h5>ItHub College</h5>
@@ -89,11 +98,11 @@ export const About: React.FC = () => {
                         </div>
                     </div>
                     <div className={clsx("d-flex justify-content-between mt-20", styles.item__exp)}>
-                        <Link href={"https://www.croc.ru/"}>
+                        {/*<Link href={"https://www.croc.ru/"}>*/}
                             <div className={clsx(styles.hover, styles.logo_exp)}>
                                 <img src="/assets/croc.svg" alt=""/>
                             </div>
-                        </Link>
+                        {/*</Link>*/}
                         <div className={clsx(styles.hover, styles.info_exp)}>
                             <div>
                                 <h5>ЗАО «КРОК инкорпорейтед»</h5>
@@ -118,6 +127,15 @@ export const About: React.FC = () => {
                     </div>
                 </div>
             </div>
+            {tags && <div className={clsx("sticky", styles.tags, styles.about_block)}>
+                <h3>Тэги</h3>
+                <div className={clsx("d-flex", styles.tags_list)}>
+                    {
+                        tags.map((tag, index) => <TagCard key={index} count_of_tags={tag.count_of_tags} Tag={tag.Tag}/>
+                        )
+                    }
+                </div>
+            </div>}
         </div>
     )
 };

@@ -2,8 +2,11 @@ import React from 'react';
 import Head from "next/head";
 import Panel from "../components/Panel";
 import {About} from "../components/About";
+import {GetServerSideProps} from "next";
+import {ProjectsApi} from "../api/ProjectsApi";
+import {Axios} from "../axios/axios";
 
-export default function AboutPage() {
+export default function AboutPage({tags}) {
     const obj = {
         id: 1,
         title: "О СЕБЕ"
@@ -15,7 +18,22 @@ export default function AboutPage() {
                 <title>About</title>
             </Head>
             <Panel {...obj}/>
-            <About/>
+            <About tags={tags}/>
         </div>
     )
+};
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    try {
+        const tags= await ProjectsApi(Axios).tags();
+        return {
+            props: {
+                tags
+            },
+        }
+    } catch (error) {
+        return {
+            props: {}
+        }
+    }
 };

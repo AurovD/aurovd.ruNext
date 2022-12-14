@@ -33,5 +33,16 @@ export interface Password{
   password: string;
   new_password: string;
 }
+
+
+export interface Tags {
+    count_of_tags: string;
+    Tag: { title: string };
+}
+
+
+export interface Statistic extends Tags {
+    count: string
+}
 // sudo lsof -PiTCP -sTCP:LISTEN
 // kill -9 3409

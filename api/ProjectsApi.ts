@@ -1,4 +1,4 @@
-import {IProjects, Password} from "../types/types";
+import {IProjects, Password, Tags, Statistic} from "../types/types";
 import { AxiosInstance } from 'axios';
 import {setCookie} from 'cookies-next';
 
@@ -31,8 +31,12 @@ export const ProjectsApi = (instance: AxiosInstance) => {
                 return e.response.data.msg ? {msg: e.response.data.msg, status: e.response.status} : {msg: "Проект не добавлен", status: e.response.status};
             }
         },
-        change: async (body: Password): Promise<{ msg: string }>=> {
+        change: async (body: Password): Promise<{ msg: string }> => {
             const { data }  = await instance.post(`/change`, JSON.stringify(body));
+            return data;
+        },
+        tags: async (): Promise<Tags | { msg: string }> => {
+            const { data }  = await instance.get(`/tags`);
             return data;
         },
         checkAuth: async (cookie): Promise<any>=> {

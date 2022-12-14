@@ -85,7 +85,7 @@ class PostController {
         try {
             let projectId = +req.query.id;
             if(isNaN(Number(projectId))){
-                return res.status(404).json({message: 'ID проекта не найдено'});
+                return res.status(404).json({msg: 'ID проекта не найдено'});
             }
             const project = await Projects.findByPk(projectId, {
                 include: [{
@@ -97,7 +97,7 @@ class PostController {
             });
 
             if(!project){
-                return res.status(404).json({message: 'Проект не найден'});
+                return res.status(404).json({msg: 'Проект не найден'});
             }
             res.status(200).json(project)
 
@@ -107,17 +107,25 @@ class PostController {
     }
     async tags (req: express.Request, res: express.Response) {
         try {
-            let projects = await Projects_Tags.findAll({
-                attributes: [[Sequelize.fn("COUNT", Sequelize.col("TagId")), "count_ofTags"]],
+            let tags = await Projects_Tags.findAll({
+                attributes: [[Sequelize.fn("COUNT", Sequelize.col("TagId")), "count_of_tags"]],
                 include: [{
                     model: Tags, attributes: ["title"]
                 }],
                 group: ['Tag.id"']
             })
+            if(!tags){
+                return res.status(404).json({msg: 'Не найдено'});
+            }
 
-            res.status(200).json(projects);
+            let count = await Projects.findAll({
+                attributes: [[Sequelize.fn('COUNT', Sequelize.col('id')), 'count']],
+            });
+
+            tags = [...tags, count[0]]
+
+            res.status(200).json(tags);
         } catch (e) {
-            console.log(e)
             return res.status(501).send({msg: "Серверная ошибка"});
         }
     }
