@@ -11,7 +11,7 @@ export const Admin: React.FC = () => {
     }
 
     return (
-        <div className={clsx("container", styles.admin)}>
+        <div className={clsx("wrapper", styles.admin)}>
             <nav className={clsx("navigation d-flex justify-content-between", styles.navigation)}>
                 <Link href="/create">
                     <a className={clsx(styles.active)}>СОЗДАТЬ ПРОЕКТ</a>

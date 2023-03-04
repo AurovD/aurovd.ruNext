@@ -112,17 +112,19 @@ class PostController {
                 include: [{
                     model: Tags, attributes: ["title"]
                 }],
-                group: ['Tag.id"']
+                group: ['Tag.id"'],
+                order: [[Sequelize.fn('COUNT', Sequelize.col('TagId')), 'DESC']]
             })
             if(!tags){
                 return res.status(404).json({msg: 'Не найдено'});
             }
 
-            let count = await Projects.findAll({
-                attributes: [[Sequelize.fn('COUNT', Sequelize.col('id')), 'count']],
-            });
+            // let count = await Projects.findAll({
+            //     attributes: [[Sequelize.fn('COUNT', Sequelize.col('id')), 'count']],
+            // });
 
-            tags = [...tags, count[0]]
+            tags = [...tags];
+            // tags = [...tags, count[0]]
 
             res.status(200).json(tags);
         } catch (e) {

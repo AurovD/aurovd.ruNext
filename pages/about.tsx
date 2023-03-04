@@ -25,7 +25,7 @@ export default function AboutPage({tags}) {
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     try {
-        const tags= await ProjectsApi(Axios).tags();
+        const tags = await ProjectsApi(Axios).tags();
         return {
             props: {
                 tags

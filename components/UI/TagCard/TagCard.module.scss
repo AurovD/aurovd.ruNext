@@ -18,8 +18,8 @@
     }
     .tag_error {
       aspect-ratio: 1 / 1 ;
-      background-color: var(--clr-main);
       border-radius: inherit;
+      border: 1px solid var(--clr-main);
     }
   }
   p:first-child {

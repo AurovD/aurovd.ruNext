@@ -8,7 +8,7 @@ import {LoadingCards} from "../LoadingCards";
 export const LoadingGrid: React.FC = () => {
 
     return (
-        <div className={clsx("container", styles.project_grid)}>
+        <div className={clsx("wrapper", styles.project_grid)}>
             {[...Array(6)].map((_, index) => <LoadingCards key={index}/>)}
         </div>
     )
