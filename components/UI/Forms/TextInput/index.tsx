@@ -41,7 +41,7 @@ export const MyTextInput: FC<Interface> = ({ label, ...props }) => {
                            helpers.setValue(event.target.value);
                        }
                    }}
-                   {...eventHandlers}
+                   {...(eventHandlers as object)}
             />
             {meta.touched && meta.error ? (
                 <div className={clsx("absolute error")}>{meta.error}</div>
