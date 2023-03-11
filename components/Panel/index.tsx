@@ -14,16 +14,10 @@ const Panel = React.memo<PanelProps>(({id, title, h2, tags}) => {
     return (
         <div className={clsx("column d-flex flex-column justify-content-between border-box", styles.panel)}>
             <nav className={clsx("navigation d-flex justify-content-between", styles.navigation)}>
-                <Link href="/">
-                    <a className={id === 0 ? clsx(styles.active) : ""}>ГЛАВНАЯ</a>
-                </Link>
-                <Link href="/about">
-                    <a className={id === 1 ? clsx(styles.active) : ""}>ОПЫТ</a>
-                </Link>
-                <Link href="/projects">
-                    <a className={id === 2 ? clsx(styles.active) : ""}>ПРОЕКТЫ</a>
-                </Link>
-                <a href="https://t.me/webdevaddicted" target="_blank">БЛОГ</a>
+                <Link href="/" className={id === 0 ? clsx(styles.active) : ""}>ГЛАВНАЯ</Link>
+                <Link href="/about" className={id === 1 ? clsx(styles.active) : ""}>ОПЫТ</Link>
+                <Link href="/projects" className={id === 2 ? clsx(styles.active) : ""}>ПРОЕКТЫ</Link>
+                <Link href="https://t.me/webdevaddicted" target="_blank">БЛОГ</Link>
             </nav>
             <div className={clsx(styles.title)}>
                 <h1 className={clsx("mt-0 mb-0")}>{title}</h1>

@@ -56,7 +56,7 @@ export const About: React.FC<TagsData> = ({tags}) => {
                                     <h5>Клинический психолог</h5>
                                     <p>Медицинская психология и психотерапия</p>
                                 </div>
-                                <a className={clsx(styles.content__link)} href="https://www.msmsu.ru/obrazovanie/student/studentu/facultet/fakultet_klinicheskoy_psikhologii/about/">подробнее</a>
+                                <Link className={clsx(styles.content__link)} href="https://www.msmsu.ru/obrazovanie/student/studentu/facultet/fakultet_klinicheskoy_psikhologii/about/">подробнее</Link>
                             </div>
                         </div>
                     </div>
@@ -74,7 +74,7 @@ export const About: React.FC<TagsData> = ({tags}) => {
                                     <h5>Веб-разработчик</h5>
                                     <p>JS, React, Node, HTML, CSS</p>
                                 </div>
-                                <a className={clsx(styles.content__link)} href="https://ithub.ru/">подробнее</a>
+                                <Link className={clsx(styles.content__link)} href="https://ithub.ru/">подробнее</Link>
                             </div>
                         </div>
                     </div>

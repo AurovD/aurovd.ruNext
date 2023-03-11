@@ -7,6 +7,7 @@ import {ProjectReq} from "../types/types";
 import {ProjectsApi} from "../api/ProjectsApi";
 import {Axios} from "../axios/axios";
 import {LoadingGrid} from "../components/UI/Loading/LoadingGrid";
+import {log} from "util";
 
 
 
@@ -26,18 +27,20 @@ export default function ProjectsPage () {
         projects: []
     });
 
-
-    useEffect(()=> {
-        try {
-            ProjectsApi(Axios).getProjects(0).then(async (res: ProjectReq) => {
+    const getListOfPjs = async () => {
+            await ProjectsApi(Axios).getProjects(0).then(async (res: ProjectReq) => {
                 if(res?.count > 0){
                     setData(res);
                     setIsLoading(false);
                 }
-            });
-        } catch (e) {
-            console.log(e)
-        }
+            }).catch((e) => {
+                console.log(e);
+            })
+    }
+
+
+    useEffect(()=> {
+        getListOfPjs()
     }, []);
 
 
