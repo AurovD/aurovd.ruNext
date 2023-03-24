@@ -36,7 +36,7 @@ export const ProjectsApi = (instance: AxiosInstance) => {
             return data;
         },
         tags: async (): Promise<Tags | { msg: string }> => {
-            const { data }  = await instance.get(`/tags`);
+            const { data }  = await instance.get(`/tags`, {timeout: 1000});
             return data;
         },
         checkAuth: async (cookie): Promise<any>=> {

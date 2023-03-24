@@ -11,6 +11,7 @@ export default function AboutPage({tags}) {
         id: 1,
         title: "О СЕБЕ"
     }
+    console.log(tags)
     return (
         <div className="d-grid grid">
             <Head>
@@ -18,7 +19,7 @@ export default function AboutPage({tags}) {
                 <title>About</title>
             </Head>
             <Panel {...obj}/>
-            <About tags={tags}/>
+            <About tags={tags || null}/>
         </div>
     )
 };
@@ -33,7 +34,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         }
     } catch (error) {
         return {
-            props: {}
+            props: {
+                tags: null
+            }
         }
     }
 };

@@ -14,6 +14,19 @@
   img {
     width: 100%;
   }
+  .qr_box {
+    position: absolute;
+    bottom: -40px;
+    right: -40px;
+    width: 90px;
+    aspect-ratio: 1/1;
+    background-color: var(--clr-bg);
+    border-radius: 1rem;
+    background-image: url("/assets/qr-code.png");
+    background-size: 150%;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
 }
 @media (max-width: 1140px) {
   .introductionWrapper {
