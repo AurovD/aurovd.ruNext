@@ -24,11 +24,11 @@ export const ProjectsApi = (instance: AxiosInstance) => {
         },
         login: async (body): Promise<{ msg?: string, token?: string, status?: number }> => {
             try {
-                const {data}   = await instance.post(`/login`, JSON.stringify(body));
+                const {data}   = await instance.post(`/login`, body);
                 setCookie('token', data.token);
                 return data;
             } catch (e) {
-                return e.response.data.msg ? {msg: e.response.data.msg, status: e.response.status} : {msg: "Проект не добавлен", status: e.response.status};
+                return e.response?.data.msg ? {msg: e.response.data.msg, status: e.response.status} : {msg: "Неверный доступ", status: e.response.status};
             }
         },
         change: async (body: Password): Promise<{ msg: string }> => {

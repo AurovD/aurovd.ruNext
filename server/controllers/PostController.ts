@@ -122,8 +122,6 @@ class PostController {
             // let count = await Projects.findAll({
             //     attributes: [[Sequelize.fn('COUNT', Sequelize.col('id')), 'count']],
             // });
-
-            tags = [...tags];
             // tags = [...tags, count[0]]
 
             res.status(200).json(tags);

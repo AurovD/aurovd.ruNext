@@ -11,7 +11,6 @@ export default function AboutPage({tags}) {
         id: 1,
         title: "О СЕБЕ"
     }
-    console.log(tags)
     return (
         <div className="d-grid grid">
             <Head>

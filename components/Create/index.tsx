@@ -7,22 +7,20 @@ import {MyTextInput} from "../UI/Forms/TextInput";
 import {MyTextArea} from "../UI/Forms/TextArea";
 import {IProject} from "../../types/types";
 import {ProjectsApi} from "../../api/ProjectsApi";
-import {Axios} from "../../axios/axios";
+import {Axios} from "../../api/index";
 import {Toast} from "../UI/Toast";
+import Dropzone from 'react-dropzone';
 
+
+class T {
+}
 
 export const CreateProject = () => {
-    const [files, setFiles] = useState<string>("Выбрать файлы");
+    const [acceptedFiles, setAcceptedFiles] = useState([]);
     const [msg, setMsg] = useState({
         msg: 'Добавлено',
         status: null
     });
-
-    const filesHandle = (files: FileList) => {
-        let str = "Выбранные файлы: ";
-        str += Array.from(files).map(img => img.name).join(", ");
-        setFiles(str);
-    }
 
     return (
         <div className={'d-flex justify-content-start'}>
@@ -34,7 +32,7 @@ export const CreateProject = () => {
                     tags: '#js #facebook #good',
                     link: '',
                     github: '',
-                    previews: null
+                    previews: acceptedFiles
                 }}
                 validationSchema={Yup.object({
                     title: Yup.string()
@@ -46,15 +44,12 @@ export const CreateProject = () => {
                         .required('Требуется описание проекта'),
                     tags: Yup.string()
                         .trim()
-                        .matches(/\B#[a-z0-9_]+/g, "Требуется знак # перед тэгом"),
-                    previews: Yup.mixed()
-                        .required('Требуется превью проекта')
+                        .matches(/\B#[a-z0-9_]+/g, "Требуется знак # перед тэгом")
                 })}
                 onSubmit={(
                     values: IProject,
                     { setSubmitting }: FormikHelpers<IProject>
                 ) => {
-                    setFiles("Выбрать файлы: ");
                     const fd = new FormData();
                     for (let k in values) {
                         fd.append(k, typeof values[k] === "string" ? values[k] : JSON.stringify(values[k]));
@@ -83,21 +78,28 @@ export const CreateProject = () => {
                         <MyTextInput label="Тэги" name="tags" type="text" placeholder="node.js javascript"/>
                         <MyTextInput label="Ссылка на Github" name="github" type="text" placeholder="https://github.com/AurovD/aurovd.ruNext"/>
                         <MyTextInput label="Ссылка на проект" name="link" type="text" placeholder="https://aurovd.ru/"/>
-                        <label htmlFor="previews" className={clsx(styles.label)}>
-                            {/*{!files.length ? "Выбрать файлы" : `Выбранные файлы: ${files.join(", ")}.`}*/}
-                            {files}
-                        </label>
-                        <input
-                            id="previews"
-                            type="file"
-                            name="previews"
-                            onChange={(event) =>{
-                                formProps.setFieldValue("previews", event.target.files);
-                                filesHandle(event.target.files);
-                            }}
-                            className={clsx(styles.files)}
-                            multiple
-                        />
+                        <Dropzone onDrop={(files) => {
+                            setAcceptedFiles(files);
+                            formProps.setFieldValue("previews", files);
+                        }} multiple={true}>
+                            {({ getRootProps, getInputProps }) => (
+                                <div {...getRootProps()} className={clsx(styles.dropzone)}>
+                                    <input {...getInputProps()} />
+                                    {acceptedFiles.length > 0 ? (
+                                        <div>
+                                            {acceptedFiles.map((file) => (
+                                                <div key={file.name}>
+                                                    <img className={clsx(styles.img)}
+                                                        src={URL.createObjectURL(file)}
+                                                        alt={file.name}
+                                                    />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ) : <p>Drag and drop some files here, or click to select files</p>}
+                                </div>
+                            )}
+                        </Dropzone>
                         <ErrorMessage name="previews" />
 
                         <button type="submit">Добавить проект</button>
