@@ -76,6 +76,14 @@ class UserController {
              return res.status(501);
          }
     }
+    async test(req: any, res: express.Response) {
+        try {
+            return res.status(200).json({msg: "Hello world"});
+        }
+         catch (e) {
+             return res.status(501);
+         }
+    }
 }
 
 export default new UserController();

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './Login.module.scss';
 import clsx from "clsx";
 import {NextPage} from "next";
@@ -8,8 +8,15 @@ import {ProjectsApi} from "../../api/ProjectsApi";
 import {Axios} from "../../axios/axios";
 import {MyTextInput} from "../UI/Forms/TextInput";
 import router from 'next/router';
+import {Toast} from "../UI/Toast";
 
 export const Login: NextPage = () => {
+
+    const [msg, setMsg] = useState({
+        msg: '',
+        status: null
+    });
+
     return (
         <div className={clsx("d-flex justify-content align-items-center", styles.login_wrapper)}>
                 <Formik
@@ -38,7 +45,17 @@ export const Login: NextPage = () => {
                         setSubmitting(false);
                         ProjectsApi(Axios).login(values)
                             .then(res => {
-                                if(res.token) router.push('/admin');
+                                if(res.token) {
+                                    router.push('/admin')
+                                } else {
+                                    setMsg({msg: res.msg, status: res.status});
+                                    setTimeout(() => {
+                                        setMsg({
+                                            msg: '',
+                                            status: null
+                                        });
+                                    }, 5000);
+                                }
                             })
                     }}>
                     {() => (
@@ -49,6 +66,7 @@ export const Login: NextPage = () => {
                         </Form>
                     )}
                 </Formik>
+            {msg.status && <Toast msg={msg.msg} status={msg.status}/>}
             </div>
     )
 };

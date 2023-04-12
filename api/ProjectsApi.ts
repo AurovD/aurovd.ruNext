@@ -18,17 +18,25 @@ export const ProjectsApi = (instance: AxiosInstance) => {
                 return e.response.data.msg ? {msg: e.response.data.msg, status: e.response.status} : {msg: "Проект не добавлен", status: e.response.status};
             }
         },
+        changeImages: async (body)  => {
+            try {
+                const {data, status}  = await instance.post('/project',  body);
+                return {msg: data.msg, status: status};
+            } catch (e) {
+                return e.response.data.msg ? {msg: e.response.data.msg, status: e.response.status} : {msg: "Проект не добавлен", status: e.response.status};
+            }
+        },
         getProject: async (id: string | string[]): Promise<any> => {
             const { data } = await instance.get(`/project?id=${id}`);
             return data;
         },
         login: async (body): Promise<{ msg?: string, token?: string, status?: number }> => {
             try {
-                const {data}   = await instance.post(`/login`, body);
+                const {data}   = await instance.post(`/login`, body, {timeout: 1000});
                 setCookie('token', data.token);
                 return data;
             } catch (e) {
-                return e.response?.data.msg ? {msg: e.response.data.msg, status: e.response.status} : {msg: "Неверный доступ", status: e.response.status};
+                return e.response?.data.msg ? {msg: e.response.data.msg, status: e.response.status} : {msg: "Неизвестная ошибка", status: 500 };
             }
         },
         change: async (body: Password): Promise<{ msg: string }> => {

@@ -15,7 +15,7 @@ export default function AboutPage({tags}) {
         <div className="d-grid grid">
             <Head>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <title>About</title>
+                <title>О СЕБЕ</title>
             </Head>
             <Panel {...obj}/>
             <About tags={tags || null}/>

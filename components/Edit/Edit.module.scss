@@ -1,0 +1,30 @@
+.project_images {
+  width: 100%;
+  .previews_grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    height: min-content;
+    .previews_box {
+      position: relative;
+      container-type: inline-size;
+      .cross {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background-color: #19292D;
+        font-size: 4cqi;
+        color: var(--clr-wtext);
+        padding: 1cqw;
+        cursor: pointer;
+      }
+      .box_image {
+        width: 100%;
+        height: unset;
+        object-fit: cover;
+        box-shadow: 0 0.25rem 1rem rgb(0 0 0 / 0.3);
+        object-position: top;
+      }
+    }
+  }
+}

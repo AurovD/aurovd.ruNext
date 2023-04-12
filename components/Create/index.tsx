@@ -9,11 +9,7 @@ import {IProject} from "../../types/types";
 import {ProjectsApi} from "../../api/ProjectsApi";
 import {Axios} from "../../api/index";
 import {Toast} from "../UI/Toast";
-import Dropzone from 'react-dropzone';
-
-
-class T {
-}
+import {MyDropzone} from "../UI/MyDropZone";
 
 export const CreateProject = () => {
     const [acceptedFiles, setAcceptedFiles] = useState([]);
@@ -26,10 +22,10 @@ export const CreateProject = () => {
         <div className={'d-flex justify-content-start'}>
             <Formik
                 initialValues={{
-                    title: 'Test js',
-                    task: 'Сделать что-нибудь',
-                    description: 'test',
-                    tags: '#js #facebook #good',
+                    title: "",
+                    task: "",
+                    description: "",
+                    tags: '',
                     link: '',
                     github: '',
                     previews: acceptedFiles
@@ -67,7 +63,6 @@ export const CreateProject = () => {
                                     status: null
                                 });
                             }, 5000);
-                            // Cookies.remove('token');
                         })
                 }}>
                 {(formProps) => (
@@ -78,30 +73,8 @@ export const CreateProject = () => {
                         <MyTextInput label="Тэги" name="tags" type="text" placeholder="node.js javascript"/>
                         <MyTextInput label="Ссылка на Github" name="github" type="text" placeholder="https://github.com/AurovD/aurovd.ruNext"/>
                         <MyTextInput label="Ссылка на проект" name="link" type="text" placeholder="https://aurovd.ru/"/>
-                        <Dropzone onDrop={(files) => {
-                            setAcceptedFiles(files);
-                            formProps.setFieldValue("previews", files);
-                        }} multiple={true}>
-                            {({ getRootProps, getInputProps }) => (
-                                <div {...getRootProps()} className={clsx(styles.dropzone)}>
-                                    <input {...getInputProps()} />
-                                    {acceptedFiles.length > 0 ? (
-                                        <div>
-                                            {acceptedFiles.map((file) => (
-                                                <div key={file.name}>
-                                                    <img className={clsx(styles.img)}
-                                                        src={URL.createObjectURL(file)}
-                                                        alt={file.name}
-                                                    />
-                                                </div>
-                                            ))}
-                                        </div>
-                                    ) : <p>Drag and drop some files here, or click to select files</p>}
-                                </div>
-                            )}
-                        </Dropzone>
+                        <MyDropzone acceptedFiles={acceptedFiles} setAcceptedFiles={setAcceptedFiles} setFieldValue={formProps.setFieldValue}/>
                         <ErrorMessage name="previews" />
-
                         <button type="submit">Добавить проект</button>
                         {msg.status && <Toast msg={msg.msg} status={msg.status}/>}
                     </Form>

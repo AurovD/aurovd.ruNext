@@ -5,6 +5,7 @@ import {ProjectsApi} from "../../api/ProjectsApi";
 import {Axios} from "../../axios/axios";
 import {Edit} from "../../components/Edit";
 import {getCookies} from "cookies-next";
+import React from "react";
 
 export default function UpdatePage({project}) {
     const obj = {
@@ -17,7 +18,7 @@ export default function UpdatePage({project}) {
                 <title>Редактирование</title>
             </Head>
             <Panel {...obj}/>
-            <Edit/>
+            <Edit project={project}/>
         </div>
     )
 }
