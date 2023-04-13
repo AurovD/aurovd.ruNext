@@ -6,6 +6,7 @@ import { User, Projects, Tags, Projects_Tags } from "../../models";
 import {IProject as BodyRequest} from "../../types/types";
 import {Sequelize} from "sequelize";
 import * as fs from "fs";
+import TagsService from "../core/tags_service";
 
 
 
@@ -51,6 +52,7 @@ class PostController {
 
                     return res.status(200).json({msg: "Добавлено"});
                 } catch (e) {
+                    console.log(e)
                     return res.status(501).send({msg: "Ошибка создания"});
                 }
             }
@@ -77,7 +79,7 @@ class PostController {
                     project.images = [...project.images, ...images_arr]
                     await project.save();
 
-                    return res.status(200).json({msg: "Добавлено"});
+                    return res.status(200).json({msg: "Добавлено", new_images: images_arr});
                 } catch (e) {
                     return res.status(501).send({msg: "Ошибка создания"});
                 }
@@ -177,22 +179,21 @@ class PostController {
             //
             // fs.unlinkSync(imagePath);
 
-            fs.unlink("./public/projects_images/" + image, (error) => {
-                if (error) {
-                    return res.status(404).json({ message: 'File not found' });
-                }
-                console.log(image + "deleted");
-            });
-
             const project = await Projects.findByPk(id);
             if (!project) {
-                return res.status(404).json({ message: 'Project not found' });
+                return res.status(404).json({ message: 'Проект не найден' });
+            } else {
+                fs.unlink("./public/projects_images/" + image, async (error) => {
+                    if (error) {
+                        return res.status(404).json({ message: 'Файл не найден' });
+                    }
+
+                    project.images = project.images.filter(imageName => imageName !== image);
+                    await project.save();
+
+                    return res.status(200).json({ message: 'Файл удален' });
+                });
             }
-
-            project.images = project.images.filter(imageName => imageName !== image);
-            await project.save();
-
-            res.json({ message: 'File deleted successfully' });
         } catch (error) {
             console.error(error);
             res.status(500).json({ message: 'Error deleting file' });

@@ -8,6 +8,7 @@ import {ProjectsApi} from "../../api/ProjectsApi";
 import {Axios} from "../../axios/axios";
 import {Axios as AxiosFD} from "../../api/index";
 import Image from "next/image";
+import {Toast} from "../UI/Toast";
 
 
 interface Project {
@@ -16,25 +17,42 @@ interface Project {
 
 export const Edit: React.FC< Project > = ({project}) => {
     const [acceptedFiles, setAcceptedFiles] = useState([]);
-    // const [msg, setMsg] = useState({
-    //     msg: 'Добавлено',
-    //     status: null
-    // });
+    const [images, setImages] = useState<string[]>(project.images);
+    const [msg, setMsg] = useState({
+        msg: '',
+        status: null
+    });
     console.log(project)
 
     const deleteImage = async (image, id) => {
         await Axios.post(`/delete_image`, {
             id,
             image,
-        }).catch(e => {
-            console.log(e)
+        }).then(res => {
+            setImages(prev => prev.filter(imageName => imageName !== image));
+            if(res.data.message && res.status){
+                setMsg({msg: res.data.message, status: res.status});
+                setTimeout(() => {
+                    setMsg({
+                        msg: '',
+                        status: null
+                    });
+                }, 5000);
+            }
+        })
+            .catch(e => {
+                const error =
+                    e.response?.data?.message ||
+                    "Ошибка сервера";
+                setMsg({ msg: error, status: e.response?.status || 500 });
+                setTimeout(() => setMsg({ msg: "", status: null }), 5000);
         })
     }
     return (
         <div className={'d-flex justify-content-start'}>
             <div className={clsx(styles.project_images)}>
-                {Array.isArray(project.images)  && <div className={clsx("wrapper", styles.previews_grid)}>
-                    {project.images.map(image =>
+                {Array.isArray(images)  && <div className={clsx("wrapper", styles.previews_grid)}>
+                    {images.map(image =>
                         <div className={clsx(styles.previews_box)} key={image}>
                             <div className={clsx(styles.cross)} onClick={event => {
                                 event.stopPropagation();
@@ -60,7 +78,23 @@ export const Edit: React.FC< Project > = ({project}) => {
                         setSubmitting(false);
                         ProjectsApi(AxiosFD).addImage(fd, project.id)
                             .then(res => {
-                                console.log(res);
+                                setImages([...images, ...res.new_images]);
+                                if(res.msg && res.status){
+                                    setMsg({msg: res.msg, status: res.status});
+                                    setTimeout(() => {
+                                        setMsg({
+                                            msg: '',
+                                            status: null
+                                        });
+                                    }, 5000);
+                                }
+                            })
+                            .catch(e => {
+                                const error =
+                                    e.response?.data?.message ||
+                                    "Ошибка сервера";
+                                setMsg({ msg: error, status: e.response?.status || 500 });
+                                setTimeout(() => setMsg({ msg: "", status: null }), 5000);
                             })
                     }}>
                     {(formProps) => (
@@ -72,6 +106,7 @@ export const Edit: React.FC< Project > = ({project}) => {
                     )}
                 </Formik>
             </div>
+            {msg.status && <Toast msg={msg.msg} status={msg.status}/>}
         </div>
     )
 };
