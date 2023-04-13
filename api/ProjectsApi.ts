@@ -18,12 +18,12 @@ export const ProjectsApi = (instance: AxiosInstance) => {
                 return e.response.data.msg ? {msg: e.response.data.msg, status: e.response.status} : {msg: "Проект не добавлен", status: e.response.status};
             }
         },
-        changeImages: async (body)  => {
+        addImage: async (body, id)  => {
             try {
-                const {data, status}  = await instance.post('/project',  body);
-                return {msg: data.msg, status: status};
+                const {data, status}  = await instance.post('/add_image/' + id,  body);
+                // return {msg: data.msg, status: status};
             } catch (e) {
-                return e.response.data.msg ? {msg: e.response.data.msg, status: e.response.status} : {msg: "Проект не добавлен", status: e.response.status};
+                // return e.response.data.msg ? {msg: e.response.data.msg, status: e.response.status} : {msg: "Проект не добавлен", status: e.response.status};
             }
         },
         getProject: async (id: string | string[]): Promise<any> => {
@@ -32,7 +32,7 @@ export const ProjectsApi = (instance: AxiosInstance) => {
         },
         login: async (body): Promise<{ msg?: string, token?: string, status?: number }> => {
             try {
-                const {data}   = await instance.post(`/login`, body, {timeout: 1000});
+                const {data}   = await instance.post(`/login`, body);
                 setCookie('token', data.token);
                 return data;
             } catch (e) {

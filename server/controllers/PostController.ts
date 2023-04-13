@@ -4,8 +4,8 @@ import {upload} from "../core/multer";
 // @ts-ignore
 import { User, Projects, Tags, Projects_Tags } from "../../models";
 import {IProject as BodyRequest} from "../../types/types";
-import TagsService from '../core/tags_service';
 import {Sequelize} from "sequelize";
+import * as fs from "fs";
 
 
 
@@ -13,7 +13,10 @@ import {Sequelize} from "sequelize";
 declare module 'express' {
     interface Request {
         user?: {user: any};
-        body:  BodyRequest;
+        body:  BodyRequest & {
+            image: string;
+            id: number;
+        };
         files: [];
     }
 }
@@ -45,6 +48,34 @@ class PostController {
                         .then(async (project) => {
                             await TagsService.add(tags, project.id);
                         })
+
+                    return res.status(200).json({msg: "Добавлено"});
+                } catch (e) {
+                    return res.status(501).send({msg: "Ошибка создания"});
+                }
+            }
+        })
+    }
+    async addImage(req: express.Request, res: express.Response) {
+        if (!req.user) {
+            return res.status(401).send({msg: 'Неверный доступ'});
+        }
+        let images = upload.array("preview", 7);
+        images(req, res, async (err) => {
+            if(err){
+                return res.send({msg: "Ошибка файла"})
+            } else {
+                try {
+                    const id = req.params.id;
+                    let images_arr = Array.from(req.files, (img: { filename: string }) => img.filename)
+
+                    const project = await Projects.findByPk(id);
+                    if (!project) {
+                        return res.status(404).json({ message: 'Project not found' });
+                    }
+
+                    project.images = [...project.images, ...images_arr]
+                    await project.save();
 
                     return res.status(200).json({msg: "Добавлено"});
                 } catch (e) {
@@ -129,6 +160,69 @@ class PostController {
             return res.status(501).send({msg: "Серверная ошибка"});
         }
     }
+    async deleteImage (req: express.Request, res: express.Response) {
+        try {
+            if (!req.user) {
+                return res.status(401).send({msg: 'Неверный доступ'});
+            }
+            const { id, image } = req.body;
+
+            // const imagePath = path.join('public', 'projects_images', image);
+            // console.log(imagePath)
+            // const imagePath = "./public/projects_images/"+ image
+            //
+            // if (!fs.existsSync(imagePath)) {
+            //     return res.status(404).json({ message: 'File not found' });
+            // }
+            //
+            // fs.unlinkSync(imagePath);
+
+            fs.unlink("./public/projects_images/" + image, (error) => {
+                if (error) {
+                    return res.status(404).json({ message: 'File not found' });
+                }
+                console.log(image + "deleted");
+            });
+
+            const project = await Projects.findByPk(id);
+            if (!project) {
+                return res.status(404).json({ message: 'Project not found' });
+            }
+
+            project.images = project.images.filter(imageName => imageName !== image);
+            await project.save();
+
+            res.json({ message: 'File deleted successfully' });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Error deleting file' });
+        }
+    }
+
 }
 
 export default new PostController();
+
+
+
+// declare module 'express' {
+//     interface Request {
+//         user?: {user: any};
+//         body:  BodyRequest;
+//         files: [];
+//     }
+// }
+// Property 'user' does not exist on type '{ body: { image: string; id: number; }; }'
+//
+// async deleteImage (req: { body: {image: string, id: number} }, res: express.Response) {
+//     try {
+//         if (!req.user) {
+//             return res.status(401).send({msg: 'Неверный доступ'});
+//         }
+//         const { id, image } = req.body;
+//         res.json({ message: 'File deleted successfully' });
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ message: 'Error deleting file' });
+//     }
+// }

@@ -1,11 +1,12 @@
 import clsx from "clsx";
-import React, {useState} from "react";
-import {IProject, IProjects} from "../../types/types";
+import React, {MouseEventHandler, useState} from "react";
+import {IProject, IProjects, ProjectReq} from "../../types/types";
 import {MyDropzone} from "../UI/MyDropZone";
 import styles from './Edit.module.scss';
 import {ErrorMessage, Form, Formik, FormikHelpers} from "formik";
 import {ProjectsApi} from "../../api/ProjectsApi";
-import {Axios} from "../../api";
+import {Axios} from "../../axios/axios";
+import {Axios as AxiosFD} from "../../api/index";
 import Image from "next/image";
 
 
@@ -20,13 +21,25 @@ export const Edit: React.FC< Project > = ({project}) => {
     //     status: null
     // });
     console.log(project)
+
+    const deleteImage = async (image, id) => {
+        await Axios.post(`/delete_image`, {
+            id,
+            image,
+        }).catch(e => {
+            console.log(e)
+        })
+    }
     return (
         <div className={'d-flex justify-content-start'}>
             <div className={clsx(styles.project_images)}>
-                {project.images.length && <div className={clsx("wrapper", styles.previews_grid)}>
+                {Array.isArray(project.images)  && <div className={clsx("wrapper", styles.previews_grid)}>
                     {project.images.map(image =>
                         <div className={clsx(styles.previews_box)} key={image}>
-                            <div className={clsx(styles.cross)}>Удалить</div>
+                            <div className={clsx(styles.cross)} onClick={event => {
+                                event.stopPropagation();
+                                deleteImage(image, project.id);
+                            }}>Удалить</div>
                             <Image className={clsx(styles.box_image)} src={"/projects_images/" + image} alt={image}
                                    width={400} height={400}
                             />
@@ -45,8 +58,9 @@ export const Edit: React.FC< Project > = ({project}) => {
                             fd.append('preview', file);
                         });
                         setSubmitting(false);
-                        ProjectsApi(Axios).changeImages(fd)
-                            .then(async (res: { msg: string, status?: number }) => {
+                        ProjectsApi(AxiosFD).addImage(fd, project.id)
+                            .then(res => {
+                                console.log(res);
                             })
                     }}>
                     {(formProps) => (
