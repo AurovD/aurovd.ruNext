@@ -1,5 +1,4 @@
 import * as fs from "fs";
-import path from "path";
 
 class PostService {
     async deleteImages(images: string[]) {
@@ -9,7 +8,7 @@ class PostService {
                     if (err) {
                         reject(err);
                     } else {
-                        resolve(); //Expected 1 arguments, but got 0. Did you forget to include 'void' in your type argument to 'Promise'?
+                        resolve();
                     }
                 });
             });

@@ -23,7 +23,7 @@ export const ProjectsApi = (instance: AxiosInstance) => {
                 const {data, status}  = await instance.post('/add_image/' + id,  body);
                 return {msg: data.msg, status: status, new_images: data.new_images};
             } catch (e) {
-                // return e.response.data.msg ? {msg: e.response.data.msg, status: e.response.status} : {msg: "Проект не добавлен", status: e.response.status};
+                return e.response.data.msg ? {msg: e.response.data.msg, status: e.response.status} : {msg: "Проект не добавлен", status: e.response.status};
             }
         },
         getProject: async (id: string | string[]): Promise<any> => {
