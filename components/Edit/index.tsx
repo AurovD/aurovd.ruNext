@@ -78,23 +78,17 @@ export const Edit: React.FC< Project > = ({project}) => {
                         setSubmitting(false);
                         ProjectsApi(AxiosFD).addImage(fd, project.id)
                             .then(res => {
-                                setImages([...images, ...res.new_images]);
-                                if(res.msg && res.status){
-                                    setMsg({msg: res.msg, status: res.status});
-                                    setTimeout(() => {
-                                        setMsg({
-                                            msg: '',
-                                            status: null
-                                        });
-                                    }, 5000);
+                                console.log(res);
+                                if(Array.isArray(res.new_images) ){
+                                    setImages([...images, ...res.new_images]);
                                 }
-                            })
-                            .catch(e => {
-                                const error =
-                                    e.response?.data?.message ||
-                                    "Ошибка сервера";
-                                setMsg({ msg: error, status: e.response?.status || 500 });
-                                setTimeout(() => setMsg({ msg: "", status: null }), 5000);
+                                setMsg({msg: res.msg, status: res.status});
+                                setTimeout(() => {
+                                    setMsg({
+                                        msg: '',
+                                        status: null
+                                    });
+                                }, 5000);
                             })
                     }}>
                     {(formProps) => (

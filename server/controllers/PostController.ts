@@ -73,10 +73,10 @@ class PostController {
                 try {
                     const id = req.params.id;
 
-                    const project = await Projects.findByPk(id);
+                    const project = await Projects.findByPk(76887);
                     if (!project) {
                         await Post_service.deleteImages(images_arr);
-                        return res.status(404).json({ message: 'Project not found' });
+                        return res.status(404).json({ message: 'Проект не найден' });
                     }
 
                     project.images = [...project.images, ...images_arr]
