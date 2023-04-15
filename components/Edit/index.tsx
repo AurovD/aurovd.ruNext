@@ -22,7 +22,6 @@ export const Edit: React.FC< Project > = ({project}) => {
         msg: '',
         status: null
     });
-    console.log(project)
 
     const deleteImage = async (image, id) => {
         await Axios.post(`/delete_image`, {
@@ -58,7 +57,7 @@ export const Edit: React.FC< Project > = ({project}) => {
                                 event.stopPropagation();
                                 deleteImage(image, project.id);
                             }}>Удалить</div>
-                            <Image className={clsx(styles.box_image)} src={"/projects_images/" + image} alt={image}
+                            <Image className={clsx(styles.box_image)} src={"/projects/" + image} alt={image}
                                    width={400} height={400}
                             />
                         </div>)}
@@ -78,7 +77,6 @@ export const Edit: React.FC< Project > = ({project}) => {
                         setSubmitting(false);
                         ProjectsApi(AxiosFD).addImage(fd, project.id)
                             .then(res => {
-                                console.log(res);
                                 if(Array.isArray(res.new_images) ){
                                     setImages([...images, ...res.new_images]);
                                 }

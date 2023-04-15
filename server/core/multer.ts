@@ -3,7 +3,7 @@ import {nanoid} from "nanoid";
 
 const storage = multer.diskStorage({
         destination: function (req, files, cb) {
-            cb(null, 'public/projects_images')
+            cb(null, 'public/projects')
         },
         filename: function (req, file, cb){
             cb(null, file.fieldname + '-' + nanoid(6) + Date.now() + '.' + file.mimetype.split("/").pop());

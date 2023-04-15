@@ -4,7 +4,7 @@ class PostService {
     async deleteImages(images: string[]) {
         const promises = images.map((name) => {
             return new Promise<void>((resolve, reject) => {
-                fs.unlink(`./public/projects_images/${name}`, (err) => {
+                fs.unlink(`./public/projects/${name}`, (err) => {
                     if (err) {
                         reject(err);
                     } else {

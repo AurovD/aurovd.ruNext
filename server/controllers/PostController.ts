@@ -177,11 +177,11 @@ class PostController {
             if (!project) {
                 return res.status(404).json({ message: 'Проект не найден' });
             } else {
-                 let deleteImgs = await Post_service.deleteImages([image]);
+                await Post_service.deleteImages([image]);
 
-                if (!deleteImgs) {
-                    return res.status(404).json({ message: 'Файл не найден' });
-                }
+                // if (!deleteImgs) {
+                //     return res.status(404).json({ message: 'Файл не найден' });
+                // }
 
                 project.images = project.images.filter(imageName => imageName !== image);
                 await project.save();
