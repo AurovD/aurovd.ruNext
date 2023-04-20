@@ -16,7 +16,7 @@ const ProjectCard = React.memo<Project>(({project}) => {
                 <Link href={"/project/" + project.id}>
                     <div className={clsx(error ? styles.error_image : "")}>
                         <img src={
-                            loading || error ? "/assets/giphy.webp" : "/projects/" + project.images[0] }
+                            loading || error ? "/assets/giphy.webp" : "https://aurovdm.ru/images/" + project.images[0] }
                              alt={project.title}
                              onLoad={() => setLoading(false)}
                              onError={() => setError(true)}

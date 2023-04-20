@@ -5,7 +5,6 @@ import {upload} from "../core/multer";
 import { User, Projects, Tags, Projects_Tags } from "../../models";
 import {IProject as BodyRequest} from "../../types/types";
 import {Sequelize} from "sequelize";
-import * as fs from "fs";
 import TagsService from "../core/tags_service";
 import Post_service from "../core/post_service";
 
@@ -48,7 +47,9 @@ class PostController {
                         images: images_arr
                     })
                         .then(async (project) => {
-                            await TagsService.add(tags, project.id);
+                            if(tags && tags.length > 0){
+                                await TagsService.add(tags, project.id);
+                            }
                         })
 
                     return res.status(200).json({msg: "Добавлено"});
@@ -65,7 +66,7 @@ class PostController {
         }
         let images = upload.array("preview", 7);
         images(req, res, async (err) => {
-            let images_arr = Array.from(req.files, (img: { filename: string }) => img.filename)
+            let images_arr = Array.from(req.files, (img: { filename: string }) => img.filename);
             if(err){
                 await Post_service.deleteImages(images_arr);
                 return res.status(400).send({msg: "Ошибка файла"})

@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import React, {MouseEventHandler, useState} from "react";
-import {IProject, IProjects, ProjectReq} from "../../types/types";
+import React, {useState} from "react";
+import {IProject, IProjects} from "../../types/types";
 import {MyDropzone} from "../UI/MyDropZone";
 import styles from './Edit.module.scss';
 import {ErrorMessage, Form, Formik, FormikHelpers} from "formik";
@@ -57,8 +57,8 @@ export const Edit: React.FC< Project > = ({project}) => {
                                 event.stopPropagation();
                                 deleteImage(image, project.id);
                             }}>Удалить</div>
-                            <Image className={clsx(styles.box_image)} src={"/projects/" + image} alt={image}
-                                   width={400} height={400}
+                            <img className={clsx(styles.box_image)} src={"https://aurovdm.ru/images/" + image} alt={image}
+                                   // width={400} height={400}
                             />
                         </div>)}
                 </div>}
