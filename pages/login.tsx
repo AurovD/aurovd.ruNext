@@ -2,8 +2,10 @@ import React from 'react';
 import Head from "next/head";
 import Panel from "../components/Panel";
 import {Login} from "../components/Login";
-import {getCookies} from "cookies-next";
+import {deleteCookie, getCookies} from "cookies-next";
 import {GetServerSideProps} from "next";
+import {ProjectsApi} from "../api/ProjectsApi";
+import {Axios} from "../axios/axios";
 
 export default function LoginPage() {
     const obj = {
@@ -24,16 +26,22 @@ export default function LoginPage() {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     try {
         if(getCookies(ctx).token){
+            const user = await ProjectsApi(Axios).checkAuth(getCookies(ctx).token);
+            if(!user){
+                deleteCookie('token');
+                return {
+                    redirect: {
+                        permanent: false,
+                        destination: '/'
+                    }
+                }
+            }
             return {
                 redirect: {
                     permanent: false,
                     destination: '/admin'
                 }
             }
-        }
-        return {
-            props: {
-            },
         }
     } catch (err) {
         return {

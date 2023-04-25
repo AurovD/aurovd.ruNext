@@ -4,7 +4,7 @@ import {GetServerSideProps} from "next";
 import {ProjectsApi} from "../../api/ProjectsApi";
 import {Axios} from "../../axios/axios";
 import {Edit} from "../../components/Edit";
-import {getCookies} from "cookies-next";
+import {getCookies, deleteCookie} from "cookies-next";
 import React from "react";
 
 export default function UpdatePage({project}) {
@@ -26,26 +26,27 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     try {
         const user = await ProjectsApi(Axios).checkAuth(getCookies(ctx).token);
         if(!user){
+            deleteCookie('token', ctx);
             return {
                 redirect: {
                     permanent: false,
-                    destination: '/'
+                    destination: '/login'
                 }
             }
-        } else {
-            const projectId = ctx.query.update;
-            const project = await ProjectsApi(Axios).getProject(projectId as string);
-            return {
-                props: {
-                    project
-                },
-            }
+        }
+        const projectId = ctx.query.update;
+        const project = await ProjectsApi(Axios).getProject(projectId as string);
+        return {
+            props: {
+                project
+            },
         }
     } catch (error) {
+        deleteCookie('token', ctx);
         return {
             props: {},
             redirect: {
-                destination: '/projects',
+                destination: '/login',
                 permanent: false
             }
         }

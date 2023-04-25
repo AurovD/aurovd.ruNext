@@ -5,7 +5,7 @@ import Head from "next/head";
 import {GetServerSideProps} from "next";
 import {ProjectsApi} from "../api/ProjectsApi";
 import {Axios} from "../axios/axios";
-import {getCookies} from "cookies-next";
+import {deleteCookie, getCookies} from "cookies-next";
 
 export default function Create() {
     return (
@@ -24,10 +24,11 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     try {
         const user = await ProjectsApi(Axios).checkAuth(getCookies(ctx).token);
         if(!user){
+            deleteCookie('token', ctx);
             return {
                 redirect: {
                     permanent: false,
-                    destination: '/'
+                    destination: '/login'
                 }
             }
         }
@@ -36,10 +37,11 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
             },
         }
     } catch (error) {
+        deleteCookie('token', ctx);
         return {
             props: {},
             redirect: {
-                destination: '/',
+                destination: '/login',
                 permanent: false
             }
         }
