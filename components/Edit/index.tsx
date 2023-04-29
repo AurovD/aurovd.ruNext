@@ -9,10 +9,17 @@ import {Axios} from "../../axios/axios";
 import {Axios as AxiosFD} from "../../api/index";
 import Image from "next/image";
 import {Toast} from "../UI/Toast";
+import {MyTextInput} from "../UI/Forms/TextInput";
+import {MyTextArea} from "../UI/Forms/TextArea";
+import * as Yup from "yup";
+import router from "next/router";
 
 
 interface Project {
     project: IProjects;
+}
+interface Images{
+    previews: any[]
 }
 
 export const Edit: React.FC< Project > = ({project}) => {
@@ -48,7 +55,7 @@ export const Edit: React.FC< Project > = ({project}) => {
         })
     }
     return (
-        <div className={'d-flex justify-content-start'}>
+        <div className={'d-flex flex-column'}>
             <div className={clsx(styles.project_images)}>
                 {Array.isArray(images)  && <div className={clsx("wrapper", styles.previews_grid)}>
                     {images.map(image =>
@@ -68,7 +75,7 @@ export const Edit: React.FC< Project > = ({project}) => {
                     }}
                     onSubmit={(
                         values: { previews: any[]; },
-                        { setSubmitting }: FormikHelpers<IProject>
+                        { setSubmitting }: FormikHelpers<Images>
                     ) => {
                         const fd = new FormData();
                         Array.from(values.previews).forEach((file: string | Blob) => {
@@ -94,6 +101,43 @@ export const Edit: React.FC< Project > = ({project}) => {
                             <MyDropzone acceptedFiles={acceptedFiles} setAcceptedFiles={setAcceptedFiles} setFieldValue={formProps.setFieldValue}/>
                             <ErrorMessage name="previews" />
                             <button type="submit">Изменить галерею</button>
+                        </Form>
+                    )}
+                </Formik>
+            </div>
+            <div>
+                <Formik
+                    initialValues={{
+                        title: project.title,
+                        task: project.task,
+                        description: project.description,
+                        link: project.link,
+                        github: project.github,
+                    }}
+                    validationSchema={Yup.object({
+                        title: Yup.string()
+                            .max(30, 'Небольше 30 символов'),
+                        task: Yup.string(),
+                        description: Yup.string(),
+                    })}
+                    onSubmit={(
+                        values: IProject,
+                        { setSubmitting }: FormikHelpers<IProject>
+                    ) => {
+                        setSubmitting(false);
+                        ProjectsApi(Axios).changeProject(values, project.id)
+                            .then(async() => {
+                                await router.push('/project/' + project.id);
+                            })
+                    }}>
+                    {(formProps) => (
+                        <Form className={clsx('d-flex flex-column form')}>
+                            <MyTextInput label="Название проекта" name="title" type="text" placeholder="Портфолио"/>
+                            <MyTextInput label="Задача проекта" name="task" type="text" placeholder="Сделать что-нибудь"/>
+                            <MyTextArea label="Description" name="description" placeholder="Description"/>
+                            <MyTextInput label="Ссылка на Github" name="github" type="text" placeholder="https://github.com/AurovD/aurovd.ruNext"/>
+                            <MyTextInput label="Ссылка на проект" name="link" type="text" placeholder="https://aurovd.ru/"/>
+                            <button type="submit">Изменить</button>
                         </Form>
                     )}
                 </Formik>

@@ -12,7 +12,7 @@ export interface Project {
 }
 export interface IProject extends Project{
     tags?: string;
-    previews: any[];
+    previews?: any[];
 }
 
 export interface IProjects extends Project {

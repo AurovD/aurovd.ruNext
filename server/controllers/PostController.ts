@@ -195,6 +195,31 @@ class PostController {
         }
     }
 
+    async change(req: express.Request, res: express.Response) {
+        try {
+            const id = req.params.id;
+            const project = await Projects.findByPk(id);
+
+            if (!project) {
+                return res.status(404).json({ message: 'Project not found' });
+            }
+
+            project.title = req.body.title;
+            project.task = req.body.task;
+            project.description = req.body.description;
+            project.link = req.body.link;
+            project.github = req.body.github;
+
+            await project.save();
+
+            return res.status(200).json(project);
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: 'Error updating project' });
+        }
+    }
+
+
 }
 
 export default new PostController();

@@ -26,6 +26,14 @@ export const ProjectsApi = (instance: AxiosInstance) => {
                 return e?.response?.data.message ? {msg: e.response.data.message, status: e.response.status} : {msg: "Серверная ошибка", status: e.response.status};
             }
         },
+        changeProject: async (body, id)  => {
+            try {
+                const {data}  = await instance.post('/change/' + id,  body);
+                return {data}
+            } catch (e) {
+                // return e?.response?.data.message ? {msg: e.response.data.message, status: e.response.status} : {msg: "Серверная ошибка", status: e.response.status};
+            }
+        },
         getProject: async (id: string | string[]): Promise<any> => {
             const { data } = await instance.get(`/project?id=${id}`);
             return data;

@@ -7,8 +7,10 @@ import {ProjectDescription} from "../../components/UI/ProjectDescription";
 import {Task} from "../../components/UI/Task";
 import {DescriptionLinks} from "../../components/UI/DescriptionLinks";
 import {GetServerSideProps} from "next";
+import {getCookies} from "cookies-next";
+import Link from "next/link";
 
-export default function ProjectPage({project}) {
+export default function ProjectPage({project, user}) {
     const obj = {
         title: project.title,
         tags: project.Tags
@@ -20,7 +22,8 @@ export default function ProjectPage({project}) {
                 <title>{project.title}</title>
             </Head>
             <Panel {...obj}/>
-            <div>
+            <div className="relative">
+                {user && <Link className={"link_update"} href={`/update/` + project.id}>Edit</Link>}
                 {project.images && project.images.map((image, index) => <ProjectPreview image={image} key={index}/>)}
                 <Task title={project.task}  color={"#fff"}/>
                 <ProjectDescription description={project.description}/>
@@ -36,9 +39,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     try {
         const projectId = ctx.query.project;
         const project = await ProjectsApi(Axios).getProject(projectId as string);
+
+        let user = getCookies(ctx).token || null;
         return {
             props: {
-                project
+                project,
+                user
             },
         }
     } catch (error) {
