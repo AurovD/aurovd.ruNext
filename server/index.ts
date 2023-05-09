@@ -31,6 +31,7 @@ app.get('/tags', PostController.tags);
 app.post('/delete_image', passport.authenticate('jwt', { session: false }), PostController.deleteImage);
 app.post('/add_image/:id', passport.authenticate('jwt', { session: false }), PostController.addImage);
 app.post('/change/:id', passport.authenticate('jwt', { session: false }), PostController.change);
+app.post('/change/tags/:id', passport.authenticate('jwt', { session: false }), PostController.changeTags);
 app.get('/test', UserController.test);
 
 app.listen(3001, () => {

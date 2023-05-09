@@ -126,17 +126,64 @@ export const Edit: React.FC< Project > = ({project}) => {
                     ) => {
                         setSubmitting(false);
                         ProjectsApi(Axios).changeProject(values, project.id)
-                            .then(async() => {
-                                await router.push('/project/' + project.id);
+                            .then(async(res) => {
+                                if(res.msg){
+                                    setMsg({msg: res.msg, status: res.status});
+                                    setTimeout(() => {
+                                        setMsg({
+                                            msg: '',
+                                            status: null
+                                        });
+                                    }, 5000);
+                                } else {
+                                    await router.push('/project/' + project.id);
+                                }
                             })
                     }}>
-                    {(formProps) => (
+                    {() => (
                         <Form className={clsx('d-flex flex-column form')}>
                             <MyTextInput label="Название проекта" name="title" type="text" placeholder="Портфолио"/>
                             <MyTextInput label="Задача проекта" name="task" type="text" placeholder="Сделать что-нибудь"/>
                             <MyTextArea label="Description" name="description" placeholder="Description"/>
                             <MyTextInput label="Ссылка на Github" name="github" type="text" placeholder="https://github.com/AurovD/aurovd.ruNext"/>
                             <MyTextInput label="Ссылка на проект" name="link" type="text" placeholder="https://aurovd.ru/"/>
+                            <button type="submit">Изменить</button>
+                        </Form>
+                    )}
+                </Formik>
+            </div>
+            <div>
+                <Formik
+                    initialValues={{
+                        tags: project.Tags.map(tag => tag.title).join(" "),
+                        old_tags: project.Tags.map(tag => tag.title),
+                    }}
+                    validationSchema={Yup.object({
+                        tags: Yup.string()
+                            .trim()
+                            .matches(/\B#[a-z0-9_]+/g, "Требуется знак # перед тэгом")
+                    })}
+                    onSubmit={(
+                        values: { tags: string; old_tags: string[]},
+                        // { setSubmitting }: FormikHelpers<Images>
+                    ) => {
+                        // setSubmitting(false);
+                        ProjectsApi(Axios).changeTags(values, project.id)
+                            .then(async(res) => {
+                                if(res.msg){
+                                    setMsg({msg: res.msg, status: res.status});
+                                    setTimeout(() => {
+                                        setMsg({
+                                            msg: '',
+                                            status: null
+                                        });
+                                    }, 5000);
+                                }
+                            })
+                    }}>
+                    {() => (
+                        <Form className={clsx('d-flex flex-column form')}>
+                            <MyTextInput label="Тэги" name="tags" type="text" placeholder="node.js javascript"/>
                             <button type="submit">Изменить</button>
                         </Form>
                     )}

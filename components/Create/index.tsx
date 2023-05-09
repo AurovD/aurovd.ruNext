@@ -10,6 +10,7 @@ import {ProjectsApi} from "../../api/ProjectsApi";
 import {Axios} from "../../api/index";
 import {Toast} from "../UI/Toast";
 import {MyDropzone} from "../UI/MyDropZone";
+import router from "next/router";
 
 export const CreateProject = () => {
     const [acceptedFiles, setAcceptedFiles] = useState([]);
@@ -55,14 +56,18 @@ export const CreateProject = () => {
                     });
                     setSubmitting(false);
                     ProjectsApi(Axios).createProject(fd)
-                        .then(async (res: { msg: string, status?: number }) => {
-                            setMsg({msg: res.msg, status: res.status});
-                            setTimeout(() => {
-                                setMsg({
-                                    msg: '',
-                                    status: null
-                                });
-                            }, 5000);
+                        .then(async(res) => {
+                            if(res.msg){
+                                setMsg({msg: res.msg, status: res.status});
+                                setTimeout(() => {
+                                    setMsg({
+                                        msg: '',
+                                        status: null
+                                    });
+                                }, 5000);
+                            } else {
+                                await router.push('/project/' + res.id);
+                            }
                         })
                 }}>
                 {(formProps) => (

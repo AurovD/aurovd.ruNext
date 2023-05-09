@@ -17,6 +17,7 @@ declare module 'express' {
         body:  BodyRequest & {
             image: string;
             id: number;
+            old_tags?: string[];
         };
         files: [];
     }
@@ -38,7 +39,7 @@ class PostController {
 
                     let tags:string[] = req.body?.tags.match(/\B#[a-z0-9_]+/g);
 
-                    await Projects.create({
+                    let project = await Projects.create({
                         title: req.body.title,
                         description: req.body.description,
                         task: req.body.task,
@@ -46,13 +47,16 @@ class PostController {
                         link: req.body.link,
                         images: images_arr
                     })
-                        .then(async (project) => {
-                            if(tags && tags.length > 0){
-                                await TagsService.add(tags, project.id);
-                            }
-                        })
 
-                    return res.status(200).json({msg: "Добавлено"});
+                    if(!project){
+                        await Post_service.deleteImages(images_arr);
+                        return res.status(501).send({msg: "Ошибка создания"});
+                    }
+
+                    if(tags && tags.length > 0){
+                        await TagsService.add(tags, project.id);
+                    }
+                    return res.status(200).json({id: 1});
                 } catch (e) {
                     await Post_service.deleteImages(images_arr);
                     return res.status(501).send({msg: "Ошибка создания"});
@@ -180,10 +184,6 @@ class PostController {
             } else {
                 await Post_service.deleteImages([image]);
 
-                // if (!deleteImgs) {
-                //     return res.status(404).json({ message: 'Файл не найден' });
-                // }
-
                 project.images = project.images.filter(imageName => imageName !== image);
                 await project.save();
 
@@ -191,7 +191,7 @@ class PostController {
             }
         } catch (error) {
             console.error(error);
-            res.status(500).json({ message: 'Error deleting file' });
+            res.status(500).json({ message: 'Ошибка при удалении' });
         }
     }
 
@@ -201,7 +201,7 @@ class PostController {
             const project = await Projects.findByPk(id);
 
             if (!project) {
-                return res.status(404).json({ message: 'Project not found' });
+                return res.status(404).json({ message: 'Проект не найден' });
             }
 
             project.title = req.body.title;
@@ -215,13 +215,40 @@ class PostController {
             return res.status(200).json(project);
         } catch (error) {
             console.error(error);
-            return res.status(500).json({ message: 'Error updating project' });
+            return res.status(500).json({ message: 'Ошибка при редактировании' });
         }
     }
 
+    async changeTags(req: express.Request, res: express.Response) {
+        try {
+            const projectId = req.params.id;
+            const newTagsString = req.body.tags;
+            const currentTags = req.body.old_tags;
 
+            const newTags = newTagsString.trim().split(/\s+/);
+
+            const tagsToAdd = newTags.filter(tag => !currentTags.includes(tag));
+
+            if(tagsToAdd.length){
+                await TagsService.add(tagsToAdd, projectId);
+            }
+
+            const tagsToRemove = currentTags.filter(tag => !newTags.includes(tag));
+
+            if(tagsToRemove.length){
+                await TagsService.removeTagsFromProject(tagsToRemove, projectId);
+            }
+
+            if(!tagsToRemove.length && !tagsToAdd.length){
+                return res.status(200).json({ message: 'Нет изменений' });
+            }
+
+            return res.status(200).json({ message: 'Тэги изменены' });
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: 'Ошибка при редактировании' });
+        }
+    }
 }
 
 export default new PostController();
-
-

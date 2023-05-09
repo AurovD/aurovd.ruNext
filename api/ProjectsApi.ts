@@ -12,8 +12,8 @@ export const ProjectsApi = (instance: AxiosInstance) => {
         },
         createProject: async (body)  => {
             try {
-                const {data, status}  = await instance.post('/project',  body);
-                return {msg: data.msg, status: status};
+                const {data}  = await instance.post('/project',  body);
+                return {id: data.id};
             } catch (e) {
                 return e.response.data.msg ? {msg: e.response.data.msg, status: e.response.status} : {msg: "Серверная ошибка", status: e.response.status};
             }
@@ -31,7 +31,15 @@ export const ProjectsApi = (instance: AxiosInstance) => {
                 const {data}  = await instance.post('/change/' + id,  body);
                 return {data}
             } catch (e) {
-                // return e?.response?.data.message ? {msg: e.response.data.message, status: e.response.status} : {msg: "Серверная ошибка", status: e.response.status};
+                return e?.response?.data.message ? {msg: e.response.data.message, status: e.response.status} : {msg: "Серверная ошибка", status: e.response.status};
+            }
+        },
+        changeTags: async (body, id)  => {
+            try {
+                const {data, status} = await instance.post('/change/tags/' + id,  body);
+                return {msg: data.message, status: status};
+            } catch (e) {
+                return e?.response?.data.message ? {msg: e.response.data.message, status: e.response.status} : {msg: "Серверная ошибка", status: e.response.status};
             }
         },
         getProject: async (id: string | string[]): Promise<any> => {
