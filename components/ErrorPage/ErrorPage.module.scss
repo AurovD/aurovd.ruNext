@@ -1,0 +1,49 @@
+.error_page {
+  background-color: var(--clr-main);
+  height: 100vh;
+  .error_page_wrapper {
+    height: 100%;
+    width: 100%;
+    gap: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    container-type: inline-size;
+    .error_headers {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      container-type: inline-size;
+      * {
+        color: var(--clr-wtext);
+        font-size: 7cqi;
+        font-weight: 900;
+      }
+      :first-child {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      :last-child {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        text-align: right;
+        transition: font-size ease-out 1s;
+        &:hover {
+          font-size: 8cqi;
+        }
+      }
+    }
+    .boxes {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      grid-template-rows: repeat(10, 1fr);
+    }
+    .box {
+      aspect-ratio: 1 / 1 ;
+      //outline: 1px solid white;
+      height: 10cqh;
+    }
+  }
+}

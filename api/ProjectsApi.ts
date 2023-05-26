@@ -1,7 +1,6 @@
-import {IProjects, Password, Tags, Statistic} from "../types/types";
+import {IProjects, Password, Tags, Statistic, IProject} from "../types/types";
 import { AxiosInstance } from 'axios';
-import {setCookie} from 'cookies-next';
-
+import {getCookies, setCookie} from 'cookies-next';
 
 export const ProjectsApi = (instance: AxiosInstance) => {
     return {
@@ -28,7 +27,13 @@ export const ProjectsApi = (instance: AxiosInstance) => {
         },
         changeProject: async (body, id)  => {
             try {
-                const {data}  = await instance.post('/change/' + id,  body);
+                const {data}  = await instance.post('/change/' + id,  body, {
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json",
+                        "Authorization": 'Bearer ' + getCookies().token,
+                    }
+                });
                 return {data}
             } catch (e) {
                 return e?.response?.data.message ? {msg: e.response.data.message, status: e.response.status} : {msg: "Серверная ошибка", status: e.response.status};
@@ -36,7 +41,12 @@ export const ProjectsApi = (instance: AxiosInstance) => {
         },
         changeTags: async (body, id)  => {
             try {
-                const {data, status} = await instance.post('/change/tags/' + id,  body);
+                const {data, status} = await instance.post('/change/tags/' + id,  body, {
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json",
+                        "Authorization": 'Bearer ' + getCookies().token,
+                    }});
                 return {msg: data.message, status: status};
             } catch (e) {
                 return e?.response?.data.message ? {msg: e.response.data.message, status: e.response.status} : {msg: "Серверная ошибка", status: e.response.status};

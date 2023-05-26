@@ -25,6 +25,7 @@ export default function UpdatePage({project}) {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     try {
         const user = await ProjectsApi(Axios).checkAuth(getCookies(ctx).token);
+
         if(!user){
             deleteCookie('token', ctx);
             return {

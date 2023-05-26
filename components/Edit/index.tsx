@@ -7,7 +7,6 @@ import {ErrorMessage, Form, Formik, FormikHelpers} from "formik";
 import {ProjectsApi} from "../../api/ProjectsApi";
 import {Axios} from "../../axios/axios";
 import {Axios as AxiosFD} from "../../api/index";
-import Image from "next/image";
 import {Toast} from "../UI/Toast";
 import {MyTextInput} from "../UI/Forms/TextInput";
 import {MyTextArea} from "../UI/Forms/TextArea";

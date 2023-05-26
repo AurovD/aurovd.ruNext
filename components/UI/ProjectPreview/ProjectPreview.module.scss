@@ -9,14 +9,3 @@
     //aspect-ratio: unset;
   }
 }
-.error_preview {
-  position: relative;
-  &:before {
-    content: "Ой, ссылка потерялась...";
-    position: absolute;
-    bottom: 3rem;
-    right: 3rem;
-    z-index: 2;
-    font-size: calc((1vw + 1vh) * 1.5);
-  }
-}

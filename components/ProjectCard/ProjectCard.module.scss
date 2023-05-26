@@ -17,13 +17,6 @@
   }
   .error_image {
     position: relative;
-    &:before {
-      content: "Ой, ссылка потерялась...";
-      position: absolute;
-      bottom: 1rem;
-      right: 1rem;
-      font-size: calc((1vw + 1vh)  * .8);
-    }
     img {
       object-position: center;
     }
