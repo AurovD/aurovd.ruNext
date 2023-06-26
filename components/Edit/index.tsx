@@ -185,12 +185,18 @@ export const Edit: React.FC< Project > = ({project}) => {
                     })}
                     onSubmit={(
                         values: { tags: string; old_tags: string[];},
+                        { resetForm }: FormikHelpers<{ tags: string; old_tags: string[]; }>
                         // { setSubmitting }: FormikHelpers<Images>
                     ) => {
                         // setSubmitting(false);
                         ProjectsApi(Axios).changeTags(values, project.id)
                             .then(async(res) => {
                                 if(res.msg){
+                                    const updatedInitialValues = {
+                                        tags: values.tags,
+                                        old_tags: values.tags.split(" ")
+                                    };
+                                    resetForm({ values: updatedInitialValues });
                                     setMsg({msg: res.msg, status: res.status});
                                     setTimeout(() => {
                                         setMsg({

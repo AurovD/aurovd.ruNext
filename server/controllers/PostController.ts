@@ -247,23 +247,23 @@ class PostController {
             //     return tag.Tag.title;
             // }).join()
 
-            // const newTags = newTagsString.trim().split(/\s+/);
-            //
-            // const tagsToAdd = newTags.filter(tag => !currentTags.includes(tag));
-            //
-            // if(tagsToAdd.length){
-            //     await TagsService.add(tagsToAdd, projectId);
-            // }
-            //
-            // const tagsToRemove = currentTags.filter(tag => !newTags.includes(tag));
-            //
-            // if(tagsToRemove.length){
-            //     await TagsService.removeTagsFromProject(tagsToRemove, projectId);
-            // }
-            //
-            // if(!tagsToRemove.length && !tagsToAdd.length){
-            //     return res.status(200).json({ message: 'Нет изменений' });
-            // }
+            const newTags = newTagsString.trim().split(/\s+/);
+
+            const tagsToAdd = newTags.filter(tag => !currentTags.includes(tag));
+
+            if(tagsToAdd.length){
+                await TagsService.add(tagsToAdd, projectId);
+            }
+
+            const tagsToRemove = currentTags.filter(tag => !newTags.includes(tag));
+
+            if(tagsToRemove.length){
+                await TagsService.removeTagsFromProject(tagsToRemove, projectId);
+            }
+
+            if(!tagsToRemove.length && !tagsToAdd.length){
+                return res.status(200).json({ message: 'Нет изменений' });
+            }
 
             return res.status(200).json({ message: 'Тэги изменены' });
         } catch (error) {
