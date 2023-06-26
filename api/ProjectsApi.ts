@@ -56,6 +56,10 @@ export const ProjectsApi = (instance: AxiosInstance) => {
             const { data } = await instance.get(`/project?id=${id}`);
             return data;
         },
+        delete: async (id: number): Promise<any> => {
+            const { data } = await instance.post(`/delete/${id}`);
+            return data;
+        },
         login: async (body): Promise<{ msg?: string, token?: string, status?: number }> => {
             try {
                 const {data}   = await instance.post(`/login`, body);

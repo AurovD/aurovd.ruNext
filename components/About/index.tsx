@@ -33,8 +33,8 @@ export const About: React.FC<TagsData> = ({tags}) => {
                         <Link  href={"https://github.com/AurovD"}>
                             VKONTAKTE
                         </Link>
-                        <Link  href={"/CV.pdf"}>
-                            LINKDEKIN
+                        <Link  href={"https://gist.github.com/AurovD"}>
+                            GIST
                         </Link>
                     </div>
                 </div>

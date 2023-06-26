@@ -8,9 +8,8 @@
   border-top: 1px solid #fff;
   border-left: 2px solid #fff;
   background-color: var(--clr-bg);
-  font-size: calc(var(--sizeindex) * .8);
-  height: calc(var(--sizeindex) * 4);
-  div {
+  container-type: inline-size;
+  *  {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,10 +17,12 @@
     font-weight: 600;
     line-height: 1.8rem;
     background-color: var(--clr-main);
-    padding: 0 max(3vw, 30px) 0 max(3vw, 30px);
+    padding: max(2cqw, 1rem);
+    padding-inline: max(3vw, 30px) max(3vw, 30px);
     flex: 1 0 0;
+    font-size: clamp(10px, 3cqi, 30px);
   }
-  .link__box {
+  a {
     cursor: pointer;
   }
 }

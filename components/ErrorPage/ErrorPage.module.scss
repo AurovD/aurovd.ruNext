@@ -16,7 +16,7 @@
       container-type: inline-size;
       * {
         color: var(--clr-wtext);
-        font-size: 7cqi;
+        font-size: clamp(40px, 7cqi, 80px);
         font-weight: 900;
       }
       :first-child {
@@ -31,19 +31,9 @@
         text-align: right;
         transition: font-size ease-out 1s;
         &:hover {
-          font-size: 8cqi;
+          font-size: clamp(50px, 8cqi, 90px);
         }
       }
-    }
-    .boxes {
-      display: grid;
-      grid-template-columns: repeat(10, 1fr);
-      grid-template-rows: repeat(10, 1fr);
-    }
-    .box {
-      aspect-ratio: 1 / 1 ;
-      //outline: 1px solid white;
-      height: 10cqh;
     }
   }
 }

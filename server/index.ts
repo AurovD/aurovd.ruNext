@@ -27,6 +27,7 @@ app.get('/projects', PostController.getAll);
 app.post('/login', UserController.login);
 app.post('/change', passport.authenticate('jwt', { session: false }), UserController.change);
 app.get('/me', passport.authenticate('jwt', { session: false }), UserController.me);
+app.post('/delete/:id', passport.authenticate('jwt', { session: false }), PostController.delete);
 app.get('/tags', PostController.tags);
 app.post('/delete_image', passport.authenticate('jwt', { session: false }), PostController.deleteImage);
 app.post('/add_image/:id', passport.authenticate('jwt', { session: false }), PostController.addImage);

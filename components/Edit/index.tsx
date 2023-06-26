@@ -29,6 +29,27 @@ export const Edit: React.FC< Project > = ({project}) => {
         status: null
     });
 
+    const handleDelete = () => {
+        let isDelete = confirm("Delete?");
+        if(isDelete) {
+            let tags = project.Tags.map(tag => tag.title).join(" ")
+            ProjectsApi(Axios).delete(project.id, tags)
+                .then(async(res) => {
+                    console.log(res);
+                    // if(res.msg){
+                    //     setMsg({msg: res.msg, status: res.status});
+                    //     setTimeout(() => {
+                    //         setMsg({
+                    //             msg: '',
+                    //             status: null
+                    //         });
+                    //     }, 5000);
+                    // }
+                })
+        }
+
+    }
+
     const deleteImage = async (image, id) => {
         await Axios.post(`/delete_image`, {
             id,
@@ -163,7 +184,7 @@ export const Edit: React.FC< Project > = ({project}) => {
                             .matches(/\B#[a-z0-9_]+/g, "Требуется знак # перед тэгом")
                     })}
                     onSubmit={(
-                        values: { tags: string; old_tags: string[]},
+                        values: { tags: string; old_tags: string[];},
                         // { setSubmitting }: FormikHelpers<Images>
                     ) => {
                         // setSubmitting(false);
@@ -187,6 +208,9 @@ export const Edit: React.FC< Project > = ({project}) => {
                         </Form>
                     )}
                 </Formik>
+            </div>
+            <div className={clsx('d-flex flex-column form')}>
+                    <button onClick={handleDelete}>Удалить</button>
             </div>
             {msg.status && <Toast msg={msg.msg} status={msg.status}/>}
         </div>
