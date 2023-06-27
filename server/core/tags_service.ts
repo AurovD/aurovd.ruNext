@@ -42,23 +42,11 @@ export class TagsService {
         }
     }
     async removeTagsFromProject(tagsToRemove, projectId) {
-            const tagIds = await Tags.findAll({ where: { title: tagsToRemove }, attributes: ['id'] })
-                .then(tags => tags.map(tag => tag.id));
+        const tagIds = await Tags.findAll({ where: { title: tagsToRemove }, attributes: ['id'] })
+            .then(tags => tags.map(tag => tag.id));
 
 
-            await Projects_Tags.destroy({ where: { TagId: tagIds, ProjectId: projectId } });
-
-            // await Tags.destroy({
-            //     where: { id: tagIds },
-            //     include: [
-            //         {
-            //             model: Projects_Tags,
-            //             attributes: [],
-            //             through: { attributes: [] }
-            //         }
-            //     ],
-            //     having: sequelize.literal('COUNT(`Projects_Tags`.`TagId`) = 0')
-            // });
+        await Projects_Tags.destroy({ where: { TagId: tagIds, ProjectId: projectId } });
 
         const noAssociatedRecords = await Projects_Tags.findOne({
             where: { TagId: tagIds }

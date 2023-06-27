@@ -48,7 +48,7 @@ export default function ProjectsPage () {
         <div className={"d-grid grid"}>
             <Head>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <title>Projects</title>
+                <title>Проекты</title>
             </Head>
             <Panel {...obj}/>
             {
@@ -57,29 +57,3 @@ export default function ProjectsPage () {
         </div>
     )
 };
-
-// export async function getServerSideProps(req, res) {
-//     try {
-//         // res.setHeader(
-//         //     'Cache-Control',
-//         //     'public, s-maxage=10, stale-while-revalidate=59'
-//         // )
-//         const data = await Api(req).getProjects(0);
-//
-//         // let respond = await fetch("http://localhost:3001/projects?offset=0");
-//         // let data = await respond.json();
-//         if(!data){
-//             return {
-//                 props: {data: []}
-//             }
-//         }
-//         return {
-//             props: {data}
-//             // props: {data: data.projects}
-//         }
-//     } catch (e) {
-//         return {
-//             props: {data: []}
-//         }
-//     }
-// }

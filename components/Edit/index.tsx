@@ -24,6 +24,7 @@ interface Images{
 export const Edit: React.FC< Project > = ({project}) => {
     const [acceptedFiles, setAcceptedFiles] = useState([]);
     const [images, setImages] = useState<string[]>(project.images);
+    const [tags, setTags] = useState<string>(project.Tags.map(tag => tag.title).join(" "));
     const [msg, setMsg] = useState({
         msg: '',
         status: null
@@ -32,19 +33,19 @@ export const Edit: React.FC< Project > = ({project}) => {
     const handleDelete = () => {
         let isDelete = confirm("Delete?");
         if(isDelete) {
-            let tags = project.Tags.map(tag => tag.title).join(" ")
-            ProjectsApi(Axios).delete(project.id, tags)
+            ProjectsApi(Axios).delete(project.id, tags, images)
                 .then(async(res) => {
-                    console.log(res);
-                    // if(res.msg){
-                    //     setMsg({msg: res.msg, status: res.status});
-                    //     setTimeout(() => {
-                    //         setMsg({
-                    //             msg: '',
-                    //             status: null
-                    //         });
-                    //     }, 5000);
-                    // }
+                    if(res.msg){
+                        setMsg({msg: res.msg, status: res.status});
+                        setTimeout(() => {
+                            setMsg({
+                                msg: '',
+                                status: null
+                            });
+                        }, 5000);
+                    } else {
+                        await router.push('/');
+                    }
                 })
         }
 
@@ -175,7 +176,7 @@ export const Edit: React.FC< Project > = ({project}) => {
             <div>
                 <Formik
                     initialValues={{
-                        tags: project.Tags.map(tag => tag.title).join(" "),
+                        tags: tags,
                         old_tags: project.Tags.map(tag => tag.title),
                     }}
                     validationSchema={Yup.object({
@@ -197,6 +198,7 @@ export const Edit: React.FC< Project > = ({project}) => {
                                         old_tags: values.tags.split(" ")
                                     };
                                     resetForm({ values: updatedInitialValues });
+                                    setTags(values.tags);
                                     setMsg({msg: res.msg, status: res.status});
                                     setTimeout(() => {
                                         setMsg({

@@ -18,8 +18,8 @@
 //     return [ProjectsApi].reduce((prev, f) => ({ ...prev, ...f(instance) }), {} as ApiReturnType);
 // }
 
-import axios, {AxiosInstance} from 'axios';
-import {getCookies, setCookie} from "cookies-next";
+import axios from 'axios';
+import {getCookies} from "cookies-next";
 
 let cookie = getCookies().token
 

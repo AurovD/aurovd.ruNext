@@ -18,6 +18,7 @@ declare module 'express' {
             image: string;
             id: number;
             old_tags?: string[];
+            images?: string[];
         };
         files: [];
     }
@@ -222,9 +223,20 @@ class PostController {
     async delete(req: express.Request, res: express.Response) {
         try {
             const projectId = req.params.id;
+
+            let tags = req.body.tags.split(" ");
+
+            await TagsService.removeTagsFromProject(tags, projectId);
+
+            await Post_service.deleteImages(req.body.images);
+
+            await Projects.destroy({
+                where: { id: projectId }
+            });
+
+            return res.status(200).json({status: true });
         } catch (error) {
-            console.error(error);
-            return res.status(500).json({ message: 'Ошибка при удалении' });
+            return res.status(500).json({ msg: 'Ошибка при удалении' });
         }
     }
 
@@ -234,18 +246,6 @@ class PostController {
             const newTagsString = req.body.tags;
             const currentTags = req.body.old_tags;
 
-            // let currentTags = await Projects_Tags.findAll({
-            //     where: {
-            //         ProjectId: projectId
-            //     },
-            //     include: [{
-            //         model: Tags, attributes: ["title"]
-            //     }],
-            // });
-
-            // currentTags = currentTags.map(tag => {
-            //     return tag.Tag.title;
-            // }).join()
 
             const newTags = newTagsString.trim().split(/\s+/);
 

@@ -23,7 +23,7 @@ export default function ProjectPage({project, user}) {
             </Head>
             <Panel {...obj}/>
             <div className="relative">
-                {user && <Link className={"link_update"} href={`/update/` + project.id}>Edit</Link>}
+                {user && <Link className={"link_update"} href={`/update/` + project.id}>Изменить</Link>}
                 {project.images && project.images.map((image, index) => <ProjectPreview image={image} key={index}/>)}
                 <Task title={project.task}  color={"#fff"}/>
                 <ProjectDescription description={project.description}/>

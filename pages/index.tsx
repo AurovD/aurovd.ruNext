@@ -20,7 +20,7 @@ export default function Home() {
             <div className={"d-grid grid"}>
                 <Head>
                     <meta name="viewport" content="width=device-width, initial-scale=1" />
-                    <title>Aurov Dmitry - Portfolio</title>
+                    <title>Аюров Дмитрий - Портфорлио</title>
                 </Head>
                 <Panel {...obj}/>
                 <Introduction/>
