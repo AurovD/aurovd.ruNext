@@ -11,6 +11,7 @@
     transition: 200ms transform ease-in-out;
     object-position: top;
     cursor: pointer;
+    height: auto;
     &:hover {
       transform: scale(1.05);
     }

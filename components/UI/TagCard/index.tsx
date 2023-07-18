@@ -8,21 +8,6 @@ import Image from "next/image";
 
 export const TagCard: React.FC<Tags> = ({count_of_tags, Tag}) => {
     const [error, setError] = useState(false);
-    //const [img, setImg] = useState(false);
-
-    // const x = async () => {
-    //         await axios(
-    //             `/assets/${Tag.title.slice(1)}.svg`,
-    //         ).then(() => {
-    //             setImg(false)
-    //         })
-    //             .catch(() => {
-    //                 setImg(true)
-    //             })
-    // }
-    // useEffect(() => {
-    //     x();
-    // })
 
     return (
         <div className={clsx("d-flex", styles.tag)}>

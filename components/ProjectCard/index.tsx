@@ -3,6 +3,7 @@ import clsx from "clsx";
 import styles from './ProjectCard.module.scss';
 import {IProjects} from "../../types/types";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Project {
     project: IProjects;
@@ -15,11 +16,13 @@ const ProjectCard = React.memo<Project>(({project}) => {
             <div className={clsx("border-box", styles.card)}>
                 <Link href={"/project/" + project.id}>
                     <div className={clsx(error ? styles.error_image : "")}>
-                        <img src={
+                        <Image src={
                             loading || error ? "/assets/no_image.png" : "https://aurovdm.ru/images/" + project.images[0] }
                              alt={project.title}
                              onLoad={() => setLoading(false)}
                              onError={() => setError(true)}
+                             width={200}
+                             height={280}
                         />
                     </div>
                 </Link>

@@ -43,10 +43,10 @@ export const About: React.FC<TagsData> = ({tags}) => {
                 <h3 className="mb-20">ОБРАЗОВАНИЕ</h3>
                 <div className={clsx("d-grid", styles.items)}>
                     <div className={clsx( styles.item, styles.mgmsu)}>
-                        <div className={clsx(styles.item__header)}>
-                            <img src="/assets/mgmsu.svg" alt=""/>
-                        </div>
                         <div className={clsx(styles.item__info)}>
+                            <div className={clsx(styles.info__logo)}>
+                                <img src="/assets/mgmsu.svg" alt=""/>
+                            </div>
                             <div className={clsx(styles.info__content)}>
                                 <div className={clsx(styles.content__years)}>
                                     <div>2008</div>
@@ -61,10 +61,10 @@ export const About: React.FC<TagsData> = ({tags}) => {
                         </div>
                     </div>
                     <div className={clsx(styles.item)}>
-                        <div className={clsx(styles.item__header)}>
-                            <img src="/assets/ithublogo.gif" alt=""/>
-                        </div>
                         <div className={clsx(styles.item__info)}>
+                            <div className={clsx(styles.info__logo)}>
+                                <img src="/assets/ithublogo.gif" alt=""/>
+                            </div>
                             <div className={clsx(styles.info__content)}>
                                 <div className={clsx(styles.content__years)}>
                                     <div>2018</div>
@@ -94,7 +94,7 @@ export const About: React.FC<TagsData> = ({tags}) => {
                                 <h5>ItHub College</h5>
                                 <p>Преподаватель</p>
                             </div>
-                            <p>Преподавание основ тестирования веб-приложений</p>
+                            {/*<p>Преподавание основ тестирования веб-приложений</p>*/}
                         </div>
                     </div>
                     <div className={clsx("d-flex justify-content-between mt-20", styles.item__exp)}>
@@ -109,7 +109,7 @@ export const About: React.FC<TagsData> = ({tags}) => {
                                 <p>Техник-тестировщик</p>
                             </div>
 
-                            <p>Осуществлял техподдержку и тестирование комплексов обработки избирательных бюллетеней на всех этапах при подготовке к выборам 2019 года, от сборки до техподдержки по время голосования.</p>
+                            {/*<p>Осуществлял техподдержку и тестирование комплексов обработки избирательных бюллетеней на всех этапах при подготовке к выборам 2019 года, от сборки до техподдержки по время голосования.</p>*/}
                         </div>
                     </div>
                     <div className={clsx("d-flex justify-content-between mt-20", styles.item__exp)}>
@@ -119,10 +119,10 @@ export const About: React.FC<TagsData> = ({tags}) => {
                         <div className={clsx(styles.hover, styles.info_exp)}>
                             <div>
                                 <h5>ProfiSourcing</h5>
-                                <p>Ресечер (Ассистент менеджера по подбору персонала)</p>
+                                <p>Ресечер</p>
                             </div>
 
-                            <p>Помогал менеджеру по подбору персонала в поиске кандидатов, просматривал резюме и проводил первичное собеседование. Оптимизировал процесс поиска кандидатов и обработки резюме, что ускорило работу в 2 раза.</p>
+                            {/*<p>Помогал менеджеру по подбору персонала в поиске кандидатов, просматривал резюме и проводил первичное собеседование. Оптимизировал процесс поиска кандидатов и обработки резюме, что ускорило работу в 2 раза.</p>*/}
                         </div>
                     </div>
                 </div>

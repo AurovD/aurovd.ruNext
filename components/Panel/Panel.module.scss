@@ -2,7 +2,7 @@
   background-color: var(--clr-main);
   position: sticky;
   top: 0;
-  padding: 3rem;
+  padding: 3rem min(4vw, 3rem);
 }
 .navigation {
   a {
@@ -19,7 +19,7 @@
   container-type: inline-size;
   h1 {
     color: #E9EAF2;
-    font-size: clamp(40px, 10cqi, 90px);
+    font-size: clamp(30px, 8cqi, 70px);
   }
   h2, span {
     color: #505C5E;
