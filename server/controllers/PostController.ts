@@ -162,12 +162,15 @@ class PostController {
                 return res.status(404).json({msg: 'Не найдено'});
             }
 
-            // let count = await Projects.findAll({
-            //     attributes: [[Sequelize.fn('COUNT', Sequelize.col('id')), 'count']],
-            // });
-            // tags = [...tags, count[0]]
+            let count = await Projects.findAll({
+                attributes: [[Sequelize.fn('COUNT', Sequelize.col('id')), 'count']],
+            });
 
-            res.status(200).json(tags);
+            let lastImg = await Projects.findOne({
+                order: [['createdAt', 'DESC']],
+            })
+
+            res.status(200).json({tags: tags, count: count[0], lastImg: lastImg.images[0], lastId: lastImg.id});
         } catch (e) {
             return res.status(501).send({msg: "Серверная ошибка"});
         }

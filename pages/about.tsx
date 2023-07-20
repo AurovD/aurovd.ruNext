@@ -6,7 +6,7 @@ import {GetServerSideProps} from "next";
 import {ProjectsApi} from "../api/ProjectsApi";
 import {Axios} from "../axios/axios";
 
-export default function AboutPage({tags}) {
+export default function AboutPage({stat}) {
     const obj = {
         id: 1,
         title: "О СЕБЕ"
@@ -18,17 +18,17 @@ export default function AboutPage({tags}) {
                 <title>О СЕБЕ</title>
             </Head>
             <Panel {...obj}/>
-            <About tags={tags || null}/>
+            <About stat={stat || null}/>
         </div>
     )
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     try {
-        const tags = await ProjectsApi(Axios).tags();
+        const stat = await ProjectsApi(Axios).tags();
         return {
             props: {
-                tags
+                stat
             },
         }
     } catch (error) {

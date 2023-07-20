@@ -4,6 +4,7 @@ export interface User {
     new_password?: string;
 }
 export interface Project {
+    id?: number;
     title: string;
     task: string;
     description: string;
@@ -11,7 +12,7 @@ export interface Project {
     github?: string;
 }
 export interface IProject extends Project{
-    tags?: string;
+    tags?: Array<{id: number, title: string}>
     previews?: any[];
 }
 

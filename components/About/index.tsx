@@ -4,15 +4,21 @@ import clsx from "clsx";
 import Link from "next/link";
 import {Tags} from "../../types/types";
 import {TagCard} from "../UI/TagCard";
+import Image from "next/image";
+import router from "next/router";
+import ProjectCard from "../ProjectCard";
 
 
 interface TagsData{
-    tags: Array<Tags>
+    stat: { tags: Array<Tags>, count: {count: number}, lastImg: string, lastId: number }
 }
 
-export const About: React.FC<TagsData> = ({tags}) => {
-
-
+export const About: React.FC<TagsData> = ({stat}) => {
+    const [error, setError] = useState(false);
+    // const [loading, setLoading] = useState(true);
+    const handleClick = async () => {
+        await router.push('/project/' + stat.lastId);
+    }
     return (
         <div className={clsx(styles.about)}>
             <div className={clsx(styles.introduction__bg)}>
@@ -125,17 +131,39 @@ export const About: React.FC<TagsData> = ({tags}) => {
                             {/*<p>Помогал менеджеру по подбору персонала в поиске кандидатов, просматривал резюме и проводил первичное собеседование. Оптимизировал процесс поиска кандидатов и обработки резюме, что ускорило работу в 2 раза.</p>*/}
                         </div>
                     </div>
+                    <div className={clsx("d-flex mt-20", styles.cv_block)}>
+                            <Link href={"/CV.pdf"} className={clsx( styles.cv_link)}>Открыть CV</Link>
+                    </div>
                 </div>
             </div>
-            {tags && <div className={clsx("sticky", styles.tags, styles.about_block)}>
-                <h3>Тэги</h3>
+            <div className={clsx("sticky", styles.last_project)} onClick={handleClick}>
+                <h3>{stat.count.count} {stat.count.count > 5 ? "проектов" : "проекта"}</h3>
+                <Image src={
+                    error ? "/assets/no_image.png" : "https://aurovdm.ru/images/" + stat.lastImg}
+                       alt={stat.lastImg}
+                       onError={() => setError(true)}
+                       className={clsx(styles.image_preview)}
+                       width={500}
+                       height={280}
+                />
+            </div>
+            {stat.tags && <div className={clsx("sticky", styles.tags, styles.about_block)}>
+                <h3>Технологии</h3>
                 <div className={clsx("d-flex", styles.tags_list)}>
                     {
-                        tags.map((tag, index) => <TagCard key={index} count_of_tags={tag.count_of_tags} Tag={tag.Tag}/>
+                        stat.tags.map((tag, index) => <TagCard key={index} count_of_tags={tag.count_of_tags} Tag={tag.Tag}/>
                         )
                     }
                 </div>
             </div>}
+            <div className={clsx("sticky")}>
+                <div className={clsx(styles.sertiport_grid)}>
+                    <ProjectCard project={{image: "/assets/cert1.png", title: "Office Word 2016"}}/>
+                    <ProjectCard project={{image: "/assets/cert2.png", title: "HTML and CSS"}}/>
+                    <ProjectCard project={{image: "/assets/cert3.png", title: "JavaScript"}}/>
+                    <ProjectCard project={{image: "/assets/cert4.png", title: "WorldSkills"}}/>
+                </div>
+            </div>
         </div>
     )
 };

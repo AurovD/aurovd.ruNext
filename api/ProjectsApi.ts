@@ -58,7 +58,13 @@ export const ProjectsApi = (instance: AxiosInstance) => {
         },
         delete: async (id: number, tags: string, images: string[]): Promise<any> => {
             try {
-                const { data } = await instance.post(`/delete/${id}`, {tags, images});
+                const { data } = await instance.post(`/delete/${id}`, {tags, images}, {
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json",
+                        "Authorization": 'Bearer ' + getCookies().token,
+                    }
+                });
                 return data;
             } catch (e) {
                 return e.response?.data.msg ? {msg: e.response.data.msg, status: e.response.status} : {msg: "Неизвестная ошибка", status: 500 };
