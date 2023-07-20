@@ -19,6 +19,8 @@ export const About: React.FC<TagsData> = ({stat}) => {
     const handleClick = async () => {
         await router.push('/project/' + stat.lastId);
     }
+
+    console.log(stat);
     return (
         <div className={clsx(styles.about)}>
             <div className={clsx(styles.introduction__bg)}>
@@ -51,7 +53,7 @@ export const About: React.FC<TagsData> = ({stat}) => {
                     <div className={clsx( styles.item, styles.mgmsu)}>
                         <div className={clsx(styles.item__info)}>
                             <div className={clsx(styles.info__logo)}>
-                                <img src="/assets/mgmsu.svg" alt=""/>
+                                <img src="/assets/mgmsu.svg" alt="mgmsu"/>
                             </div>
                             <div className={clsx(styles.info__content)}>
                                 <div className={clsx(styles.content__years)}>
@@ -69,7 +71,7 @@ export const About: React.FC<TagsData> = ({stat}) => {
                     <div className={clsx(styles.item)}>
                         <div className={clsx(styles.item__info)}>
                             <div className={clsx(styles.info__logo)}>
-                                <img src="/assets/ithublogo.gif" alt=""/>
+                                <img src="/assets/ithublogo.gif" alt="ithub"/>
                             </div>
                             <div className={clsx(styles.info__content)}>
                                 <div className={clsx(styles.content__years)}>
@@ -92,7 +94,7 @@ export const About: React.FC<TagsData> = ({stat}) => {
                     <div className={clsx("d-flex justify-content-between mt-20", styles.item__exp)}>
                         {/*<Link href={"https://ithub.ru/"}>*/}
                             <div className={clsx(styles.hover, styles.logo_exp)}>
-                                <img src="/assets/ithublogo.gif" alt=""/>
+                                <img src="/assets/ithublogo.gif" alt="ithub"/>
                             </div>
                         {/*</Link>*/}
                         <div className={clsx(styles.hover, styles.info_exp)}>
@@ -106,7 +108,7 @@ export const About: React.FC<TagsData> = ({stat}) => {
                     <div className={clsx("d-flex justify-content-between mt-20", styles.item__exp)}>
                         {/*<Link href={"https://www.croc.ru/"}>*/}
                             <div className={clsx(styles.hover, styles.logo_exp)}>
-                                <img src="/assets/croc.svg" alt=""/>
+                                <img src="/assets/croc.svg" alt="croc"/>
                             </div>
                         {/*</Link>*/}
                         <div className={clsx(styles.hover, styles.info_exp)}>
@@ -120,7 +122,7 @@ export const About: React.FC<TagsData> = ({stat}) => {
                     </div>
                     <div className={clsx("d-flex justify-content-between mt-20", styles.item__exp)}>
                         <div className={clsx(styles.hover, styles.logo_exp)}>
-                            <img src="/assets/ps.svg" alt=""/>
+                            <img src="/assets/ps.svg" alt="ps"/>
                         </div>
                         <div className={clsx(styles.hover, styles.info_exp)}>
                             <div>
@@ -137,7 +139,7 @@ export const About: React.FC<TagsData> = ({stat}) => {
                 </div>
             </div>
             <div className={clsx("sticky", styles.last_project)} onClick={handleClick}>
-                <h3>{stat.count.count} {stat.count.count > 5 ? "проектов" : "проекта"}</h3>
+                {/*<h3>{stat.count.count} {stat.count.count > 5 ? "проектов" : "проекта"}</h3>*/}
                 <Image src={
                     error ? "/assets/no_image.png" : "https://aurovdm.ru/images/" + stat.lastImg}
                        alt={stat.lastImg}
