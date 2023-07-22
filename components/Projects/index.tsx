@@ -17,8 +17,6 @@ export const Projects: React.FC<Projects> = ({data}) => {
     const [projects, setProjects] = useState(data.projects);
     const [offset, setOffset] = useState(0);
     const [limit] = useState(5);
-    // const isPostsLoading = false;
-
 
     useEffect(() => {
         if(offset > 0){
@@ -37,10 +35,32 @@ export const Projects: React.FC<Projects> = ({data}) => {
         }
     })
 
+    // const handleSortByBiggestFirst = () => {
+    //     // setSortOrder('biggestFirst');
+    //     setProjects([...projects].sort((a, b) => b.id - a.id));
+    // };
+    //
+    // const handleSortBySmallestFirst = () => {
+    //     // setSortOrder('smallestFirst');
+    //     setProjects([...projects].sort((a, b) => a.id - b.id));
+    // };
+
     return (
-        <div className={clsx("wrapper", styles.project_grid)}>
-            {projects.map(project => <ProjectCard key={project.id} project={project}/>)}
-            <div ref={observer} className={styles.observer}>Observer</div>
-        </div>
+        <>
+            <div className={clsx("wrapper")}>
+                {/*<div className={clsx(styles.project_grid)}>*/}
+                {/*    <div className={clsx(styles.sort_buttons)} onClick={handleSortByBiggestFirst}>*/}
+                {/*        Новые вперед*/}
+                {/*    </div>*/}
+                {/*    <div className={clsx(styles.sort_buttons)} onClick={handleSortBySmallestFirst}>*/}
+                {/*        Новые*/}
+                {/*    </div>*/}
+                {/*</div>*/}
+                <div className={clsx(styles.project_grid)}>
+                    {projects.map(project => <ProjectCard key={project.id} project={project}/>)}
+                    <div ref={observer} className={styles.observer}>Observer</div>
+                </div>
+            </div>
+        </>
 )
 };

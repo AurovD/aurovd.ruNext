@@ -12,7 +12,7 @@ export interface Project {
     github?: string;
 }
 export interface IProject extends Project{
-    tags?: Array<{id: number, title: string}>
+    tags?: string;
     previews?: any[];
 }
 

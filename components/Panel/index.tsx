@@ -23,9 +23,12 @@ const Panel = React.memo<PanelProps>(({id, title, h2, tags}) => {
                 <h1 className={clsx("mt-0 mb-0")}>{title}</h1>
                 {
                     tags && tags.length ?
-                        tags.map(tag => <span key={tag.id}>{tag.title}</span>) :
+                        tags.slice(0, 5).map(tag => <span key={tag.id}>{tag.title}</span>) :
                         null
                 }
+                {tags && tags.length > 5 && (
+                    <span>...</span>
+                )}
                 {h2 && <h2 className={clsx("mt-0 mb-0")}>{h2}</h2>}
             </div>
             <div className={clsx("d-flex", styles.contacts)}>

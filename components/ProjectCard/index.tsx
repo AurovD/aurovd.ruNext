@@ -57,9 +57,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                 </Link>
                 <p>
                     {project.Tags &&
-                        project.Tags.map((tag, index) => (
+                        project.Tags.slice(0, 5).map((tag, index) => (
                             <span key={tag.title}>{tag.title}</span>
                         ))}
+                    {project.Tags && project.Tags.length > 5 && (
+                        <span>...</span>
+                    )}
                 </p>
             </div>
         </div>

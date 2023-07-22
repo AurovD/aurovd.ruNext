@@ -241,9 +241,10 @@
     }
   }
   .last_project {
-    height: 50cqw;
+    height: 60cqw;
     position: relative;
     container-type: inline-size;
+    z-index: 5;
     h3 {
       position: absolute;
       top: 50%;
@@ -274,13 +275,22 @@
       justify-content: center;
     }
   }
-  .sertiport_grid {
+  .sertiport_box {
+    background-color: var(--clr-main);
+    padding-top: 1rem;
+    h3 {
+      margin-left: 1rem;
+      font-size: calc(var(--sizeindex) * 2);
+      color: var(--clr-bg);
+    }
+    .sertiport_grid {
       display: grid;
       gap: 1rem;
       grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
       height: min-content;
       background-color: var(--clr-main);
-    padding-top: 1rem;
+      padding-top: 1rem;
+    }
   }
 }
 

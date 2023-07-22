@@ -34,7 +34,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     } catch (error) {
         return {
             props: {
-                tags: null
+                stat: null
             }
         }
     }

@@ -7,9 +7,6 @@ import {ProjectReq} from "../types/types";
 import {ProjectsApi} from "../api/ProjectsApi";
 import {Axios} from "../axios/axios";
 import {LoadingGrid} from "../components/UI/Loading/LoadingGrid";
-import {log} from "util";
-
-
 
 // const Projects = dynamic<React.ComponentProps<typeof ProjectsComp>>(
 //     () => import('../components/Projects').then(mod => mod.Projects),

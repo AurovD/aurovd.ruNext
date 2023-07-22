@@ -1,8 +1,21 @@
+.sort {
+
+}
 .project_grid {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
   height: min-content;
+  padding-bottom: 2rem;
+
+  .sort_buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #19292D;
+    height: 30px;
+    color: #c7c7c7;
+  }
 }
 .observer {
   visibility: hidden;

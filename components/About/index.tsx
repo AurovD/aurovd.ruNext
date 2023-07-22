@@ -138,18 +138,16 @@ export const About: React.FC<TagsData> = ({stat}) => {
                     </div>
                 </div>
             </div>
-            <div className={clsx("sticky", styles.last_project)} onClick={handleClick}>
-                {/*<h3>{stat.count.count} {stat.count.count > 5 ? "проектов" : "проекта"}</h3>*/}
-                <Image src={
+            {stat?.count.count && <div className={clsx("sticky", styles.last_project)} onClick={handleClick}>
+                <h3>{stat.count.count} {stat.count.count > 5 ? "проектов" : "проекта"}</h3>
+                <img src={
                     error ? "/assets/no_image.png" : "https://aurovdm.ru/images/" + stat.lastImg}
                        alt={stat.lastImg}
                        onError={() => setError(true)}
                        className={clsx(styles.image_preview)}
-                       width={500}
-                       height={280}
                 />
-            </div>
-            {stat.tags && <div className={clsx("sticky", styles.tags, styles.about_block)}>
+            </div>}
+            {stat?.tags && <div className={clsx("sticky", styles.tags, styles.about_block)}>
                 <h3>Технологии</h3>
                 <div className={clsx("d-flex", styles.tags_list)}>
                     {
@@ -158,12 +156,13 @@ export const About: React.FC<TagsData> = ({stat}) => {
                     }
                 </div>
             </div>}
-            <div className={clsx("sticky")}>
+            <div className={clsx("sticky", styles.sertiport_box)}>
+                <h3>Сертификаты</h3>
                 <div className={clsx(styles.sertiport_grid)}>
                     <ProjectCard project={{image: "/assets/cert1.png", title: "Office Word 2016"}}/>
                     <ProjectCard project={{image: "/assets/cert2.png", title: "HTML and CSS"}}/>
                     <ProjectCard project={{image: "/assets/cert3.png", title: "JavaScript"}}/>
-                    <ProjectCard project={{image: "/assets/cert4.png", title: "WorldSkills"}}/>
+                    <ProjectCard project={{image: "/assets/cert4.PNG", title: "WorldSkills"}}/>
                 </div>
             </div>
         </div>
