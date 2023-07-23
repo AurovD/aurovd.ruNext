@@ -25,8 +25,8 @@ export const TagCard: React.FC<Tags> = ({count_of_tags, Tag}) => {
                     />}
             </div>
             <div className={clsx("d-flex flex-column justify-content-center relative")}>
-                <p>{Tag.title}</p>
-                <p>{count_of_tags}</p>
+                <p className={clsx(styles.tag_title)}>{Tag.title}</p>
+                {count_of_tags && <p className={clsx(styles.tags_count)}>{count_of_tags}</p>}
             </div>
         </div>
     )

@@ -9,6 +9,8 @@ import {DescriptionLinks} from "../../components/UI/DescriptionLinks";
 import {GetServerSideProps} from "next";
 import {getCookies} from "cookies-next";
 import Link from "next/link";
+import React from "react";
+import {TagsList} from "../../components/UI/TagsList";
 
 export default function ProjectPage({project, user}) {
     const obj = {
@@ -27,6 +29,7 @@ export default function ProjectPage({project, user}) {
                 {project.images && project.images.map((image, index) => <ProjectPreview image={image} key={index}/>)}
                 <Task title={project.task}  color={"#fff"}/>
                 <ProjectDescription description={project.description}/>
+                {project?.Tags && <TagsList tags={project.Tags}/>}
                 {project.github && <DescriptionLinks link={project.github} title={"GitHub"}/>}
                 {project.link && <DescriptionLinks link={project.link} title={"Сайт"}/>}
             </div>

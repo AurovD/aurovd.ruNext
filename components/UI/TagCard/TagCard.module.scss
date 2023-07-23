@@ -14,7 +14,7 @@
     .tag_img {
       width: 100%;
       aspect-ratio: 1 / 1 ;
-      object-fit: cover;
+      //object-fit: cover;
     }
     .tag_error {
       aspect-ratio: 1 / 1 ;
@@ -22,11 +22,11 @@
       border: 1px solid var(--clr-main);
     }
   }
-  p:first-child {
+  .tag_title {
     font-weight: 800;
     font-size: 1rem;
   }
-  p:last-child {
+  .tags_count {
     position: absolute;
     top: -15px;
     right: -15px;

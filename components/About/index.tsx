@@ -3,10 +3,9 @@ import styles from './About.module.scss';
 import clsx from "clsx";
 import Link from "next/link";
 import {Tags} from "../../types/types";
-import {TagCard} from "../UI/TagCard";
-import Image from "next/image";
 import router from "next/router";
 import ProjectCard from "../ProjectCard";
+import {TagsList} from "../UI/TagsList";
 
 
 interface TagsData{
@@ -20,7 +19,6 @@ export const About: React.FC<TagsData> = ({stat}) => {
         await router.push('/project/' + stat.lastId);
     }
 
-    console.log(stat);
     return (
         <div className={clsx(styles.about)}>
             <div className={clsx(styles.introduction__bg)}>
@@ -147,15 +145,7 @@ export const About: React.FC<TagsData> = ({stat}) => {
                        className={clsx(styles.image_preview)}
                 />
             </div>}
-            {stat?.tags && <div className={clsx("sticky", styles.tags, styles.about_block)}>
-                <h3>Технологии</h3>
-                <div className={clsx("d-flex", styles.tags_list)}>
-                    {
-                        stat.tags.map((tag, index) => <TagCard key={index} count_of_tags={tag.count_of_tags} Tag={tag.Tag}/>
-                        )
-                    }
-                </div>
-            </div>}
+            {stat?.tags && <TagsList tags={stat.tags}/>}
             <div className={clsx("sticky", styles.sertiport_box)}>
                 <h3>Сертификаты</h3>
                 <div className={clsx(styles.sertiport_grid)}>
