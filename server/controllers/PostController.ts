@@ -108,7 +108,7 @@ class PostController {
                     through: Projects_Tags,
                     attributes: ["id", "title"]
                 }],
-                order: [["id", "DESC"]]
+                order: [["updatedAt", "DESC"]]
             })
             let count = await Projects.count().then(c => c);
             if(count && projects) {
