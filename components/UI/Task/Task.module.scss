@@ -22,8 +22,8 @@
     //-webkit-text-fill-color: var(--clr-main);;
   }
   .task__text{
-    font-size: calc(var(--sizeindex) * 2);
+    font-size: calc(var(--sizeindex) * 1);
     text-align: right;
-    font-weight: 800;
+    font-weight: 600;
   }
 }

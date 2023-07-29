@@ -13,6 +13,7 @@ export default function Create() {
             <Head>
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <title>СОЗДАТЬ ПРОЕКТ</title>
+                <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon"/>
             </Head>
             <Panel title='СОЗДАТЬ ПРОЕКТ'/>
             <CreateProject/>

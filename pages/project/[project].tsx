@@ -17,11 +17,22 @@ export default function ProjectPage({project, user}) {
         title: project.title,
         tags: project.Tags
     }
+
+    console.log(project)
     return (
         <div className={"d-grid grid"}>
             <Head>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <title>{project.title}</title>
+                <meta name="author" content="Аюров Дмитрий"/>
+                <meta name="robots" content="index, follow"/>
+                <link rel="canonical" href={`https://www.aurovdm.ru/project ${project.id}`}/>
+                <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon"/>
+                <meta property="og:title" content={`${project.title} | Аюров Дмитрий | Веб разработка | Портфолио`}/>
+                <meta property="og:description" content="Аюров Дмитрий - опытный веб-разработчик с портфолио проектов. Посмотрите мои работы и навыки в веб разработке."/>
+                <meta property="og:url" content={`https://www.aurovdm.ru/project ${project.id}`}/>
+                <meta name="description" content="Аюров Дмитрий - опытный веб-разработчик с портфолио проектов. Посмотрите мои работы и навыки в веб разработке."/>
+                <meta name="keywords" content={`Аюров Дмитрий, веб разработка, портфолио, web development, web developer, проекты, работы, backend, frontend, резюме, ${project.title}`}/>
             </Head>
             <Panel {...obj}/>
             <div className="relative">
