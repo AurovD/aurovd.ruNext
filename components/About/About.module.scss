@@ -260,7 +260,8 @@
       object-fit: cover;
       object-position: center;
       cursor: pointer;
-      filter: brightness(0.7);
+      filter: brightness(.4);
+      //filter: blur(2px);
     }
   }
   .tags {

@@ -167,7 +167,7 @@ class PostController {
             });
 
             let lastImg = await Projects.findOne({
-                order: [['createdAt', 'DESC']],
+                order: [["updatedAt", 'DESC']],
             })
 
             res.status(200).json({tags: tags, count: count[0], lastImg: lastImg.images[0], lastId: lastImg.id});
