@@ -1,6 +1,6 @@
 .description {
   position: sticky;
-  top: 0;
+  //top: 0;
   padding: 30px max(3vw, 40px);
   border-radius: 5px;
   color: var(--clr-main);
@@ -8,4 +8,11 @@
   font-size: calc(var(--sizeindex) * .8);
   font-weight: 600;
   line-height: calc(var(--sizeindex) * 1);
+  h3 {
+    margin-top: 1rem;
+    margin-bottom: .5rem;
+  }
+  p {
+    margin-bottom: 0.5rem;
+  }
 }
