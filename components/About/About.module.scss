@@ -253,6 +253,8 @@
       z-index: 5;
       color: var(--clr-wtext);
       font-weight: 600;
+      background-color: #19292D;
+      padding: 1rem 1rem;
     }
     img {
       width: 100%;
@@ -260,7 +262,7 @@
       object-fit: cover;
       object-position: center;
       cursor: pointer;
-      filter: brightness(.4);
+      //filter: brightness(.4);
       //filter: blur(2px);
     }
   }

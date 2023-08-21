@@ -15,4 +15,12 @@
   p {
     margin-bottom: 0.5rem;
   }
+  blockquote {
+    background-color: rgba(0,0,0,.1);
+    padding: 20px max(3vw, 20px);
+    font-size: calc(var(--sizeindex) * .7);
+    line-height: calc(var(--sizeindex) * 1);
+    margin-bottom: .5rem;
+    font-style: italic;
+  }
 }

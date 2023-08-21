@@ -5,7 +5,7 @@ import sanitizeHtml from 'sanitize-html';
 
 export const ProjectDescription: React.FC<{ description: string }> = ({ description }) => {
     const sanitizeOptions = {
-        allowedTags: sanitizeHtml.defaults.allowedTags.concat(['h1', 'h2', 'h3', 'p']), // Add any additional allowed tags
+        allowedTags: sanitizeHtml.defaults.allowedTags.concat(['h1', 'h2', 'h3', 'p', 'blockquote']), // Add any additional allowed tags
         allowedAttributes: {},
     };
 

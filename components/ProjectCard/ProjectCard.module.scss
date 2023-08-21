@@ -3,6 +3,7 @@
   aspect-ratio: 1.5 / 1;
   background-color: #ddd;
   box-shadow: 0 0.25rem 1rem rgb(0 0 0 / 0.3);
+  container-type: inline-size;
   img {
     width: 100%;
     aspect-ratio: 1 / .6;
@@ -28,7 +29,8 @@
     padding: 0.5rem;
     .card__title {
       background: inherit;
-      font-size: 1.45rem;
+      //font-size: 1.45rem;
+      font-size: clamp(1rem, 5cqi, 1.45rem);
       line-height: 1.1;
       font-weight: 900;
       cursor: pointer;
