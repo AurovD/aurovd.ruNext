@@ -25,6 +25,7 @@ export default function Home() {
                     <meta name="robots" content="index, follow"/>
                     <link rel="canonical" href="https://www.aurovdm.ru"/>
                     <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon"/>
+                    <meta name="zen-verification" content="33sFYUaQdhK67h47SHiYJsIG7ykUIphHlBy3kzbM8OPIrT1C44dj0AZBprmSGLZ8" />
                     <meta property="og:title" content="Аюров Дмитрий | Веб разработка | Портфолио"/>
                     <meta property="og:description" content="Аюров Дмитрий - опытный веб-разработчик с портфолио проектов. Посмотрите мои работы и навыки в веб разработке."/>
                     <meta property="og:url" content="https://www.aurovdm.ru"/>

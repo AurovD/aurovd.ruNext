@@ -12,7 +12,11 @@
     margin-top: 1rem;
     margin-bottom: .5rem;
   }
-  p {
+  ul {
+    list-style-type: square;
+    list-style-position: inside;
+  }
+  p, li {
     margin-bottom: 0.5rem;
   }
   blockquote {
