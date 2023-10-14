@@ -7,6 +7,8 @@ import {IProject as BodyRequest} from "../../types/types";
 import {Sequelize} from "sequelize";
 import TagsService from "../core/tags_service";
 import Post_service from "../core/post_service";
+import {nanoid} from "nanoid";
+import {images} from "next/dist/build/webpack/config/blocks/images";
 
 
 
@@ -32,13 +34,20 @@ class PostController {
         }
         let images = upload.array("preview", 7);
         images(req, res, async (err) => {
+            const names = [];
             if(err){
                 return res.send({msg: "Ошибка файла"})
             } else {
-                let images_arr = Array.from(req.files, (img: { filename: string }) => img.filename)
                 try {
 
                     let tags:string[] = req.body?.tags.match(/\B#[a-z0-9_]+/g);
+
+
+                    for (const file of req.files) {
+                        let name = nanoid(6) + Date.now();
+                        names.push(name);
+                        await Post_service.resizeAndSaveImages(file.buffer, file.fieldname, name);
+                    }
 
                     let project = await Projects.create({
                         title: req.body.title,
@@ -46,11 +55,11 @@ class PostController {
                         task: req.body.task,
                         github: req.body.github,
                         link: req.body.link,
-                        images: images_arr
+                        images: names
                     })
 
                     if(!project){
-                        await Post_service.deleteImages(images_arr);
+                        await Post_service.deleteImages(names);
                         return res.status(501).send({msg: "Ошибка создания"});
                     }
 
@@ -59,7 +68,7 @@ class PostController {
                     }
                     return res.status(200).json({id: project.id});
                 } catch (e) {
-                    await Post_service.deleteImages(images_arr);
+                    await Post_service.deleteImages(names);
                     return res.status(501).send({msg: "Ошибка создания"});
                 }
             }
@@ -71,9 +80,8 @@ class PostController {
         }
         let images = upload.array("preview", 7);
         images(req, res, async (err) => {
-            let images_arr = Array.from(req.files, (img: { filename: string }) => img.filename);
+            const names = [];
             if(err){
-                await Post_service.deleteImages(images_arr);
                 return res.status(400).send({msg: "Ошибка файла"})
             } else {
                 try {
@@ -81,17 +89,21 @@ class PostController {
 
                     const project = await Projects.findByPk(id);
                     if (!project) {
-                        await Post_service.deleteImages(images_arr);
                         return res.status(404).json({ message: 'Проект не найден' });
                     }
 
-                    project.images = [...project.images, ...images_arr]
+                    for (const file of req.files) {
+                        let name = nanoid(6) + Date.now();
+                        names.push(name);
+                        await Post_service.resizeAndSaveImages(file.buffer, file.fieldname, name);
+                    }
+                    project.images = [...project.images, ...names]
                     await project.save();
 
-                    return res.status(200).json({msg: "Добавлено", new_images: images_arr});
+                    return res.status(200).json({msg: "Добавлено", new_images: names});
                 } catch (e) {
-                    await Post_service.deleteImages(images_arr);
-                    return res.status(501).send({msg: "Ошибка создания"});
+                    await Post_service.deleteImages(names);
+                    return res.status(501).send({msg: "Ошибка загрузки"});
                 }
             }
         })
