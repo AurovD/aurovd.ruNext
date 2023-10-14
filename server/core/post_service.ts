@@ -1,15 +1,26 @@
 import * as fs from "fs";
+import sharp from "sharp";
+import {nanoid} from "nanoid";
 
 class PostService {
+
+    #sizes = [
+        { width: 0},
+        { width: 800 },
+        { width: 400 },
+    ];
+
     async deleteImages(images: string[]) {
         const promises = images.map((name) => {
-            return new Promise<void>((resolve, reject) => {
-                fs.unlink(`./public/projects/${name}`, (err) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve();
-                    }
+            this.#sizes.map(size => {
+                return new Promise<void>((resolve, reject) => {
+                    fs.unlink(`./public/projects/preview-${name}${size.width ? "-"+ size.width : ''}.jpg`, (err) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve();
+                        }
+                    });
                 });
             });
         });
@@ -21,7 +32,21 @@ class PostService {
             console.error(err);
             return false;
         }
-    }
+    };
+
+    async resizeAndSaveImages(buffer, filename: string, name: string) {
+
+        const tasks = this.#sizes.map((size, index) => {
+            if (size.width === 0) {
+                return sharp(buffer).toFile(`public/projects/${filename}` + '-' + name + '.jpg');
+            } else {
+                return sharp(buffer)
+                    .resize(size.width)
+                    .toFile(`public/projects/${filename}` + '-' + name + `-${size.width}` + '.jpg');
+            }
+        });
+        await Promise.all(tasks);
+    };
 }
 
 export default new PostService();

@@ -6,6 +6,7 @@ import ProjectCard from "../ProjectCard";
 import {useObserver} from "../../hooks/useObserver";
 import {Axios} from "../../axios/axios";
 import {ProjectsApi} from "../../api/ProjectsApi";
+import {SearchBar} from "../SearchBar";
 
 
 interface Projects {
@@ -56,6 +57,7 @@ export const Projects: React.FC<Projects> = ({data}) => {
                 {/*        Новые*/}
                 {/*    </div>*/}
                 {/*</div>*/}
+                {/*<SearchBar/>*/}
                 <div className={clsx(styles.project_grid)}>
                     {projects.map(project => <ProjectCard key={project.id} project={project}/>)}
                     <div ref={observer} className={styles.observer}>Observer</div>

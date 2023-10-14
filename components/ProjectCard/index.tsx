@@ -7,7 +7,7 @@ import Image from "next/image";
 
 
 interface ProjectCardProps {
-    project: IProjects | { image: string; title: string };
+    project: IProjects;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
@@ -42,7 +42,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             <Link href={'/project/' + project.id}>
                 <div className={clsx(error ? styles.error_image : '')}>
                     <Image
-                        src={loading || error ? '/assets/no_image.png' : 'https://aurovdm.ru/images/' + project.images[0]}
+                        src={loading || error ? '/assets/no_image.png' : '/projects/preview-' + project.images[0] + '-400.jpg'}
+                        // src={loading || error ? '/assets/no_image.png' : 'https://aurovdm.ru/images/preview-' + project.images[0] + '-400.jpg'}
                         alt={project.title}
                         onLoad={() => setLoading(false)}
                         onError={() => setError(true)}

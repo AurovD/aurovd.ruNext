@@ -5,7 +5,7 @@ import Link from "next/link";
 import {Tags} from "../../types/types";
 import router from "next/router";
 import ProjectCard from "../ProjectCard";
-import {TagsList} from "../UI/TagsList";
+import {TagCard} from "../UI/TagCard";
 
 
 interface TagsData{
@@ -140,15 +140,24 @@ export const About: React.FC<TagsData> = ({stat}) => {
                 </div>
             </div>
             {stat?.count.count && <div className={clsx("sticky", styles.last_project)} onClick={handleClick}>
-                <h3>{stat.count.count} {stat.count.count > 5 ? "проектов" : "проекта"}</h3>
+                {/*<h3>{stat.count.count} {stat.count.count > 5 ? "проектов" : "проекта"}</h3>*/}
                 <img src={
-                    error ? "/assets/no_image.png" : "https://aurovdm.ru/images/" + stat.lastImg}
+                    error ? "/assets/no_image.png" : '/projects/preview-' + stat.lastImg + '-800.jpg'}
+                    // error ? "/assets/no_image.png" : "https://aurovdm.ru/images/" + stat.lastImg + '-800.jpg'}
                        alt={stat.lastImg}
                        onError={() => setError(true)}
                        className={clsx(styles.image_preview)}
                 />
             </div>}
-            {stat?.tags && <TagsList tags={stat.tags}/>}
+            {stat?.tags &&  <div className={clsx("sticky", styles.tags, styles.about_block)}>
+                {stat.tags.length > 0 && <h3>Технологии</h3>}
+                <div className={clsx("d-flex", styles.tags_list)}>
+                    <TagCard count={stat.count.count} title={"Все проекты"} />
+                    {stat.tags.map((tag, index) =>
+                        <TagCard key={tag.Tag.title} count={tag.count_of_tags} title={tag.Tag.title} />
+                    )}
+                </div>
+            </div>}
             <div className={clsx("sticky", styles.sertiport_box)}>
                 <h3>Сертификаты</h3>
                 <div className={clsx(styles.sertiport_grid)}>

@@ -1,14 +1,15 @@
 import multer from "multer";
 import {nanoid} from "nanoid";
 
-const storage = multer.diskStorage({
-        destination: function (req, files, cb) {
-            cb(null, 'public/projects')
-        },
-        filename: function (req, file, cb){
-            cb(null, file.fieldname + '-' + nanoid(6) + Date.now() + '.' + file.mimetype.split("/").pop());
-        }
-    });
+// const storage = multer.diskStorage({
+//         destination: function (req, files, cb) {
+//             cb(null, 'public/projects')
+//         },
+//         filename: function (req, file, cb){
+//             cb(null, file.fieldname + '-' + nanoid(6) + Date.now() + '.' + file.mimetype.split("/").pop());
+//         }
+//     });
+const storage = multer.memoryStorage();
 
 const imageFilter = function (req, file, cb) {
     if (!file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF|svg|SVG)$/)) {

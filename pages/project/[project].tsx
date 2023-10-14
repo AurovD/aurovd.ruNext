@@ -10,7 +10,8 @@ import {GetServerSideProps} from "next";
 import {getCookies} from "cookies-next";
 import Link from "next/link";
 import React from "react";
-import {TagsList} from "../../components/UI/TagsList";
+import clsx from "clsx";
+import {TagCard} from "../../components/UI/TagCard";
 
 export default function ProjectPage({project, user}) {
     const obj = {
@@ -18,7 +19,7 @@ export default function ProjectPage({project, user}) {
         tags: project.Tags
     }
 
-    console.log(project)
+
     return (
         <div className={"d-grid grid"}>
             <Head>
@@ -40,7 +41,14 @@ export default function ProjectPage({project, user}) {
                 {project.images && project.images.map((image, index) => <ProjectPreview image={image} key={index}/>)}
                 <Task title={project.task}  color={"#fff"}/>
                 <ProjectDescription description={project.description}/>
-                {project?.Tags && <TagsList tags={project.Tags}/>}
+                {project?.Tags &&  <div className={clsx("sticky tags about_block")}>
+                    {project?.Tags.length > 0 && <h3>Технологии</h3>}
+                    <div className={clsx("d-flex tags_list")}>
+                        {project?.Tags.map((tag, index) =>
+                            <TagCard key={tag.title} title={tag.title} />
+                        )}
+                    </div>
+                </div>}
                 {project.github && <DescriptionLinks link={project.github} title={"GitHub"}/>}
                 {project.link && <DescriptionLinks link={project.link} title={"Сайт"}/>}
             </div>
