@@ -37,8 +37,12 @@ export interface Password{
 
 
 export interface Tags {
-    count?: number;
+    count?: number | string;
     title: string;
+    count_of_tags?: string;
+    Tag?: {
+        title: string;
+    }
 }
 
 

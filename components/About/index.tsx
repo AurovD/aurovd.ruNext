@@ -161,10 +161,10 @@ export const About: React.FC<TagsData> = ({stat}) => {
             <div className={clsx("sticky", styles.sertiport_box)}>
                 <h3>Сертификаты</h3>
                 <div className={clsx(styles.sertiport_grid)}>
-                    <ProjectCard project={{image: "/assets/cert1.png", title: "Office Word 2016"}}/>
-                    <ProjectCard project={{image: "/assets/cert2.png", title: "HTML and CSS"}}/>
-                    <ProjectCard project={{image: "/assets/cert3.png", title: "JavaScript"}}/>
-                    <ProjectCard project={{image: "/assets/cert4.PNG", title: "WorldSkills"}}/>
+                    <ProjectCard image={"/assets/cert1.png"} title={ "Office Word 2016"}/>
+                    <ProjectCard image={"/assets/cert2.png"} title= {"HTML and CSS"}/>
+                    <ProjectCard image={"/assets/cert3.png"} title= {"JavaScript"}/>
+                    <ProjectCard image={"/assets/cert4.PNG"} title= {"WorldSkills"}/>
                 </div>
             </div>
         </div>

@@ -8,7 +8,6 @@ import {Sequelize} from "sequelize";
 import TagsService from "../core/tags_service";
 import Post_service from "../core/post_service";
 import {nanoid} from "nanoid";
-import {images} from "next/dist/build/webpack/config/blocks/images";
 
 
 
@@ -22,7 +21,7 @@ declare module 'express' {
             old_tags?: string[];
             images?: string[];
         };
-        files: [];
+        files: {};
     }
 }
 
@@ -43,7 +42,8 @@ class PostController {
                     let tags:string[] = req.body?.tags.match(/\B#[a-z0-9_]+/g);
 
 
-                    for (const file of req.files) {
+                    for (const fieldName in req.files) {
+                        const file = req.files[fieldName];
                         let name = nanoid(6) + Date.now();
                         names.push(name);
                         await Post_service.resizeAndSaveImages(file.buffer, file.fieldname, name);
@@ -92,7 +92,8 @@ class PostController {
                         return res.status(404).json({ message: 'Проект не найден' });
                     }
 
-                    for (const file of req.files) {
+                    for (const fieldName in req.files) {
+                        const file = req.files[fieldName];
                         let name = nanoid(6) + Date.now();
                         names.push(name);
                         await Post_service.resizeAndSaveImages(file.buffer, file.fieldname, name);

@@ -7,21 +7,23 @@ import Image from "next/image";
 
 
 interface ProjectCardProps {
-    project: IProjects;
+    project?: IProjects;
+    image?: string;
+    title?: string;
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, image, title }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
-    if ('image' in project && 'title' in project) {
+    if (image && title) {
         return (
             <div className={clsx('border-box', styles.card)}>
-                <Link href={project.image}>
+                <Link href={image}>
                     <div className={clsx(error ? styles.error_image : '')}>
                         <Image
-                            src={loading || error ? '/assets/no_image.png' : project.image}
-                            alt={project.title}
+                            src={loading || error ? '/assets/no_image.png' : image}
+                            alt={title}
                             onLoad={() => setLoading(false)}
                             onError={() => setError(true)}
                             width={200}
@@ -30,7 +32,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                     </div>
                 </Link>
                 <div className={clsx('border-box', styles.card__description)}>
-                    <h2 className={clsx(styles.card__title)}>{project.title}</h2>
+                    <h2 className={clsx(styles.card__title)}>{title}</h2>
                 </div>
 
             </div>
