@@ -44,8 +44,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, image, title }) => {
             <Link href={'/project/' + project.id}>
                 <div className={clsx(error ? styles.error_image : '')}>
                     <Image
-                        // src={loading || error ? '/assets/no_image.png' : '/projects/preview-' + project.images[0] + '-400.jpg'}
-                        src={loading || error ? '/assets/no_image.png' : 'https://aurovdm.ru/images/preview-' + project.images[0] + '-400.jpg'}
+                        // src={loading || error ? '/assets/no_image.png' : '/projects/preview-' + project.images[0] + '-600.jpg'}
+                        src={loading || error ? '/assets/no_image.png' : 'https://aurovdm.ru/images/preview-' + project.images[0] + '-600.jpg'}
                         alt={project.title}
                         onLoad={() => setLoading(false)}
                         onError={() => setError(true)}

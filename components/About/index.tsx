@@ -142,8 +142,8 @@ export const About: React.FC<TagsData> = ({stat}) => {
             {stat?.count.count && <div className={clsx("sticky", styles.last_project)} onClick={handleClick}>
                 {/*<h3>{stat.count.count} {stat.count.count > 5 ? "проектов" : "проекта"}</h3>*/}
                 <img src={
-                    error ? "/assets/no_image.png" : '/projects/preview-' + stat.lastImg + '-800.jpg'}
-                    // error ? "/assets/no_image.png" : "https://aurovdm.ru/images/" + stat.lastImg + '-800.jpg'}
+                    // error ? "/assets/no_image.png" : '/projects/preview-' + stat.lastImg + '-1000.jpg'}
+                    error ? "/assets/no_image.png" : "https://aurovdm.ru/images/preview-" + stat.lastImg + '-1000.jpg'}
                        alt={stat.lastImg}
                        onError={() => setError(true)}
                        className={clsx(styles.image_preview)}

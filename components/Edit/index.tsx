@@ -85,8 +85,8 @@ export const Edit: React.FC< Project > = ({project}) => {
                                 event.stopPropagation();
                                 deleteImage(image, project.id);
                             }}>Удалить</div>
-                            {/*<img className={clsx(styles.box_image)} src={'/projects/preview-' + image + '-400.jpg'} alt={image}/>*/}
-                            <img className={clsx(styles.box_image)} src={"https://aurovdm.ru/images/preview-" + image + '-400.jpg'} alt={image}/>
+                            {/*<img className={clsx(styles.box_image)} src={'/projects/preview-' + image + '-600.jpg'} alt={image}/>*/}
+                            <img className={clsx(styles.box_image)} src={"https://aurovdm.ru/images/preview-" + image + '-600.jpg'} alt={image}/>
                         </div>)}
                 </div>}
                 <Formik

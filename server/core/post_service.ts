@@ -1,13 +1,12 @@
 import * as fs from "fs";
 import sharp from "sharp";
-import {nanoid} from "nanoid";
 
 class PostService {
 
     #sizes = [
         { width: 0},
-        { width: 800 },
-        { width: 400 },
+        { width: 1000 },
+        { width: 600 },
     ];
 
     async deleteImages(images: string[]) {

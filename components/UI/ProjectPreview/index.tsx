@@ -16,8 +16,8 @@ const ProjectPreview = React.memo<{image: string}>(({image}) => {
     return (
         <div className={clsx("m-10", styles.preview, error ? styles.error_preview : "")} onClick={handleClick}>
             <Image src={
-                // error ? "/assets/no_image.png" : "/projects/preview-" + image + '-800.jpg'}
-                error ? "/assets/no_image.png" : "https://aurovdm.ru/images/preview-" + image + '-800.jpg'}
+                // error ? "/assets/no_image.png" : "/projects/preview-" + image + '-1000.jpg'}
+                error ? "/assets/no_image.png" : "https://aurovdm.ru/images/preview-" + image + '-1000.jpg'}
                  alt={image}
                  onError={() => setError(true)}
                    className={clsx(styles.image_preview)}
