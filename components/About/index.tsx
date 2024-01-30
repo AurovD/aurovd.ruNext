@@ -93,6 +93,19 @@ export const About: React.FC<TagsData> = ({stat}) => {
                 <h3>ОПЫТ</h3>
                 <div className={clsx("d-flex flex-column")}>
                     <div className={clsx("d-flex justify-content-between mt-20", styles.item__exp)}>
+                        <div className={clsx(styles.hover, styles.logo_exp)}>
+                            <img src="https://docs.ozon.ru/common/logo.png" alt="ozon"/>
+                        </div>
+                        <div className={clsx(styles.hover, styles.info_exp)}>
+                            <div>
+                                <h5>ООО «Интернет Решения»</h5>
+                                <p>Оператор слада/ Товаровед по элктронике</p>
+                            </div>
+
+                            {/*<p>Помогал менеджеру по подбору персонала в поиске кандидатов, просматривал резюме и проводил первичное собеседование. Оптимизировал процесс поиска кандидатов и обработки резюме, что ускорило работу в 2 раза.</p>*/}
+                        </div>
+                    </div>
+                    <div className={clsx("d-flex justify-content-between mt-20", styles.item__exp)}>
                         {/*<Link href={"https://ithub.ru/"}>*/}
                             <div className={clsx(styles.hover, styles.logo_exp)}>
                                 <img src="/assets/ithublogo.gif" alt="ithub"/>
@@ -152,7 +165,7 @@ export const About: React.FC<TagsData> = ({stat}) => {
             {stat?.tags &&  <div className={clsx("sticky", styles.tags, styles.about_block)}>
                 {stat.tags.length > 0 && <h3>Технологии</h3>}
                 <div className={clsx("d-flex", styles.tags_list)}>
-                    <TagCard count={stat.count.count} title={"Все проекты"} />
+                    <TagCard count={stat.count.count} title={"Все проекты"}/>
                     {stat.tags.map((tag, index) =>
                         <TagCard key={tag.Tag.title} count={tag.count_of_tags} title={tag.Tag.title} />
                     )}
