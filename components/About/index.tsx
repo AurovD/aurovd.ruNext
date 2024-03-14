@@ -94,12 +94,23 @@ export const About: React.FC<TagsData> = ({stat}) => {
                 <div className={clsx("d-flex flex-column")}>
                     <div className={clsx("d-flex justify-content-between mt-20", styles.item__exp)}>
                         <div className={clsx(styles.hover, styles.logo_exp)}>
+                            <img src="/assets/freelancer.png" alt="freelancer"/>
+                        </div>
+                        <div className={clsx(styles.hover, styles.info_exp)}>
+                            <div>
+                                <h5>Проектная деятельность</h5>
+                                <p>Fullstack/Frontend/Backend - разработчик</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={clsx("d-flex justify-content-between mt-20", styles.item__exp)}>
+                        <div className={clsx(styles.hover, styles.logo_exp)}>
                             <img src="https://docs.ozon.ru/common/logo.png" alt="ozon"/>
                         </div>
                         <div className={clsx(styles.hover, styles.info_exp)}>
                             <div>
                                 <h5>ООО «Интернет Решения»</h5>
-                                <p>Оператор слада/ Товаровед по элктронике</p>
+                                <p>Оператор слада/ Товаровед по электронике</p>
                             </div>
 
                             {/*<p>Помогал менеджеру по подбору персонала в поиске кандидатов, просматривал резюме и проводил первичное собеседование. Оптимизировал процесс поиска кандидатов и обработки резюме, что ускорило работу в 2 раза.</p>*/}
