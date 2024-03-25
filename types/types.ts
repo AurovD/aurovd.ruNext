@@ -18,15 +18,15 @@ export interface IProject extends Project{
 
 export interface IProjects extends Project {
     createdAt: string;
-    id: number;
+    // id: number;
     images?: [string];
     updatedAt: string;
     Tags?: Array<{id: number, title: string}>
 }
-export interface IMessage{
-    data: {msg: string};
-    status: number;
-}
+// export interface IMessage{
+//     data: {msg: string};
+//     status: number;
+// }
 export interface ProjectReq {
   count: number, projects: IProjects[]
 }
@@ -49,5 +49,8 @@ export interface Tags {
 export interface Statistic extends Tags {
     count: string
 }
+
+export type Status = 'default' | 'loading' | 'success' | 'error';
+
 // sudo lsof -PiTCP -sTCP:LISTEN
 // kill -9 3409

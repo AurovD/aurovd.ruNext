@@ -1,38 +1,31 @@
 import React, {useEffect, useState} from 'react';
 import clsx from "clsx";
 import styles from './Projects.module.scss';
-import {ProjectReq} from "../../types/types";
+import {IProjects, ProjectReq} from "../../types/types";
 import ProjectCard from "../ProjectCard";
 import {useObserver} from "../../hooks/useObserver";
-import {Axios} from "../../axios/axios";
-import {ProjectsApi} from "../../api/ProjectsApi";
-import {SearchBar} from "../SearchBar";
+import {useProjects} from "./projects";
 
 
 interface Projects {
-    data: ProjectReq;
+    projects: IProjects[];
 }
 
-export const Projects: React.FC<Projects> = ({data}) => {
-    const observer = React.useRef();
-    const [projects, setProjects] = useState(data.projects);
-    const [offset, setOffset] = useState(0);
-    const [limit] = useState(5);
+export const Projects: React.FC<Projects> = ({projects}) => {
 
-    useEffect(() => {
-        if(offset > 0){
-            ProjectsApi(Axios).getProjects(offset).then(async (res: ProjectReq) => {
-                setProjects([...projects, ...res.projects]);
-            });
-        }
-    }, [offset]);
+    const [setOffset, loadProjects, isAllProjectsLoaded,] = useProjects(state => [
+        state.setOffset,
+        state.loadProjects,
+        state.isAllProjectsLoaded,
+    ]);
+
+    const observer = React.useRef();
 
 
     useObserver(observer, () => {
-        if(offset <= limit && data?.count > 0){
-            setOffset(prev => {
-                return prev + 6;
-            });
+        if (!isAllProjectsLoaded()) {
+            setOffset();
+            loadProjects();
         }
     })
 

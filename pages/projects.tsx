@@ -7,6 +7,7 @@ import {ProjectReq} from "../types/types";
 import {ProjectsApi} from "../api/ProjectsApi";
 import {Axios} from "../axios/axios";
 import {LoadingGrid} from "../components/UI/Loading/LoadingGrid";
+import {useProjects} from "../components/Projects/projects";
 
 // const Projects = dynamic<React.ComponentProps<typeof ProjectsComp>>(
 //     () => import('../components/Projects').then(mod => mod.Projects),
@@ -18,28 +19,19 @@ export default function ProjectsPage () {
         title: "ПРОЕКТЫ"
     }
 
-    const [isLoading, setIsLoading] = React.useState<boolean>(true);
-    const [projects, setData] = React.useState<ProjectReq>({
-        count: 0,
-        projects: []
-    });
 
-    const getListOfPjs = async () => {
-            await ProjectsApi(Axios).getProjects(0).then(async (res: ProjectReq) => {
-                if(res?.count > 0){
-                    setData(res);
-                    setIsLoading(false);
-                }
-            }).catch((e) => {
-                console.log(e);
-            })
-    }
+    const [projects, loadProjects, isAllProjectsLoaded, offset, status] = useProjects(state => [
+        state.projects,
+        state.loadProjects,
+        state.isAllProjectsLoaded,
+        state.offset,
+        state.status,
+    ]);
 
 
-    useEffect(()=> {
-        getListOfPjs()
+    useEffect(() => {
+        loadProjects(true);
     }, []);
-
 
     return (
         <div className={"d-grid grid"}>
@@ -58,7 +50,7 @@ export default function ProjectsPage () {
             </Head>
             <Panel {...obj}/>
             {
-                isLoading ? <LoadingGrid/> : <Projects data={projects}/>
+                status === "error" || status === "loading" ? <LoadingGrid/> : <Projects projects={projects}/>
             }
         </div>
     )
