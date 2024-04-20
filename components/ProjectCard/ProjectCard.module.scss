@@ -38,6 +38,6 @@
     }
   }
   p {
-    font-size: .8rem;
+    font-size: clamp(.5rem, 4cqi, .8rem);
   }
 }

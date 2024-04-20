@@ -24,7 +24,6 @@ export const Projects: React.FC<Projects> = ({projects}) => {
 
     useObserver(observer, () => {
         if (!isAllProjectsLoaded()) {
-            setOffset();
             loadProjects();
         }
     })

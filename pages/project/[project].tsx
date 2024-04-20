@@ -9,16 +9,27 @@ import {DescriptionLinks} from "../../components/UI/DescriptionLinks";
 import {GetServerSideProps} from "next";
 import {getCookies} from "cookies-next";
 import Link from "next/link";
-import React from "react";
+import React, {useEffect} from "react";
 import clsx from "clsx";
 import {TagCard} from "../../components/UI/TagCard";
+import {useProject} from "../../store/project";
 
-export default function ProjectPage({project, user}) {
+export default function ProjectPage({projectId, user}) {
+
+    const [loadProject, project] = useProject(state => [
+        state.loadProject,
+        state.project
+    ]);
+
+    useEffect(() => {
+        loadProject(projectId);
+    }, []);
+
+
     const obj = {
         title: project.title,
         tags: project.Tags
     }
-
 
     return (
         <div className={"d-grid grid"}>
@@ -60,12 +71,11 @@ export default function ProjectPage({project, user}) {
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     try {
         const projectId = ctx.query.project;
-        const project = await ProjectsApi(Axios).getProject(projectId as string);
 
         let user = getCookies(ctx).token || null;
         return {
             props: {
-                project,
+                projectId,
                 user
             },
         }
