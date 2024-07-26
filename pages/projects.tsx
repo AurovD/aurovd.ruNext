@@ -30,7 +30,7 @@ export default function ProjectsPage () {
 
 
     useEffect(() => {
-        loadProjects(true);
+        loadProjects();
     }, []);
 
     return (

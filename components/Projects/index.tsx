@@ -5,6 +5,7 @@ import {IProjects, ProjectReq} from "../../types/types";
 import ProjectCard from "../ProjectCard";
 import {useObserver} from "../../hooks/useObserver";
 import {useProjects} from "./projects";
+import {SearchBar} from "../SearchBar";
 
 
 interface Projects {
@@ -13,8 +14,7 @@ interface Projects {
 
 export const Projects: React.FC<Projects> = ({projects}) => {
 
-    const [setOffset, loadProjects, isAllProjectsLoaded,] = useProjects(state => [
-        state.setOffset,
+    const [loadProjects, isAllProjectsLoaded,] = useProjects(state => [
         state.loadProjects,
         state.isAllProjectsLoaded,
     ]);
@@ -28,15 +28,15 @@ export const Projects: React.FC<Projects> = ({projects}) => {
         }
     })
 
-    // const handleSortByBiggestFirst = () => {
-    //     // setSortOrder('biggestFirst');
-    //     setProjects([...projects].sort((a, b) => b.id - a.id));
-    // };
-    //
-    // const handleSortBySmallestFirst = () => {
-    //     // setSortOrder('smallestFirst');
-    //     setProjects([...projects].sort((a, b) => a.id - b.id));
-    // };
+    const handleSortByBiggestFirst = () => {
+        // setSortOrder('biggestFirst');
+        // setProjects([...projects].sort((a, b) => b.id - a.id));
+    };
+
+    const handleSortBySmallestFirst = () => {
+        // setSortOrder('smallestFirst');
+        // setProjects([...projects].sort((a, b) => a.id - b.id));
+    };
 
     return (
         <>
@@ -49,7 +49,8 @@ export const Projects: React.FC<Projects> = ({projects}) => {
                 {/*        Новые*/}
                 {/*    </div>*/}
                 {/*</div>*/}
-                {/*<SearchBar/>*/}
+                <SearchBar/>
+                {/*<div>Поиск</div>*/}
                 <div className={clsx(styles.project_grid)}>
                     {projects.map(project => <ProjectCard key={project.id} project={project}/>)}
                     <div ref={observer} className={styles.observer}>Observer</div>

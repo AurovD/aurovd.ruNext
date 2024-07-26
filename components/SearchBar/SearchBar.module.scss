@@ -1,0 +1,19 @@
+.search_form {
+  padding-bottom: 2.5rem;
+  height: 100px;
+  gap: 2px;
+  display: flex;
+  input {
+    flex-grow: 1;
+    outline: none;
+    border: 2px solid var(--clr-main)
+  }
+  button  {
+    aspect-ratio: 1 / 1;
+    flex-grow: 0;
+    background-color: var(--clr-main);
+    color: var(--clr-wtext);
+    cursor: pointer;
+    border: none;
+  }
+}

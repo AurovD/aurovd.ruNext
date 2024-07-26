@@ -1,14 +1,14 @@
-import {IProjects, Password, Tags, Statistic, IProject} from "../types/types";
+import {IProjects, Password, Tags} from "../types/types";
 import { AxiosInstance } from 'axios';
 import {getCookies, setCookie} from 'cookies-next';
 
 export const ProjectsApi = (instance: AxiosInstance) => {
     return {
-        getProjects: async (offset): Promise<{ count: number, projects: IProjects[] }> => {
-        // getProjects: async (offset): Promise<IProject[]> => {
-            const { data } = await instance.get('/projects?offset=' + offset);
-            return data;
-        },
+        // getProjects: async (offset): Promise<{ count: number, projects: IProjects[] }> => {
+        // // getProjects: async (offset): Promise<IProject[]> => {
+        //     const { data } = await instance.get('/projects?offset=' + offset);
+        //     return data;
+        // },
         createProject: async (body)  => {
             try {
                 const {data}  = await instance.post('/project',  body);
