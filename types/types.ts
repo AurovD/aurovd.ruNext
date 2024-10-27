@@ -21,7 +21,8 @@ export interface IProjects extends Project {
     // id: number;
     images?: [string];
     updatedAt: string;
-    Tags?: Array<{id: number, title: string}>
+    Tags?: Array<{id: number, title: string}>;
+    msg?: string;
 }
 // export interface IMessage{
 //     data: {msg: string};

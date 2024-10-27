@@ -39,7 +39,7 @@ export const About: React.FC<TagsData> = ({stat}) => {
                         <Link  href={"https://github.com/AurovD"}>
                             VKONTAKTE
                         </Link>
-                        <Link  href={"https://wa.me/79265411308"}>
+                        <Link  href={"https://wa.me/79313861102"}>
                             WHATSUP
                         </Link>
                         <Link  href={"https://gist.github.com/AurovD"}>

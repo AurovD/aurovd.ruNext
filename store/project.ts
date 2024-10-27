@@ -28,6 +28,11 @@ export const useProject = create<ProjectStore>((set, get) => ({
         if(!existingProject){
             try {
                 const data = await fetchRequest<IProjects>(`https://aurovdm.ru/api/project?id=`+ id);
+                // const data = await fetchRequest<IProjects>(`http://localhost:3001/project?id=`+ id);
+                if(data.msg){
+                    set({status: "error"});
+                    return;
+                }
                 set({
                     project: data,
                     status: "success",

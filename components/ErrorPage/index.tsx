@@ -10,8 +10,14 @@ export const ErrorPage: React.FC = () => {
         <div className={clsx("wrapper relative", styles.error_page)}>
             <div className={clsx("wrapper relative", styles.error_page_wrapper)}>
                 <div className={clsx(styles.error_headers)}>
-                    <h2>СТРАНИЦА НЕ<br />НАЙДЕНА</h2>
-                    <Link href="/">ВЕРНУТЬ<br />МЕНЯ ОБРАТНО</Link>
+                    <h2>
+                        СТРАНИЦА
+                        <span>НЕ НАЙДЕНА</span>
+                    </h2>
+                    <Link href="/" className={styles.link}>
+                        <span>ВЕРНУТЬ</span>
+                        <span>МЕНЯ ОБРАТНО</span>
+                    </Link>
                 </div>
             </div>
         </div>

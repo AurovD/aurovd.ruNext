@@ -1,7 +1,5 @@
 import Panel from "../../components/Panel";
 import Head from "next/head";
-import {ProjectsApi} from "../../api/ProjectsApi";
-import {Axios} from "../../axios/axios";
 import ProjectPreview from "../../components/UI/ProjectPreview";
 import {ProjectDescription} from "../../components/UI/ProjectDescription";
 import {Task} from "../../components/UI/Task";
@@ -13,13 +11,19 @@ import React, {useEffect} from "react";
 import clsx from "clsx";
 import {TagCard} from "../../components/UI/TagCard";
 import {useProject} from "../../store/project";
+import router from "next/router";
 
 export default function ProjectPage({projectId, user}) {
 
-    const [loadProject, project] = useProject(state => [
+    const [loadProject, project, status] = useProject(state => [
         state.loadProject,
-        state.project
+        state.project,
+        state.status
     ]);
+
+    if(status === "error"){
+        router.push("/projects");
+    }
 
     useEffect(() => {
         loadProject(projectId);

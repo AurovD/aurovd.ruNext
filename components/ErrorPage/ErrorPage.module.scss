@@ -16,21 +16,34 @@
       container-type: inline-size;
       * {
         color: var(--clr-wtext);
-        font-size: clamp(40px, 7cqi, 80px);
+        font-size: clamp(40px, 6cqi, 80px);
         font-weight: 900;
       }
-      :first-child {
+      h2, a {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      h2 {
         position: absolute;
         top: 0;
         left: 0;
       }
-      :last-child {
+      .link {
         position: absolute;
         bottom: 0;
         right: 0;
         text-align: right;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
         transition: font-size ease-out 1s;
-        &:hover {
+
+        span {
+          transition: font-size ease-out 1s;
+        }
+
+        &:hover span {
           font-size: clamp(50px, 8cqi, 90px);
         }
       }

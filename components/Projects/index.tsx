@@ -49,7 +49,7 @@ export const Projects: React.FC<Projects> = ({projects}) => {
                 {/*        Новые*/}
                 {/*    </div>*/}
                 {/*</div>*/}
-                <SearchBar/>
+                {/*<SearchBar/>*/}
                 {/*<div>Поиск</div>*/}
                 <div className={clsx(styles.project_grid)}>
                     {projects.map(project => <ProjectCard key={project.id} project={project}/>)}
