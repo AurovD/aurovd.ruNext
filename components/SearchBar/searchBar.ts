@@ -13,11 +13,11 @@ export const useSearchBar = create<useSearchBar>((set, get) => ({
         if(!request){
             return;
         }
-        let result = useProjects.getState().isAllProjectsLoaded();
-        const {projectFiltering} = get();
-        if(result) {
-            projectFiltering(request);
-        }
+        // let result = useProjects.getState().isAllProjectsLoaded();
+        // const {projectFiltering} = get();
+        // if(result) {
+        //     projectFiltering(request);
+        // }
     },
     projectFiltering: (request) => {
         let projects = useProjects.getState().projects;
