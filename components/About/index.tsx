@@ -105,7 +105,7 @@ export const About: React.FC<TagsData> = ({stat}) => {
                     </div>
                     <div className={clsx("d-flex justify-content-between mt-20", styles.item__exp)}>
                         <div className={clsx(styles.hover, styles.logo_exp)}>
-                            <img src="https://docs.ozon.ru/common/logo.png" alt="ozon"/>
+                            <img src="/assets/ozon.png" alt="ozon"/>
                         </div>
                         <div className={clsx(styles.hover, styles.info_exp)}>
                             <div>

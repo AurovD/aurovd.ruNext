@@ -16,7 +16,7 @@ interface ProjectsStore {
 };
 export const useProjects = create<ProjectsStore>((set, get) => ({
     isAllProjectsLoaded: () => {
-        return get().total === get().loadedProjects;
+        return get().total === get().loadedProjects && get().loadedProjects > 0 && get().loadedProjects > 0;
     },
     loadProjects: async () => {
         const {projects} = get();
@@ -28,17 +28,14 @@ export const useProjects = create<ProjectsStore>((set, get) => ({
         }
 
         try {
-            const data = await fetchRequest<ProjectReq>(`https://aurovdm.ru/api/projects?offset=` + offset);
-            console.log(data);
-            set({
-                projects: [...projects, ...data.projects],
-                status: "success",
-                loadedProjects: projects.length + data.projects.length,
-                total: data.count
-            });
-            if(!isAllProjectsLoaded()){
+                const data = await fetchRequest<ProjectReq>(`https://aurovdm.ru/api/projects?offset=` + offset);
+                set({
+                    projects: [...projects, ...data.projects],
+                    status: "success",
+                    loadedProjects: projects.length + data.projects.length,
+                    total: data.count
+                });
                 setOffset();
-            }
         } catch (err) {
             set({status: "error"});
         }
