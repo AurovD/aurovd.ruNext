@@ -1,12 +1,14 @@
 .search_form {
   padding-bottom: 2.5rem;
-  height: 100px;
+  height: 90px;
   gap: 2px;
   display: flex;
   input {
     flex-grow: 1;
     outline: none;
-    border: 2px solid var(--clr-main)
+    border: 2px solid var(--clr-main);
+    padding: 10px max(0.5vw, 20px);
+    font-size: calc(var(--sizeindex) * 1);
   }
   button  {
     aspect-ratio: 1 / 1;

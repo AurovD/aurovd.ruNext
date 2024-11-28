@@ -50,7 +50,6 @@ export const Projects: React.FC<Projects> = ({projects}) => {
                 {/*    </div>*/}
                 {/*</div>*/}
                 {/*<SearchBar/>*/}
-                {/*<div>Поиск</div>*/}
                 <div className={clsx(styles.project_grid)}>
                     {projects.map(project => <ProjectCard key={project.id} project={project}/>)}
                     <div ref={observer} className={styles.observer}>Observer</div>
