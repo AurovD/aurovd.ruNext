@@ -6,6 +6,7 @@ import ProjectCard from "../ProjectCard";
 import {useObserver} from "../../hooks/useObserver";
 import {useProjects} from "./projects";
 import {SearchBar} from "../SearchBar";
+import {FiltersOrderPanel} from "../UI/FiltersOrderPanel";
 
 
 interface Projects {
@@ -41,14 +42,7 @@ export const Projects: React.FC<Projects> = ({projects}) => {
     return (
         <>
             <div className={clsx("wrapper")}>
-                {/*<div className={clsx(styles.project_grid)}>*/}
-                {/*    <div className={clsx(styles.sort_buttons)} onClick={handleSortByBiggestFirst}>*/}
-                {/*        Новые вперед*/}
-                {/*    </div>*/}
-                {/*    <div className={clsx(styles.sort_buttons)} onClick={handleSortBySmallestFirst}>*/}
-                {/*        Новые*/}
-                {/*    </div>*/}
-                {/*</div>*/}
+                {/*<FiltersOrderPanel/>*/}
                 {/*<SearchBar/>*/}
                 <div className={clsx(styles.project_grid)}>
                     {projects.map(project => <ProjectCard key={project.id} project={project}/>)}

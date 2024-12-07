@@ -3,7 +3,6 @@ import {ErrorMessage, Field, Form, Formik, FormikHelpers} from "formik";
 import clsx from "clsx";
 import styles from './SearchBar.module.scss';
 import * as Yup from "yup";
-import {useProjects} from "../Projects/projects";
 import {useSearchBar} from "./searchBar";
 
 
@@ -12,6 +11,9 @@ export const SearchBar: React.FC = () => {
     const [searching] = useSearchBar(state => [
         state.searching,
     ]);
+
+
+
 
     return (
         <div>
