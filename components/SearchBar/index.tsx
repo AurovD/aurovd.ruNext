@@ -8,11 +8,10 @@ import {useSearchBar} from "./searchBar";
 
 export const SearchBar: React.FC = () => {
 
-    const [searching] = useSearchBar(state => [
+    const [searching, message] = useSearchBar(state => [
         state.searching,
+        state.message
     ]);
-
-
 
 
     return (
@@ -27,15 +26,17 @@ export const SearchBar: React.FC = () => {
                 onSubmit={(
                     values: { request: string },
                 ) => {
-                    // console.log(values);
-                    searching(values.request);
+                    searching(values.request.trim());
                 }}
             >
                 {(formProps) => (
-                    <Form className={clsx('d-flex', styles.search_form)}>
-                        <Field type="text" name="request"/>
-                        <button type={"submit"}>Поиск</button>
-                    </Form>
+                    <>
+                        <Form className={clsx('d-flex', styles.search_form)}>
+                            <Field type="text" name="request"/>
+                            <button type={"submit"}>Поиск</button>
+                        </Form>
+                        {message && <p>{message}</p>}
+                    </>
                 )}
             </Formik>
         </div>

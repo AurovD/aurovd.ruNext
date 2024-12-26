@@ -8,7 +8,7 @@ export const FiltersOrderPanel: React.FC = () => {
         state.filters,
     ]);
     return (
-        <div className={clsx("d-flex", styles.filtersOrderPanel)}>
+        <div className={clsx("d-flex d-i-flex", styles.filtersOrderPanel)}>
             {filters.map((filter) => <div key={filter}>{filter}</div>)}
         </div>
     )
