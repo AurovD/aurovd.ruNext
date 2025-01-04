@@ -9,7 +9,7 @@ export const FiltersOrderPanel: React.FC = () => {
     ]);
     return (
         <div className={clsx("d-flex d-i-flex", styles.filtersOrderPanel)}>
-            {filters.map((filter) => <div key={filter}>{filter}</div>)}
+            {filters.map((filter) => <div key={filter} className={clsx(styles.filter)}>{filter}</div>)}
         </div>
     )
 }

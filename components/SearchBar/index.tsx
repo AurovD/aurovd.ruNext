@@ -27,15 +27,16 @@ export const SearchBar: React.FC = () => {
                     values: { request: string },
                 ) => {
                     searching(values.request.trim());
+                    values.request = "";
                 }}
             >
                 {(formProps) => (
                     <>
                         <Form className={clsx('d-flex', styles.search_form)}>
-                            <Field type="text" name="request"/>
+                            <Field type="text" name="request" placeholder={message}/>
                             <button type={"submit"}>Поиск</button>
+                            {/*{message && <p className={clsx(styles.msg)}>{message}</p>}*/}
                         </Form>
-                        {message && <p>{message}</p>}
                     </>
                 )}
             </Formik>

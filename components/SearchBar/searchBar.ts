@@ -14,6 +14,7 @@ interface useSearchBar {
 export const useSearchBar = create<useSearchBar>((set, get) => ({
     filters: [],
     searching: (request, ) => {
+        set({message: ""});
         if(!request){
             return;
         }

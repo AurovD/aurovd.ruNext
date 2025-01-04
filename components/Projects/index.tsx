@@ -7,6 +7,7 @@ import {useObserver} from "../../hooks/useObserver";
 import {useProjects} from "./projects";
 import {SearchBar} from "../SearchBar";
 import {FiltersOrderPanel} from "../UI/FiltersOrderPanel";
+import {useSearchBar} from "../SearchBar/searchBar";
 
 
 interface Projects {
@@ -18,6 +19,9 @@ export const Projects: React.FC<Projects> = ({projects}) => {
     const [loadProjects, isAllProjectsLoaded,] = useProjects(state => [
         state.loadProjects,
         state.isAllProjectsLoaded,
+    ]);
+    const [filters] = useSearchBar(state => [
+        state.filters,
     ]);
 
     const observer = React.useRef();
@@ -42,8 +46,8 @@ export const Projects: React.FC<Projects> = ({projects}) => {
     return (
         <>
             <div className={clsx("wrapper")}>
-                {/*<FiltersOrderPanel/>*/}
-                {/*<SearchBar/>*/}
+                {filters.length > 0 && <FiltersOrderPanel/>}
+                <SearchBar/>
                 <div className={clsx(styles.project_grid)}>
                     {projects.map(project => <ProjectCard key={project.id} project={project}/>)}
                     <div ref={observer} className={styles.observer}>Observer</div>
