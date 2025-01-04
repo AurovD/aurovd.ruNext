@@ -46,8 +46,8 @@ export const Projects: React.FC<Projects> = ({projects}) => {
     return (
         <>
             <div className={clsx("wrapper")}>
-                {filters.length > 0 && <FiltersOrderPanel/>}
-                <SearchBar/>
+                {/*{filters.length > 0 && <FiltersOrderPanel/>}*/}
+                {/*<SearchBar/>*/}
                 <div className={clsx(styles.project_grid)}>
                     {projects.map(project => <ProjectCard key={project.id} project={project}/>)}
                     <div ref={observer} className={styles.observer}>Observer</div>

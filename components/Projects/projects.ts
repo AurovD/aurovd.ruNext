@@ -28,6 +28,7 @@ export const useProjects = create<ProjectsStore>((set, get) => ({
         }
 
         try {
+                // const data = await fetchRequest<ProjectReq>(`http://localhost:3001/projects?offset=` + offset);
                 const data = await fetchRequest<ProjectReq>(`https://aurovdm.ru/api/projects?offset=` + offset);
                 set({
                     projects: [...projects, ...data.projects],
