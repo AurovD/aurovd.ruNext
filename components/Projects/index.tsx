@@ -31,17 +31,7 @@ export const Projects: React.FC<Projects> = ({projects}) => {
         if (!isAllProjectsLoaded()) {
             loadProjects();
         }
-    })
-
-    const handleSortByBiggestFirst = () => {
-        // setSortOrder('biggestFirst');
-        // setProjects([...projects].sort((a, b) => b.id - a.id));
-    };
-
-    const handleSortBySmallestFirst = () => {
-        // setSortOrder('smallestFirst');
-        // setProjects([...projects].sort((a, b) => a.id - b.id));
-    };
+    });
 
     return (
         <>

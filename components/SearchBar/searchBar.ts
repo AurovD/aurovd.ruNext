@@ -1,6 +1,6 @@
 import {create} from "zustand";
 import {useProjects} from "../Projects/projects";
-import {IProjects} from "../../types/types";
+import {IProjects, Status} from "../../types/types";
 import {array} from "yup";
 
 interface useSearchBar {
@@ -8,6 +8,7 @@ interface useSearchBar {
     searching: (request: string) => void,
     projectFilteringAll: (request: string) => void,
     tagsFiltering: (project: IProjects, request: string) => boolean,
+    deletingFilter: (request: string) => void,
     message: string,
 }
 
@@ -42,6 +43,22 @@ export const useSearchBar = create<useSearchBar>((set, get) => ({
             }
 
         }
+    },
+    deletingFilter: (request: string) => {
+        const {filters} = get();
+        let newFilter = filters.filter((filterItem) => filterItem !== request);
+        set({filters: newFilter});
+
+        // status: Status;
+        // loadProjects: () => void;
+        // loadedProjects: number;
+        // projects: IProjects[];
+        // offset: number;
+        // setOffset: () => void;
+        // isAllProjectsLoaded: () => boolean;
+        // total: number;
+        // let {status, loadProjects, loadedProjects, projects, setOffset, , } = useProjects.getState();
+        useProjects.getState().loadProjects();
     },
     tagsFiltering: (project, request) => {
         if (project.Tags.length) {
