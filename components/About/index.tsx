@@ -31,19 +31,19 @@ export const About: React.FC<TagsData> = ({stat}) => {
                         <h3>АЮРОВ</h3>
                         <h3>ВЕБ-РАЗРАБОТЧИК</h3>
                     </div>
-                    <p>Занимаюсь разработкой несколько лет и готов реализовать Ваши идеи в осмысленное, изящное и красивое воплощение, которые привлечет клиентов и повысит конверсию. Для начала работы и сотрудничества  нам надо поговорить, так что кликайте на ссылку телеграмма внизу страницы</p>
+                    <p>Занимаюсь разработкой несколько лет и готов реализовать Ваши идеи в осмысленное, изящное и красивое воплощение, которые привлечет клиентов и повысит конверсию. Для начала работы и сотрудничества  нам надо поговорить, так что кликайте на одну  из ссылок ниже</p>
                     <div className={clsx("d-flex mt-30", styles.introduction__contacts)}>
                         <Link  href={"https://t.me/aurovdm"}>
                             TELEGRAM
                         </Link>
-                        <Link  href={"https://github.com/AurovD"}>
-                            VKONTAKTE
+                        <Link  href={"https://www.linkedin.com/in/aurovdmitry/"}>
+                            LINKEDIN
                         </Link>
                         <Link  href={"https://wa.me/79313861102"}>
                             WHATSUP
                         </Link>
-                        <Link  href={"https://gist.github.com/AurovD"}>
-                            GIST
+                        <Link  href={"https://github.com/AurovD"}>
+                            GITHUB
                         </Link>
                     </div>
                 </div>
@@ -98,24 +98,24 @@ export const About: React.FC<TagsData> = ({stat}) => {
                         </div>
                         <div className={clsx(styles.hover, styles.info_exp)}>
                             <div>
-                                <h5>Проектная деятельность</h5>
+                                <h5>ITHub Group</h5>
                                 <p>Fullstack/Frontend/Backend - разработчик</p>
                             </div>
                         </div>
                     </div>
-                    <div className={clsx("d-flex justify-content-between mt-20", styles.item__exp)}>
-                        <div className={clsx(styles.hover, styles.logo_exp)}>
-                            <img src="/assets/ozon.png" alt="ozon"/>
-                        </div>
-                        <div className={clsx(styles.hover, styles.info_exp)}>
-                            <div>
-                                <h5>ООО «Интернет Решения»</h5>
-                                <p>Оператор слада/ Товаровед по электронике</p>
-                            </div>
+                    {/*<div className={clsx("d-flex justify-content-between mt-20", styles.item__exp)}>*/}
+                    {/*    <div className={clsx(styles.hover, styles.logo_exp)}>*/}
+                    {/*        <img src="/assets/ozon.png" alt="ozon"/>*/}
+                    {/*    </div>*/}
+                    {/*    <div className={clsx(styles.hover, styles.info_exp)}>*/}
+                    {/*        <div>*/}
+                    {/*            <h5>ООО «Интернет Решения»</h5>*/}
+                    {/*            <p>Оператор слада/ Товаровед по электронике</p>*/}
+                    {/*        </div>*/}
 
-                            {/*<p>Помогал менеджеру по подбору персонала в поиске кандидатов, просматривал резюме и проводил первичное собеседование. Оптимизировал процесс поиска кандидатов и обработки резюме, что ускорило работу в 2 раза.</p>*/}
-                        </div>
-                    </div>
+                    {/*        /!*<p>Помогал менеджеру по подбору персонала в поиске кандидатов, просматривал резюме и проводил первичное собеседование. Оптимизировал процесс поиска кандидатов и обработки резюме, что ускорило работу в 2 раза.</p>*!/*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                     <div className={clsx("d-flex justify-content-between mt-20", styles.item__exp)}>
                         {/*<Link href={"https://ithub.ru/"}>*/}
                             <div className={clsx(styles.hover, styles.logo_exp)}>
@@ -145,19 +145,19 @@ export const About: React.FC<TagsData> = ({stat}) => {
                             {/*<p>Осуществлял техподдержку и тестирование комплексов обработки избирательных бюллетеней на всех этапах при подготовке к выборам 2019 года, от сборки до техподдержки по время голосования.</p>*/}
                         </div>
                     </div>
-                    <div className={clsx("d-flex justify-content-between mt-20", styles.item__exp)}>
-                        <div className={clsx(styles.hover, styles.logo_exp)}>
-                            <img src="/assets/ps.svg" alt="ps"/>
-                        </div>
-                        <div className={clsx(styles.hover, styles.info_exp)}>
-                            <div>
-                                <h5>ProfiSourcing</h5>
-                                <p>Ресечер</p>
-                            </div>
+                    {/*<div className={clsx("d-flex justify-content-between mt-20", styles.item__exp)}>*/}
+                    {/*    <div className={clsx(styles.hover, styles.logo_exp)}>*/}
+                    {/*        <img src="/assets/ps.svg" alt="ps"/>*/}
+                    {/*    </div>*/}
+                    {/*    <div className={clsx(styles.hover, styles.info_exp)}>*/}
+                    {/*        <div>*/}
+                    {/*            <h5>ProfiSourcing</h5>*/}
+                    {/*            <p>Ресечер</p>*/}
+                    {/*        </div>*/}
 
-                            {/*<p>Помогал менеджеру по подбору персонала в поиске кандидатов, просматривал резюме и проводил первичное собеседование. Оптимизировал процесс поиска кандидатов и обработки резюме, что ускорило работу в 2 раза.</p>*/}
-                        </div>
-                    </div>
+                    {/*        /!*<p>Помогал менеджеру по подбору персонала в поиске кандидатов, просматривал резюме и проводил первичное собеседование. Оптимизировал процесс поиска кандидатов и обработки резюме, что ускорило работу в 2 раза.</p>*!/*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                     <div className={clsx("d-flex mt-20", styles.cv_block)}>
                             <Link href={"/CV.pdf"} className={clsx( styles.cv_link)}>Открыть CV</Link>
                     </div>
