@@ -40,7 +40,7 @@ class PostService {
                 return sharp(buffer).toFile(`public/projects/${filename}` + '-' + name + '.jpg');
             } else {
                 return sharp(buffer)
-                    .resize(size.width)
+                    //.resize(size.width)
                     .toFile(`public/projects/${filename}` + '-' + name + `-${size.width}` + '.jpg');
             }
         });
